@@ -24,3 +24,4 @@ Next steps:
 -Email marketing?
 -Display contact info on profile toggle
 -Email and/or whatsapp campaigns, for meetups etc? Use twilio api to automatically set up WA communities for people? 
+-Donation Page
