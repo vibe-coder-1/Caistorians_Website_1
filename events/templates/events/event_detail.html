@@ -15,9 +15,9 @@
     <div class="event-detail_rsvp-form">
         <form method="post" action="{% url 'events:event_rsvp' event.pk %}">
             {% csrf_token %}
-            <label for="id_status">Your RSVP:</label>
+            <label for="id_status">Your RSVP: {{ current_status }}</label>
             {{ form.status }}
-            <button type="submit" class="event-detail_btn">Save RSVP</button>
+            <button type="submit" class="event-detail_btn" style="position: absolute; right: auto;">RSVP</button>
         </form>
     </div>
     {% endif %}
