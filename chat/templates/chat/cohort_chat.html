@@ -2,44 +2,109 @@
 {% block content %}
 <h2>Cohort {{ room.cohort_year }} Chat</h2>
 
-<div id="chat-window" style="border:1px solid #ccc; height:300px; overflow-y:scroll; padding:10px;">
+<style>
+    #chat-window {
+        border: 1px solid #ccc;
+        height: 350px;
+        overflow-y: auto;
+        padding: 12px;
+        background: #fafafa;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    .message {
+        margin: 8px 0;
+        padding: 8px 12px;
+        border-radius: 8px;
+        width: fit-content;
+        max-width: 85%;
+        text-align: left;
+        line-height: 1.3;
+        color: #111;
+    }
+
+    .sender {
+        font-weight: 600;
+        display: inline-block;
+        margin-right: 8px;
+    }
+
+    .meta {
+        display: inline-block;
+        opacity: 0.6;
+        font-size: 0.8rem;
+        margin-left: 8px;
+    }
+</style>
+
+<div id="chat-window">
     {% for msg in messages %}
-        <p><strong>{{ msg.sender.username }}:</strong> {{ msg.text }}</p>
+        <div class="message" style="background-color: {{ msg.color }}">
+            <span class="sender">{{ msg.sender.username }}</span>
+            <span class="text">{{ msg.text }}</span>
+            <span class="meta">{{ msg.sent_at|date:"H:i" }}</span>
+        </div>
     {% endfor %}
 </div>
 
-<input id="chat-input" type="text" placeholder="Type a message..." style="width:80%;">
+<input id="chat-input" type="text" placeholder="Type a message..." style="width:78%;">
 <button id="send-btn">Send</button>
 
 <script>
-const protocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
-const cohortYear = "{{ room.cohort_year }}";
-const chatSocket = new WebSocket(
-    `ws://${window.location.host}/ws/chat/${cohortYear}/`
-);
-
 const chatWindow = document.getElementById('chat-window');
 const chatInput = document.getElementById('chat-input');
 const sendBtn = document.getElementById('send-btn');
 
+function appendMessage(sender, text, time, color) {
+    const container = document.createElement('div');
+    container.className = 'message';
+    container.style.backgroundColor = color || '#eee';
+
+    const senderSpan = document.createElement('span');
+    senderSpan.className = 'sender';
+    senderSpan.textContent = sender;
+
+    const textSpan = document.createElement('span');
+    textSpan.className = 'text';
+    textSpan.style.marginLeft = '6px';
+    textSpan.textContent = text;
+
+    const metaSpan = document.createElement('span');
+    metaSpan.className = 'meta';
+    metaSpan.textContent = time;
+
+    container.appendChild(senderSpan);
+    container.appendChild(textSpan);
+    container.appendChild(metaSpan);
+
+    chatWindow.appendChild(container);
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+}
+
+// WebSocket
+const protocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
+const cohortYear = "{{ room.cohort_year }}";
+const chatSocket = new WebSocket(`${protocol}${window.location.host}/ws/chat/${cohortYear}/`);
+
 chatSocket.onmessage = function(e) {
     const data = JSON.parse(e.data);
-    const p = document.createElement('p');
-    p.innerHTML = `<strong>${data.sender}:</strong> ${data.text}`;
-    chatWindow.appendChild(p);
-    chatWindow.scrollTop = chatWindow.scrollHeight;
+    const time = data.time || new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    appendMessage(data.sender, data.text, time, data.color);
 };
 
 sendBtn.onclick = function() {
     const text = chatInput.value.trim();
-    if(text) {
-        chatSocket.send(JSON.stringify({'text': text}));
-        chatInput.value = '';
-    }
+    if (!text) return;
+    chatSocket.send(JSON.stringify({ text }));
+    chatInput.value = '';
 };
 
 chatInput.addEventListener('keypress', function(e) {
-    if(e.key === 'Enter') sendBtn.click();
+    if (e.key === 'Enter') sendBtn.click();
 });
+
+chatSocket.onopen = function() {
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+};
 </script>
 {% endblock %}

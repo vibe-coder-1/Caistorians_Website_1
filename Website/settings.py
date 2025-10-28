@@ -42,6 +42,7 @@ ALLOWED_HOSTS = ['127.0.0.1','10.25.130.184', 'localhost']
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -61,6 +62,7 @@ INSTALLED_APPS = [
     'fundraisers',
     'channels',
     'chat',
+    'bleach',
 ]
 
 MIDDLEWARE = [
@@ -91,11 +93,12 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'Website.wsgi.application'
-ASGI_APPLICATION = 'Website.asgi.application'
+ASGI_APPLICATION = "Website.asgi.application"
+
+# Development channel layer (in-memory). Replace with Redis in production.
 CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {'hosts': [('127.0.0.1', 6379)]},
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
     },
 }
 

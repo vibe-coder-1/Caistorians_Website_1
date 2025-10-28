@@ -1,0 +1,45 @@
+<!-- {% extends "Main/base.html" %}
+{% block content %}
+<h2>Cohort {{ room.cohort_year }} Chat</h2>
+
+<div id="chat-window" style="border:1px solid #ccc; height:300px; overflow-y:scroll; padding:10px;">
+    {% for msg in messages %}
+        <p><strong>{{ msg.sender.username }}:</strong> {{ msg.text }}</p>
+    {% endfor %}
+</div>
+
+<input id="chat-input" type="text" placeholder="Type a message..." style="width:80%;">
+<button id="send-btn">Send</button>
+
+<script>
+const protocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
+const cohortYear = "{{ room.cohort_year }}";
+const chatSocket = new WebSocket(
+    `ws://${window.location.host}/ws/chat/${cohortYear}/`
+);
+
+const chatWindow = document.getElementById('chat-window');
+const chatInput = document.getElementById('chat-input');
+const sendBtn = document.getElementById('send-btn');
+
+chatSocket.onmessage = function(e) {
+    const data = JSON.parse(e.data);
+    const p = document.createElement('p');
+    p.innerHTML = `<strong>${data.sender}:</strong> ${data.text}`;
+    chatWindow.appendChild(p);
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+};
+
+sendBtn.onclick = function() {
+    const text = chatInput.value.trim();
+    if(text) {
+        chatSocket.send(JSON.stringify({'text': text}));
+        chatInput.value = '';
+    }
+};
+
+chatInput.addEventListener('keypress', function(e) {
+    if(e.key === 'Enter') sendBtn.click();
+});
+</script>
+{% endblock %} -->
