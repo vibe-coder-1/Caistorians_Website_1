@@ -9,6 +9,10 @@
         <p><strong>Location:</strong> {{ event.location }}</p>
     </div>
 
+    {% if current_status %}
+        <p><strong>Your current RSVP:</strong> {{ current_status }}</p>
+    {% endif %}
+
     <form method="post" class="event-rsvp_form">
         {% csrf_token %}
         {{ form.as_p }}
