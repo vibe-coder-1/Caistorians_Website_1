@@ -49,11 +49,63 @@
         <h2>{{ school.name }} Past & Present</h2>
         <div class="school_history_images">
             {% for image in school.historical_images.all %}
-                <img src="{{ image.image.url }}" alt="{{ image.caption }}">
+                <div class="history_img_wrapper">
+                    <img src="{{ image.image.url }}" alt="{{ image.caption }}">
+                </div>
             {% endfor %}
         </div>
         <a href="#">Explore Our History</a>
     </section>
+
+    <style>
+    .school_history {
+        background-color: #f0f0f0;
+        padding: 3rem 1.5rem;
+        text-align: center;
+    }
+
+    .school_history h2 {
+        font-size: 2.3rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Horizontal scroll container */
+    .school_history_images {
+        display: flex;
+        overflow-x: auto;
+        gap: 1rem;
+        padding-bottom: 0.5rem;
+        scroll-behavior: smooth;
+        scrollbar-width: none; /* Firefox */
+    }
+
+    /* Hide scrollbar in Chrome, Edge, Safari */
+    .school_history_images::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Uniform image size */
+    .history_img_wrapper {
+        flex: 0 0 auto;
+        width: 250px;
+        height: 170px;
+        position: relative;
+    }
+
+    .history_img_wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* keeps proportions but crops evenly */
+        border-radius: 8px;
+        box-shadow: 0 5px 12px rgba(0,0,0,0.12);
+        transition: transform 0.25s ease;
+    }
+
+    .history_img_wrapper img:hover {
+        transform: scale(1.04);
+    }
+    </style>
 
     <!-- ALUMNI SLIDER -->
     <section class="school_alumni_slider">
@@ -72,14 +124,34 @@
 
 </div>
 
+
+
+
+
 <style>
+
+
+
+
+/* Remove default body/html margin to eliminate whitespace */
+body, html {
+    margin: 0;
+    padding: 0;
+    padding-top:1.0%;
+    overflow-x: hidden;
+}
+
+
+
+
 /* === HERO SECTION === */
 .school_homepage .school_hero {
     position: relative;
     width: 100%;
-    height: 55vh;
+    height: 50vh;
     overflow: hidden;
-    font-family: sans-serif;
+    margin-top: -60px; /* lift hero up under navbar */
+    padding-top: 0;
 }
 
 .school_homepage .school_hero_images {
@@ -87,6 +159,7 @@
     width: 100%;
     height: 100%;
     position: relative;
+    
 }
 
 .school_homepage .school_hero_images::before {
@@ -98,12 +171,10 @@
 }
 
 .school_homepage .hero_img {
-    width: 33.33%;
+    width: calc(100% / 3);
     height: 100%;
     object-fit: cover;
-    object-position: top;
-    position: relative;
-    z-index: 0;
+    transform-origin: center center;
     transition: transform 0.3s ease;
 }
 
@@ -117,7 +188,7 @@
 
 .school_homepage .school_hero_overlay {
     position: absolute;
-    top: 60%;
+    top: 62%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
@@ -205,9 +276,9 @@
 
 /* === ALUMNI SLIDER === */
 .school_homepage .school_alumni_slider {
-    background-color: #f7f7f7; /* light gray */
+    background-color: #f7f7f7;
     color: #222;
-    padding: 2rem 1.5rem 1rem 1.5rem; /* slightly squished */
+    padding: 2rem 1.5rem 1rem 1.5rem;
     text-align: center;
     position: relative;
 }
