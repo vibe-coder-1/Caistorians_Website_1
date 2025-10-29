@@ -30,7 +30,7 @@ def public_profile_view(request, username):
 def directory_view(request):
     query = request.GET.get("q")
     year = request.GET.get("year")
-    alumni_list = User.objects.filter(school=request.user.school, is_student_account = False).order_by("last_name")
+    alumni_list = User.objects.filter(school=request.user.school).order_by("last_name")
 
     if query:
         alumni_list = alumni_list.filter(

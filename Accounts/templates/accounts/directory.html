@@ -1,39 +1,89 @@
 {% extends "Main/base.html" %}
 {% load static %}
 {% block content %}
-<h2 class="directory-title">Alumni Directory - {{ user.school }}</h2>
+<h2 class="directory-title" style="text-align:center; margin-bottom: 25px;">
+  Alumni Directory - {{ user.school }}
+</h2>
 
-<form method="get" class="directory-search">
-    <input type="text" name="q" placeholder="Search by name or occupation" value="{{ request.GET.q }}">
-    <input type="number" name="year" placeholder="Graduation Year" value="{{ request.GET.year }}">
-    <button type="submit">Search</button>
+<form method="get" class="directory-search" style="
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;">
+  <input type="text" name="q" placeholder="Search by name or occupation"
+         value="{{ request.GET.q }}"
+         style="padding: 10px 15px; border: 1px solid #ccc; border-radius: 8px; width: 250px;">
+  <input type="number" name="year" placeholder="Graduation Year"
+         value="{{ request.GET.year }}"
+         style="padding: 10px 15px; border: 1px solid #ccc; border-radius: 8px; width: 150px;">
+  <button type="submit"
+          style="background: #0078ff; color: white; border: none; border-radius: 8px;
+                 padding: 10px 20px; font-weight: 600; cursor: pointer; transition: 0.2s;">
+    Search
+  </button>
 </form>
 
-<div class="directory-cards">
+<div class="directory-cards" style="
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  justify-items: center;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+">
 {% for alumni in alumni_list %}
-<a class="directory-card-link" href="{% url 'Accounts:public_profile' alumni.username %}">
-    <div class="directory-card">
-        <div class="directory-card-left">
-            {% if alumni.profile_picture %}
-                <img src="{{ alumni.profile_picture.url }}" alt="{{ alumni.username }}" class="directory-img">
-            {% else %}
-                <div class="directory-no-img">No Photo</div>
-            {% endif %}
-
-        </div>
-        <div class="directory-card-right">
-            <p><strong>{{ alumni.username }}</strong></p>
-            {% if alumni.graduation_year %}
-            <p>Class of {{ alumni.graduation_year }}</p>
-            {% endif %}
-            {% if alumni.occupation %}
-            <p>{{ alumni.occupation }}</p>
-            {% endif %}
-        </div>
-    </div>
-    </a>    
+<a class="directory-card-link" href="{% url 'Accounts:public_profile' alumni.username %}"
+   style="text-decoration: none; color: inherit; width: 100%; display: flex; justify-content: center;">
+  <div class="directory-card" style="
+      width: 100%;
+      max-width: 300px;
+      height: 150px;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      display: flex;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+  "
+  onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 6px 14px rgba(0,120,255,0.15)';"
+  onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 6px rgba(0,0,0,0.05)';">
+      <div class="directory-card-left" style="flex: 0 0 90px;">
+          {% if alumni.profile_picture %}
+              <img src="{{ alumni.profile_picture.url }}" alt="{{ alumni.username }}"
+                   style="width: 90px; height: 100%; object-fit: cover;">
+          {% else %}
+              <div style="
+                   background: #eee; color: #666; height: 100%;
+                   display: flex; align-items: center; justify-content: center; font-size: 14px;">
+                   No Photo
+              </div>
+          {% endif %}
+      </div>
+      <div style="flex: 1; padding: 15px;">
+          <p style="font-weight: 700; margin-bottom: 4px;">{{ alumni.username }}</p>
+          {% if alumni.graduation_year %}
+          <p style="color: #666; margin-bottom: 4px;">Class of {{ alumni.graduation_year }}</p>
+          {% endif %}
+          {% if alumni.occupation %}
+          <p style="color: #444;">{{ alumni.occupation }}</p>
+          {% endif %}
+      </div>
+  </div>
+</a>
 {% empty %}
-    <p>No alumni found.</p>
+    <p style="text-align:center;">No alumni found.</p>
 {% endfor %}
 </div>
+
+<style>
+@media (max-width: 1000px) {
+  .directory-cards { grid-template-columns: repeat(2, 1fr); max-width: 700px; }
+}
+@media (max-width: 650px) {
+  .directory-cards { grid-template-columns: repeat(1, 1fr); max-width: 400px; }
+}
+</style>
 {% endblock %}
