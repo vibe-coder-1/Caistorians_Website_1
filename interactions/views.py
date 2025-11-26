@@ -44,6 +44,7 @@ def compose_view(request):
             initial_data["recipient"] = User.objects.filter(school=request.user.school).get(username=to_user)
         except User.DoesNotExist:
             pass
+
     if subject:
         initial_data["subject"] = f"Re: {subject}"
 
@@ -53,12 +54,17 @@ def compose_view(request):
             msg = form.save(commit=False)
             msg.sender = request.user
             msg.save()
+
+            # Send notification and HTML email
             create_notification(
                 title="New Message",
-                message=f"You got a new message from {request.user}",
-                users=[msg.recipient],  # ✅ correct
-                link=reverse("interactions:detail", args=[msg.id])  # ✅ generate proper URL
+                message=f"You got a new message from {request.user.username}",
+                users=[msg.recipient],
+                link=reverse("interactions:detail", args=[msg.id]),
+                send_email=True,
+                request=request  # needed to build full URL in the email
             )
+
             return redirect("interactions:outbox")
     else:
         form = MessageForm(initial=initial_data)

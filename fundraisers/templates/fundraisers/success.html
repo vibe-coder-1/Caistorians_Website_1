@@ -1,0 +1,14 @@
+{% extends "Main/base.html" %}
+
+{% block content %}
+<div style="display: flex; justify-content: center; align-items: center; height: 70vh; background: #f8faff;">
+  <div style="text-align: center; background: white; padding: 40px 60px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 5px solid #004080;">
+    <h2 style="color: #004080; font-size: 32px; margin-bottom: 10px;">Payment Successful 🎉</h2>
+    <p style="font-size: 18px; color: #333; margin-bottom: 25px;">Thank you for your donation! Your contribution helps support this fundraiser.</p>
+    <a href="{% url 'fundraisers:fundraiser_list' %}" 
+       style="background: #004080; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 600; transition: background 0.2s;">
+       Back to Fundraisers
+    </a>
+  </div>
+</div>
+{% endblock %}

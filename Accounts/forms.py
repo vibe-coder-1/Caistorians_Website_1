@@ -6,19 +6,15 @@ from .models import School
 User = get_user_model()
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
-    school = forms.ModelChoiceField(
-        queryset=School.objects.all(),
-        required=True,
-        empty_label="Select a school",
-        label="School")
     is_student_account = forms.BooleanField(required=False, label="I am a student")
     class Meta:
         model = get_user_model()
-        fields = ("username", "email", "school", "is_student_account", "password1", "password2")
-
+        #fields = ("username", "email", "school", "is_student_account", "password1", "password2")
+        fields = ("username", "email", "is_student_account", "password1", "password2")
     def save(self, commit=True):
         user = super().save(commit=False)
         user.email = self.cleaned_data["email"]
+        user.school = School.objects.get_or_create(name="Caistor Grammar School")[0]
         if commit:
             user.save()
         return user

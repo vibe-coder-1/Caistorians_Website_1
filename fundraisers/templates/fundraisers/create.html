@@ -1,0 +1,22 @@
+{% extends "Main/base.html" %}
+
+{% block content %}
+<div style="max-width: 600px; margin: 60px auto; background: #ffffff; padding: 40px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); font-family: 'Segoe UI', sans-serif;">
+
+  <h2 style="text-align: center; color: #1a1a1a; font-size: 28px; margin-bottom: 20px;">Create Fundraiser</h2>
+  
+  <form method="post" style="display: flex; flex-direction: column; gap: 20px;">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit" 
+      style="background-color: #004080; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-size: 16px; transition: background 0.3s ease;">
+      Create
+    </button>
+  </form>
+
+  <p style="text-align: center; font-size: 14px; color: #555; margin-top: 25px;">
+    Fundraisers help support school projects and alumni initiatives.
+  </p>
+</div>
+{% endblock %}

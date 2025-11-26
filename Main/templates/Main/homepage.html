@@ -1,101 +1,68 @@
 {% extends "Main/base.html" %}
+{% load static %}
 
 {% block content %}
+<div style="font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0;">
 
-<!-- Hero -->
-<section class="homepage_hero">
-    <h1 class="homepage_maintitle">Welcome to The Caistorians' Association</h1>
-    <p class="homepage_tagline">Connecting alumni, sharing stories, and celebrating our community.</p>
-    <a href="{% url 'Accounts:create_account' %}" class="homepage_ctabutton">Join Us</a>
-</section>
-
-<div class="homepage_container">
-    <!-- Core Features -->
-    <section class="homepage_features">
-        <div class="homepage_featurecard">
-            <h2 class="homepage_featuretitle">Alumni Directory</h2>
-            <p class="homepage_featuretext">Find and connect with fellow alumni.</p>
-        </div>
-        <div class="homepage_featurecard">
-            <h2 class="homepage_featuretitle">Events</h2>
-            <p class="homepage_featuretext">See upcoming reunions and activities.</p>
-        </div>
-        <div class="homepage_featurecard">
-            <h2 class="homepage_featuretitle">Gallery</h2>
-            <p class="homepage_featuretext">See photos from alumni events and school life.</p>
-        </div>
-        <div class="homepage_featurecard">
-            <h2 class="homepage_featuretitle">Stories</h2>
-            <p class="homepage_featuretext">Share your journey or read others’ experiences.</p>
+    <!-- Hero Section -->
+    <section style="position: relative; text-align: center; color: black; padding: 50px 50px">
+        <!--<img src="{% static 'images/default_banner.jpg' %}" alt="Caistor Grammar School" 
+             style="width: 100%; height: 60vh; object-fit: cover; filter: brightness(60%);">-->
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+            <h1 style="font-size: 3em; margin-bottom: 0.3em;">Caistor Grammar School</h1>
+            <p style="font-size: 1.3em; letter-spacing: 0.05em;">A community for students, alumni, and supporters</p>
         </div>
     </section>
 
-    <!-- Why Alumni Societies -->
-    <section class="homepage_why">
-        <h2 class="homepage_sectiontitle">Why Alumni Societies Matter</h2>
-        <div class="homepage_twocolumns">
-            <div>
-                <p class="homepage_text">
-                    A strong alumni society builds lifelong connections, supports current students,
-                    and creates a network that benefits every generation.
-                </p>
-                <ul class="homepage_benefitslist">
-                    <li>Mentorship opportunities for students</li>
-                    <li>Fundraising and sponsorship potential</li>
-                    <li>Career networking for graduates</li>
-                    <li>Community engagement and school pride</li>
-                </ul>
-            </div>
-            <div class="homepage_imageplaceholder">[ Insert Image Here ]</div>
+    <!-- Intro Section -->
+    <section style="text-align: center; padding: 50px 10%; background-color: #f8f8f8;">
+        <h2 style="font-size: 2em; margin-bottom: 10px;">Welcome to the CGS Alumni Platform</h2>
+        <p style="max-width: 700px; margin: 0 auto; font-size: 1.1em; line-height: 1.6;">
+            Caistor Grammar School is a selective state academy with a proud tradition of academic excellence and community spirit.
+            Whether you’re a current student, a recent graduate, or a lifelong alumnus, this platform connects you to the stories,
+            events, and people that make CGS special.
+        </p>
+    </section>
+
+    <!-- Feature Boxes -->
+    <section style="display: flex; flex-wrap: wrap; justify-content: center; text-align: center; background: white; padding: 40px 0;">
+        <div style="flex: 1 1 250px; margin: 15px; padding: 30px; border: 1px solid #ddd; border-radius: 12px; max-width: 300px;">
+            <h3 style="margin-bottom: 10px;">About the School</h3>
+            <p>Learn more about CGS’s values, academic achievements, and rich history dating back to 1630.</p>
+            <a href="https://www.caistorgrammar.com/" style="display: inline-block; margin-top: 10px; color: #004aad; text-decoration: none;">Visit Official Site →</a>
+        </div>
+
+        <div style="flex: 1 1 250px; margin: 15px; padding: 30px; border: 1px solid #ddd; border-radius: 12px; max-width: 300px;">
+            <h3 style="margin-bottom: 10px;">Join the Alumni</h3>
+            <p>Stay connected with the CGS community. Share your journey and support future generations.</p>
+            <a href="{% url 'Accounts:create_account' %}" style="display: inline-block; margin-top: 10px; color: #004aad; text-decoration: none;">Sign Up →</a>
+        </div>
+
+        <div style="flex: 1 1 250px; margin: 15px; padding: 30px; border: 1px solid #ddd; border-radius: 12px; max-width: 300px;">
+            <h3 style="margin-bottom: 10px;">Read Alumni Stories</h3>
+            <p>Discover where life after CGS has taken our students—from scientists to entrepreneurs to explorers.</p>
+            <a href="{% url 'community:story_list' %}" style="display: inline-block; margin-top: 10px; color: #004aad; text-decoration: none;">View Stories →</a>
         </div>
     </section>
 
-    <!-- Use Cases -->
-    <section class="homepage_usecases">
-        <h2 class="homepage_sectiontitle">What You Can Do</h2>
-        <div class="homepage_usecasesgrid">
-            <div class="homepage_usecasecard">
-                <h3>Stay Connected</h3>
-                <p>Reconnect with classmates and keep in touch with school life.</p>
-                <div class="homepage_imageplaceholder">[ Image ]</div>
-            </div>
-            <div class="homepage_usecasecard">
-                <h3>Host Reunions</h3>
-                <p>Organise gatherings and reunions for your year group.</p>
-                <div class="homepage_imageplaceholder">[ Image ]</div>
-            </div>
-            <div class="homepage_usecasecard">
-                <h3>Support Students</h3>
-                <p>Provide mentoring, internships, or career guidance.</p>
-                <div class="homepage_imageplaceholder">[ Image ]</div>
-            </div>
-            <div class="homepage_usecasecard">
-                <h3>Grow the Network</h3>
-                <p>Help the community thrive and expand worldwide.</p>
-                <div class="homepage_imageplaceholder">[ Image ]</div>
-            </div>
-        </div>
+    <!-- Quote Section -->
+    <section style="background-color: #004aad; color: white; padding: 60px 20px; text-align: center;">
+        <blockquote style="font-size: 1.4em; max-width: 800px; margin: 0 auto; font-style: italic;">
+            “A good education is not just about exams, but about curiosity, character, and connection — all values we hold dear at Caistor Grammar.”
+        </blockquote>
+        <p style="margin-top: 20px; font-weight: bold;">— Headmaster, Caistor Grammar School</p>
     </section>
 
-    <!-- Upcoming Features -->
-    <section class="homepage_future">
-        <h2 class="homepage_sectiontitle">Coming Soon</h2>
-        <ul class="homepage_futurelist">
-            <li>Chat rooms for year groups</li>
-            <li>Paywall & exclusive content</li>
-            <li>OAuth login options</li>
-            <li>Email & WhatsApp campaigns (via Twilio)</li>
-            <li>Toggle contact info visibility on profiles</li>
-            <li>Donations Page</li>
-        </ul>
-        <div class="homepage_imageplaceholder">[ Feature Teaser Image ]</div>
-    </section>
-
-    <!-- CTA -->
-    <section class="homepage_ctasection">
-        <h2 class="homepage_sectiontitle">Be Part of the Community</h2>
-        <p class="homepage_text">Join today and help shape the future of our alumni society.</p>
-        <a href="{% url 'Accounts:create_account' %}" class="homepage_ctabutton">Get Started</a>
+    <!-- Call to Action -->
+    <section style="text-align: center; padding: 60px 20px;">
+        <h2 style="font-size: 2em;">Be part of the story.</h2>
+        <p style="font-size: 1.1em; max-width: 700px; margin: 10px auto; padding: 10px 10px">
+            Join the platform to share your achievements, attend exclusive events, and stay connected with fellow CGS alumni.
+        </p>
+        <a href="{% url 'Accounts:create_account' %}" 
+           style="background-color: #004aad; color: white; padding: 12px 25px; border-radius: 8px; text-decoration: none; font-weight: bold;">
+           Get Started
+        </a>
     </section>
 
 </div>

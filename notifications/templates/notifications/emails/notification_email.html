@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{ title }}</title>
+</head>
+
+<body style="font-family: Arial, sans-serif; line-height: 1.6;">
+    <h2>{{ title }}</h2>
+    <p>{{ message }}</p>
+
+    {% if link %}
+        <p>
+            <a href="{{ link }}" style="display:inline-block;padding:10px 20px;background:#4CAF50;color:white;text-decoration:none;border-radius:5px;">
+                View Message
+            </a>
+        </p>
+    {% endif %}
+
+    <hr>
+    <p style="font-size: 0.9em; color: #555;">
+        This email was sent by Caistorians. Please do not reply directly to this email.
+    </p>
+</body>
+</html>

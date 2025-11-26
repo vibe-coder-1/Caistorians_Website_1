@@ -21,7 +21,7 @@ def event_detail_view(request, pk):
     user_status = None
     if request.user.is_authenticated:
         try:
-            user_status = RSVP.objects.get(event=event, user=request.user).status
+            user_status = RSVP.objects.get(event=event, user=request.user).status.capitalize()
         except RSVP.DoesNotExist:
             pass
     
@@ -34,6 +34,7 @@ def event_detail_view(request, pk):
         "rsvps_yes": rsvps_yes,
         "rsvps_maybe": rsvps_maybe,
         "rsvps_no": rsvps_no,
+        "current_status": user_status,
     })
 
 
@@ -92,25 +93,23 @@ def event_delete(request, pk):
     return render(request, "events/event_confirm_delete.html", {"event": event})
 
 
-# events/views.py
 @login_required
 def rsvp_event(request, pk):
     event = get_object_or_404(Event, pk=pk)
-    try:
-        rsvp = RSVP.objects.get(event=event, user=request.user)
-    except RSVP.DoesNotExist:
-        rsvp = None
+    rsvp, _ = RSVP.objects.get_or_create(event=event, user=request.user)
 
     if request.method == "POST":
         form = RSVPForm(request.POST, instance=rsvp)
         if form.is_valid():
-            rsvp = form.save(commit=False)
-            rsvp.user = request.user
-            rsvp.event = event
-            rsvp.save()
-            messages.success(request, "Your RSVP has been saved.")
+            form.save()
+            messages.success(request, f"Your RSVP status has been set to '{rsvp.get_status_display()}'.")
             return redirect("events:event_detail", pk=event.pk)
     else:
         form = RSVPForm(instance=rsvp)
 
-    return render(request, "events/rsvp_form.html", {"form": form, "event": event})
+    return render(request, "events/rsvp_form.html", {
+        "form": form,
+        "event": event,
+        "current_status": rsvp.get_status_display(),
+    })
+

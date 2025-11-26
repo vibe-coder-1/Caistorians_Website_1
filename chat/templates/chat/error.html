@@ -1,0 +1,30 @@
+{% extends "Main/base.html" %}
+{% block content %}
+<div style="
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 75vh;
+  text-align: center;
+  color: #333;
+">
+  <div style="
+    background: #fff3f3;
+    border: 1px solid #ffcccc;
+    border-radius: 16px;
+    padding: 40px 60px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  ">
+    <h1 style="color: #d93025; font-size: 32px; margin-bottom: 15px;">Whoops!</h1>
+    <p style="font-size: 18px; margin-bottom: 25px;">
+      You haven’t added your graduation year to your profile yet.
+    </p>
+    <a href="/accounts/profile/edit/" 
+       style="background: #0078ff; color: white; text-decoration: none; 
+              padding: 10px 20px; border-radius: 8px; font-weight: 600; transition: 0.2s;">
+      Add it now
+    </a>
+  </div>
+</div>
+{% endblock %}

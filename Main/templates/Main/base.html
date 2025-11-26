@@ -2,17 +2,10 @@
 <html lang="en">
 <head>
     {% load static %}
-<<<<<<< Updated upstream
     {% if user.is_authenticated and user.school.logo %}
       <link rel="icon" href="{{ user.school.logo.url }}" type="image/png">
     {% else %}
-      <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/png">
-=======
-    {% if not user.school.logo %}
-      <link rel="icon" href="{% static 'images/Favicon.png' %}" type="image/png">
-    {% else %}
-      <link rel="icon" href="{% static 'images/Favicon.png' %}" type="image/png">
->>>>>>> Stashed changes
+      <link rel="icon" href="{% static 'images/favicon.jpg' %}" type="image/jpg">
     {% endif %}
     <meta charset="UTF-8">
     <title>{% block title %}The Caistorians' Association{% endblock %}</title>
@@ -56,6 +49,17 @@
         </ul>
       </li>
 
+
+      <li class="dropdown">
+        <a href="#">Fundraisers ▾</a>
+        <ul class="dropdown-menu">
+          <li><a href="{% url 'fundraisers:create_fundraiser' %}">Create</a></li>
+          <li><a href="{% url 'fundraisers:fundraiser_list' %}">List</a></li>
+        </ul>
+      </li>
+
+
+
       <!-- Events -->
       <li class="dropdown">
         <a href="#">Events ▾</a>
@@ -73,10 +77,15 @@
           <li><a href="{% url 'community:story_list' %}">Stories</a></li>
           <li><a href="{% url 'community:submit_story' %}">Submit Story</a></li>
           <li><a href="{% url 'community:upload_photo' %}">Upload Photo</a></li>
-          <li><a href="{% url 'schools:school_list' %}">Schools List</a></li>
+          <!--<li><a href="{% url 'schools:school_list' %}">Schools List</a></li>-->
         </ul>
       </li>
-
+    <li class="dropdown">
+      <a href="#">Chat ▾</a>
+      <ul class="dropdown-menu">
+        <li><a href="{% url 'chat:chat_redirect' %}">Chat</a></li>
+      </ul>
+    </li>
 
 
       {% else %}
@@ -101,7 +110,7 @@
 
 
     <!-- Main Content -->
-    <main>
+    <main style="padding-top: 100px; align-items: center;">
         {% block content %}
         {% endblock %}
     </main>

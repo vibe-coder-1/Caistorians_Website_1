@@ -4,20 +4,23 @@
 {% block content %}
 <div class="school_homepage">
 
+    <!-- HERO SECTION -->
     <section class="school_hero">
-        {% if school.banner_image %}
-            <img src="{{ school.banner_image.url }}" alt="Banner image" class="school_hero_image">
-        {% else %}
-            <img src="{% static 'images/default_banner.jpg' %}" alt="Default banner" class="school_hero_image">
-        {% endif %}
+
+        <div class="school_hero_images">
+            <img src="{% static 'images/picture2.jpg' %}" alt="Old CGS Students" class="hero_img">
+            <img src="{% static 'images/picture3.jpg' %}" alt="Modern CGS Students" class="hero_img hero_img_middle">
+            <img src="{% static 'images/picture4.jpg' %}" alt="Old CGS Students" class="hero_img">
+        </div>
+
         <div class="school_hero_overlay">
             <h1 class="school_hero_title">{{ school.name }}</h1>
             <p class="school_hero_tagline">Celebrating our alumni, past and present</p>
         </div>
-    </section>
-    
 
-    <!-- Feature Boxes (existing 4) -->
+    </section>
+
+    <!-- FEATURE BOXES -->
     <section class="school_featureboxes">
         <div class="school_box">
             <h3>Official School News</h3>
@@ -41,18 +44,70 @@
         </div>
     </section>
 
-    <!-- Historical Section -->
+    <!-- HISTORICAL SECTION -->
     <section class="school_history">
         <h2>{{ school.name }} Past & Present</h2>
         <div class="school_history_images">
             {% for image in school.historical_images.all %}
-                <img src="{{ image.image.url }}" alt="{{ image.caption }}">
+                <div class="history_img_wrapper">
+                    <img src="{{ image.image.url }}" alt="{{ image.caption }}">
+                </div>
             {% endfor %}
         </div>
         <a href="#">Explore Our History</a>
     </section>
 
-    <!-- Alumni Slider -->
+    <style>
+    .school_history {
+        background-color: #f0f0f0;
+        padding: 3rem 1.5rem;
+        text-align: center;
+    }
+
+    .school_history h2 {
+        font-size: 2.3rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Horizontal scroll container */
+    .school_history_images {
+        display: flex;
+        overflow-x: auto;
+        gap: 1rem;
+        padding-bottom: 0.5rem;
+        scroll-behavior: smooth;
+        scrollbar-width: none; /* Firefox */
+    }
+
+    /* Hide scrollbar in Chrome, Edge, Safari */
+    .school_history_images::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Uniform image size */
+    .history_img_wrapper {
+        flex: 0 0 auto;
+        width: 250px;
+        height: 170px;
+        position: relative;
+    }
+
+    .history_img_wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* keeps proportions but crops evenly */
+        border-radius: 8px;
+        box-shadow: 0 5px 12px rgba(0,0,0,0.12);
+        transition: transform 0.25s ease;
+    }
+
+    .history_img_wrapper img:hover {
+        transform: scale(1.04);
+    }
+    </style>
+
+    <!-- ALUMNI SLIDER -->
     <section class="school_alumni_slider">
         <h2>Alumni Highlights</h2>
         <div class="alumni_slider_container">
@@ -68,4 +123,219 @@
     </section>
 
 </div>
+
+
+
+
+
+<style>
+
+
+
+
+/* Remove default body/html margin to eliminate whitespace */
+body, html {
+    margin: 0;
+    padding: 0;
+    padding-top:1.0%;
+    overflow-x: hidden;
+}
+
+
+
+
+/* === HERO SECTION === */
+.school_homepage .school_hero {
+    position: relative;
+    width: 100%;
+    height: 50vh;
+    overflow: hidden;
+    margin-top: -60px; /* lift hero up under navbar */
+    padding-top: 0;
+}
+
+.school_homepage .school_hero_images {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    
+}
+
+.school_homepage .school_hero_images::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(0,0,0,0.1) 25%, rgba(0,0,0,0.85) 100%);
+    z-index: 1;
+}
+
+.school_homepage .hero_img {
+    width: calc(100% / 3);
+    height: 100%;
+    object-fit: cover;
+    transform-origin: center center;
+    transition: transform 0.3s ease;
+}
+
+.school_homepage .hero_img_middle {
+    object-position: bottom;
+}
+
+.school_homepage .hero_img:hover {
+    transform: scale(1.05);
+}
+
+.school_homepage .school_hero_overlay {
+    position: absolute;
+    top: 62%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
+    text-shadow: 0 6px 16px rgba(0,0,0,0.85);
+    z-index: 2;
+}
+
+.school_homepage .school_hero_title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin: 0 0 0.3rem 0;
+}
+
+.school_homepage .school_hero_tagline {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+/* === FEATURE BOXES === */
+.school_homepage .school_featureboxes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 3rem 1.5rem;
+    background-color: #fff;
+}
+
+.school_homepage .school_box {
+    flex: 1 1 20rem;
+    background-color: #fdfdfd;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 0.8rem;
+    box-shadow: 0px 6px 18px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.school_homepage .school_box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0px 10px 25px rgba(0,0,0,0.12);
+}
+
+.school_homepage .school_box h3 {
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+}
+
+.school_homepage .school_box a {
+    display: inline-block;
+    margin-top: 0.8rem;
+    color: #fff;
+    background-color: #0073e6;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.school_homepage .school_box a:hover {
+    background-color: #005bb5;
+}
+
+/* === HISTORICAL SECTION === */
+.school_homepage .school_history {
+    background-color: #f0f0f0;
+    padding: 3rem 1.5rem;
+    text-align: center;
+}
+
+.school_homepage .school_history h2 {
+    font-size: 2.3rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.school_homepage .school_history_images img {
+    max-width: 280px;
+    margin: 0.8rem;
+    border-radius: 8px;
+    box-shadow: 0 5px 12px rgba(0,0,0,0.1);
+}
+
+/* === ALUMNI SLIDER === */
+.school_homepage .school_alumni_slider {
+    background-color: #f7f7f7;
+    color: #222;
+    padding: 2rem 1.5rem 1rem 1.5rem;
+    text-align: center;
+    position: relative;
+}
+
+/* subtle top shadow/gradient */
+.school_homepage .school_alumni_slider::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(247,247,247,0.9), rgba(247,247,247,0));
+    z-index: 1;
+}
+
+.school_homepage .school_alumni_slider h2 {
+    font-size: 2.3rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 2;
+}
+
+.school_homepage .alumni_slide {
+    display: inline-block;
+    margin: 0.8rem;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 0.8rem;
+    width: 230px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    position: relative;
+    z-index: 2;
+}
+
+.school_homepage .alumni_slide img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 0.8rem;
+}
+
+.school_homepage .alumni_name {
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+}
+
+.school_homepage .alumni_quote {
+    font-style: italic;
+    font-size: 0.85rem;
+}
+
+.school_homepage .alumni_cta {
+    margin-top: 1.5rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #0073e6;
+}
+</style>
 {% endblock %}

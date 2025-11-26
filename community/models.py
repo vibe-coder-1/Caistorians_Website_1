@@ -31,6 +31,8 @@ class Story(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     approved = models.BooleanField(default=False)  # Admin moderation
-
+    text_content = models.TextField(blank=True, null=True)
+    pdf_file = models.FileField(upload_to='pdfs/', blank=True, null=True)
     def __str__(self):
         return self.title
+

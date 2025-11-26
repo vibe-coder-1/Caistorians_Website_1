@@ -1,0 +1,44 @@
+{% extends "Main/base.html" %}
+
+{% block content %}
+<div style="max-width: 800px; margin: 60px auto; background: #ffffff; padding: 40px; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: 'Segoe UI', sans-serif;">
+
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+    <h2 style="color: #002147; font-size: 30px; margin: 0;">Active Fundraisers</h2>
+    <a href="{% url 'fundraisers:create_fundraiser' %}" 
+       style="background-color: #004080; color: white; text-decoration: none; padding: 10px 18px; border-radius: 8px; font-size: 15px; transition: background 0.3s ease;">
+       + Create Fundraiser
+    </a>
+  </div>
+
+  {% if fundraisers %}
+  <ul style="list-style: none; padding: 0; margin: 0;">
+    {% for f in fundraisers %}
+      <a href="{% url 'fundraisers:fundraiser_detail' f.id %}" 
+        style="
+          display: block;
+          background: #f8faff;
+          padding: 15px 20px;
+          margin-bottom: 12px;
+          border-radius: 10px;
+          border-left: 5px solid #004080;
+          text-decoration: none;
+          color: #002147;
+          transition: all 0.2s ease-in-out;
+        "
+        onmouseover="this.style.background='#e6efff'; this.style.transform='translateY(-2px)';"
+        onmouseout="this.style.background='#f8faff'; this.style.transform='translateY(0)';"
+      >
+        <span style="font-weight: 600; font-size: 18px;">{{ f.title }}</span>
+        <p style="margin: 6px 0 0; font-size: 15px; color: #333;">
+          Raised £{{ f.total_raised }} / £{{ f.goal_amount }}
+        </p>
+      </a>
+    {% endfor %}
+
+  </ul>
+  {% else %}
+    <p style="text-align: center; color: #666; font-size: 16px;">No fundraisers are currently active.</p>
+  {% endif %}
+</div>
+{% endblock %}

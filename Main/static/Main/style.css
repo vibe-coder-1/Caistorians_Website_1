@@ -2,7 +2,12 @@
 /* NAV + FOOTER */
 nav {
     background: #1e3a5f; /* deep navy */
-    padding: 0.5rem 1rem;
+
+    position: fixed;
+    top: 0;
+    width: 100%;
+
+    z-index: 1000;
 }
 
 footer {
@@ -17,6 +22,8 @@ footer {
     justify-content: space-between;
     align-items: center;
     max-height: 80px;
+
+    padding: 0.5rem 1rem;
 }
 
 .nav-links {

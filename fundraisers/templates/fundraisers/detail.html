@@ -1,0 +1,55 @@
+{% extends "Main/base.html" %}
+
+{% block content %}
+<div style="max-width: 700px; margin: 60px auto; background: #ffffff; padding: 40px; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: 'Segoe UI', sans-serif;">
+
+  <h2 style="text-align: center; color: #002147; font-size: 30px; margin-bottom: 10px;">
+    {{ fundraiser.title }}
+  </h2>
+  
+  <p style="text-align: center; color: #555; font-size: 17px; margin-bottom: 30px;">
+    {{ fundraiser.description }}
+  </p>
+
+  <div style="background: #f5f7fa; padding: 20px; border-radius: 10px; text-align: center; margin-bottom: 30px;">
+    <p style="font-size: 18px; color: #333; margin: 0;">
+      <strong>£{{ fundraiser.total_raised }}</strong> raised of 
+      <strong>£{{ fundraiser.goal_amount }}</strong> goal
+    </p>
+    <div style="height: 12px; background: #d8e0eb; border-radius: 6px; overflow: hidden; margin-top: 10px;">
+      <div style="width: calc({{ fundraiser.total_raised }}/{{ fundraiser.goal_amount }} * 100%); background: #004080; height: 100%;"></div>
+    </div>
+  </div>
+
+  <form id="donate-form" style="display: flex; flex-direction: column; gap: 15px; align-items: center;">
+    {% csrf_token %}
+    <input type="number" name="amount" placeholder="Enter amount (£)" min="1" required
+      style="width: 80%; padding: 12px; border-radius: 8px; border: 1px solid #ccc; font-size: 16px; text-align: center;">
+    
+    <button type="submit"
+      style="background-color: #004080; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-size: 16px; transition: background 0.3s ease;">
+      Donate Now
+    </button>
+  </form>
+
+  <p style="text-align: center; color: #666; font-size: 14px; margin-top: 20px;">
+    Your donation goes toward school initiatives and alumni projects.
+  </p>
+</div>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+const stripe = Stripe("{{ STRIPE_PUBLISHABLE_KEY }}");
+document.getElementById("donate-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const amount = e.target.amount.value;
+  const response = await fetch("{% url 'fundraisers:checkout' fundraiser.id %}", {
+    method: "POST",
+    headers: {"Content-Type": "application/x-www-form-urlencoded"},
+    body: new URLSearchParams({amount}),
+  });
+  const data = await response.json();
+  stripe.redirectToCheckout({ sessionId: data.id });
+});
+</script>
+{% endblock %}

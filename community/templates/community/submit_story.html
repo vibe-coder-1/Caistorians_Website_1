@@ -3,13 +3,29 @@
 <div class="story_submit_page">
   <h2 class="story_submit_title">Submit Your Story</h2>
 
-  <form method="post" class="story_submit_form">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <div class="story_submit_cta">
-          <button type="submit" class="btn-primary">Submit</button>
-      </div>
-  </form>
+<form method="post" class="story_submit_form" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="story_submit_cta">
+        <button type="submit" class="btn-primary">Submit</button>
+    </div>
+</form>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const textArea = document.querySelector('textarea[name="text_content"]');
+    const pdfInput = document.querySelector('input[name="pdf_file"]');
+    if (!textArea || !pdfInput) return;
+
+    textArea.addEventListener('input', () => {
+        pdfInput.disabled = textArea.value.trim() !== '';
+    });
+    pdfInput.addEventListener('change', () => {
+        textArea.disabled = pdfInput.files.length > 0;
+    });
+});
+</script>
+
 
   <div class="story_submit_back">
       <a href="{% url 'community:story_list' %}" class="back_link">← Back to Stories</a>
