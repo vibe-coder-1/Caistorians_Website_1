@@ -6,3 +6,6 @@ channels
 channels-redis
 bleach
 daphne
+gunicorn
+psycopg2-binary
+whitenoise

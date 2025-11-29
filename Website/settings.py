@@ -37,7 +37,7 @@ STATICFILES_DIRS = [
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #
-ALLOWED_HOSTS = ['127.0.0.1','10.25.130.184', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1','10.25.130.184', 'localhost','Caistorians_Website.com', 'caistorians.com']
 
 # Application definition
 
@@ -74,6 +74,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+
+MIDDLEWARE.insert(1, "whitenoise.middleware.WhiteNoiseMiddleware")
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 ROOT_URLCONF = 'Website.urls'
 
