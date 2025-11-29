@@ -35,13 +35,19 @@ def message_detail_view(request, pk):
 def compose_view(request):
     initial_data = {}
     to_user = request.GET.get("to")
+    from_user = request.GET.get("from")
     subject = request.GET.get("subject")
 
     if to_user:
         from django.contrib.auth import get_user_model
         User = get_user_model()
+
+        target = to_user
+        if to_user == request.user.username:
+            target = from_user
+
         try:
-            initial_data["recipient"] = User.objects.filter(school=request.user.school).get(username=to_user)
+            initial_data["recipient"] = User.objects.filter(school=request.user.school).get(username=target)
         except User.DoesNotExist:
             pass
 

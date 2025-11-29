@@ -10,7 +10,7 @@
   <hr>
   <p class="message_body">{{ message.body }}</p>
 
-  <a href="{% url 'interactions:compose' %}?to={{ message.sender.username }}&subject=Re: {{ message.subject }}"
+  <a href="{% url 'interactions:compose' %}?to={{ message.sender.username }}&from={{ message.recipient.username }}&subject=Re: {{ message.subject }}"
      class="reply_btn">
     Reply
   </a>

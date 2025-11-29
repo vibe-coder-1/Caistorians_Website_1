@@ -5,7 +5,7 @@
     {% if user.is_authenticated and user.school.logo %}
       <link rel="icon" href="{{ user.school.logo.url }}" type="image/png">
     {% else %}
-      <link rel="icon" href="{% static 'images/favicon.jpg' %}" type="image/jpg">
+      <link rel="icon" href="{% static 'images/Caistorians_Association.png' %}" type="image/png">
     {% endif %}
     <meta charset="UTF-8">
     <title>{% block title %}The Caistorians' Association{% endblock %}</title>
@@ -21,7 +21,7 @@
           {% if user.is_authenticated %}
             <img class="navbar-logo" src="{{ user.school.logo.url }}">
           {% else %}
-            <img class="navbar-logo" src="{% static 'images/Caistor_Grammar_School_Badge.png' %}" alt="Logo">
+            <img class="navbar-logo" src="{% static 'images/Caistorians_Association.png' %}" alt="Logo">
             {% endif %}
       </a>
     </div>

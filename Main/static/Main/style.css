@@ -1001,15 +1001,18 @@ main {
 
 
 /*Public Profile ------------------------------------------------------------------------------------------------------------------------------------------------------*/
-.profile-container {
-    display: flex;
-    gap: 2rem;
+.profile-display {
     background: #fff;
-    padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     max-width: 500px;
     margin: 2rem auto;
+}
+
+.profile-container {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem;
 }
 
 .profile-left {
@@ -1044,6 +1047,11 @@ main {
 
 .profile-right li {
     margin-bottom: 0.75rem;
+}
+
+.profile-center {
+    padding-bottom: 2rem;
+    text-align: center;
 }
 
 
