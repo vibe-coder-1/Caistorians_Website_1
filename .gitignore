@@ -1,6 +1,4 @@
 .venv/
 .env
 
-.Accounts/
-
 *.pyc

@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import get_user_model
 from django.urls import reverse
 from .models import Message
 from .forms import MessageForm
 from notifications.utils import create_notification
+
 #Create your views here.
 
 @login_required
@@ -33,27 +35,6 @@ def message_detail_view(request, pk):
 
 @login_required
 def compose_view(request):
-    initial_data = {}
-    to_user = request.GET.get("to")
-    from_user = request.GET.get("from")
-    subject = request.GET.get("subject")
-
-    if to_user:
-        from django.contrib.auth import get_user_model
-        User = get_user_model()
-
-        target = to_user
-        if to_user == request.user.username:
-            target = from_user
-
-        try:
-            initial_data["recipient"] = User.objects.filter(school=request.user.school).get(username=target)
-        except User.DoesNotExist:
-            pass
-
-    if subject:
-        initial_data["subject"] = f"Re: {subject}"
-
     if request.method == "POST":
         form = MessageForm(request.POST)
         if form.is_valid():
@@ -72,7 +53,29 @@ def compose_view(request):
             )
 
             return redirect("interactions:outbox")
-    else:
+    elif request.method == "GET":
+        initial_data = {}
+
+        to_user = request.GET.get("to")
+        from_user = request.GET.get("from")
+        subject = request.GET.get("subject")
+
+        if to_user or from_user:
+            
+            User = get_user_model()
+
+            target = to_user
+            if to_user == request.user.username:
+                target = from_user
+
+            try:
+                initial_data["recipient"] = User.objects.filter(school=request.user.school).get(username=target)
+            except User.DoesNotExist:
+                pass
+
+        if subject:
+            initial_data["subject"] = f"Re: {subject}"
+
         form = MessageForm(initial=initial_data)
 
-    return render(request, "interactions/compose.html", {"form": form})
+        return render(request, "interactions/compose.html", {"form": form})
