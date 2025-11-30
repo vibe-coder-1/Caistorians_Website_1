@@ -2,26 +2,27 @@
 {% load static %}
 
 {% block content %}
-<div class="profile-container">
-    <div class="profile-box">
+<div class="personal-profile-container">
+    <div class="personal-profile-box">
         <!-- Left column: username and picture -->
-        <div class="profile-left">
-            <h2 class="profile-username">{{ user.username }}</h2>
+        <div class="personal-profile-left">
+            <h2 class="personal-profile-username">{{ user.username }}</h2>
             {% if user.profile_picture %}
-            <img src="{{ user.profile_picture.url }}" alt="Profile picture" class="profile-img">
+            <img src="{{ user.profile_picture.url }}" alt="Profile picture" class="personal-profile-img">
             {% else %}
-            <div class="no-picture">No Profile Picture</div>
+            <div class="personal-no-picture">No Profile Picture</div>
             {% endif %}
         </div>
 
         <!-- Right column: user info -->
-        <div class="profile-right">
+        <div class="personal-profile-right">
             <ul>
                 <br><br>
                 <li><strong>Email:</strong> {{ user.email }}</li>
                 <li><strong>First Name:</strong> {{ user.first_name }}</li>
                 <li><strong>Last Name:</strong> {{ user.last_name }}</li>
                 <li><strong>Graduation Year:</strong> {{ user.graduation_year }}</li>
+                <li><strong>Name While At School:</strong> {{ user.name_while_at_school }}</li>
                 <li><strong>Occupation:</strong> {{ user.occupation }}</li>
                 <li><strong>Bio:</strong> {{ user.bio|default:"Not provided" }}</li>
                 <li><strong>LinkedIn:</strong>
@@ -36,8 +37,11 @@
                 <li><strong>Is Staff:</strong> {{ user.is_staff_account }}</li>
                 <li><strong>Is Active:</strong> {{ user.is_active }}</li>
             </ul>
-            <a href="{% url 'Accounts:edit_profile' %}" class="btn-primary">Edit Profile</a>
         </div>
+    </div>
+
+    <div class="profile-center">
+        <a href="{% url 'Accounts:edit_profile' %}" class="btn-primary">Edit Profile</a>
     </div>
 </div>
 {% endblock %}

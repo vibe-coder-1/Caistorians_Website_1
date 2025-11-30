@@ -53,7 +53,7 @@
       <div class="directory-card-left" style="flex: 0 0 90px;">
           {% if alumni.profile_picture %}
               <img src="{{ alumni.profile_picture.url }}" alt="{{ alumni.username }}"
-                   style="width: 90px; height: 100%; object-fit: cover;">
+                   style="width: 90px; height: 100%; object-fit: contain;">
           {% else %}
               <div style="
                    background: #eee; color: #666; height: 100%;
@@ -64,12 +64,17 @@
       </div>
       <div style="flex: 1; padding: 15px;">
           <p style="font-weight: 700; margin-bottom: 4px;">{{ alumni.username }}</p>
+          {% if alumni.name_while_at_school %}
+          <p style="color: #666; margin-bottom: 4px;">{{ alumni.name_while_at_school }}</p>
+          {% elif alumni.first_name and alumni.last_name %}
+          <p style="color: #666; margin-bottom: 4px;">{{ alumni.first_name }} {{ alumni.last_name }}</p>
+          {% endif %}
           {% if alumni.graduation_year %}
           <p style="color: #666; margin-bottom: 4px;">Class of {{ alumni.graduation_year }}</p>
           {% endif %}
-          {% if alumni.occupation %}
+          <!-- {% if alumni.occupation %}
           <p style="color: #444;">{{ alumni.occupation }}</p>
-          {% endif %}
+          {% endif %} -->
       </div>
   </div>
 </a>

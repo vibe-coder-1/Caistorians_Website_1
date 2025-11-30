@@ -7,6 +7,7 @@ from schools.models import School
 class User(AbstractUser):
     school = models.ForeignKey(School, on_delete=models.CASCADE, related_name="users", null=True, blank=True)
     graduation_year = models.PositiveIntegerField(null=True, blank=True)
+    name_while_at_school = models.CharField(max_length=100, blank=True)
     occupation = models.CharField(max_length=100, blank=True)
     bio = models.TextField(blank=True)
     linkedin_url = models.URLField(blank=True)

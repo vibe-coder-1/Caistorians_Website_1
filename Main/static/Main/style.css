@@ -835,40 +835,42 @@ main {
 
 
 /*Personal_profile ----------------------------------------------------------------------------------------Profile-----------------------------------------------------------------*/
-.profile-container {
+.personal-profile-container {
     max-width: 900px;
     margin: 2rem auto;
     padding: 2rem;
-}
 
-.profile-box {
-    display: flex;
-    flex-wrap: wrap;
     background: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.personal-profile-box {
+    display: flex;
+    flex-wrap: wrap;
+
     padding: 2rem;
     gap: 2rem;
 }
 
-.profile-left {
+.personal-profile-left {
     flex: 0 0 200px;
     max-width: 200px;
     text-align: center;
 }
 
-.profile-username {
+.personal-profile-username {
     margin-bottom: 1rem;
     text-align: left;
 }
 
-.profile-img {
+.personal-profile-img {
     width: 100%;
     border-radius: 8px;
     display: block;
 }
 
-.no-picture {
+.personal-no-picture {
     width: 100%;
     height: 200px;
     background: #ddd;
@@ -880,29 +882,29 @@ main {
     text-align: center;
 }
 
-.profile-right {
+.personal-profile-right {
     flex: 1;
 }
 
-.profile-right ul {
+.personal-profile-right ul {
     list-style: none;
     padding: 0;
 }
 
-.profile-right li {
+.personal-profile-right li {
     margin-bottom: 0.5rem;
 }
 
-.profile-right.social a {
+.personal-profile-right.social a {
     color: #fff;
     text-decoration: none;
 }
 
-.profile-right a:hover {
+.personal-profile-right a:hover {
     text-decoration: underline;
 }
 
-.btn-primary {
+.-btn-primary {
     margin-top: 1rem;
 }
 
@@ -1005,14 +1007,16 @@ main {
     background: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    max-width: 500px;
+    max-width: 900px;
     margin: 2rem auto;
 }
 
 .profile-container {
-    display: flex;
     gap: 2rem;
     padding: 2rem;
+    justify-content: center;
+
+    display: flex;
 }
 
 .profile-left {
