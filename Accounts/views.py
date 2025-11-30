@@ -58,7 +58,7 @@ def edit_profile_view(request):
         "form": form,
         "username": request.user.username,
     }
-    return render(request, 'Accounts/edit_account.html', context)
+    return render(request, 'Accounts/edit_profile.html', context)
 
 def privacy(request):
     return render(request, 'Accounts/privacy.html')
