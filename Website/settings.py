@@ -37,7 +37,7 @@ STATICFILES_DIRS = [
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #
-ALLOWED_HOSTS = ['127.0.0.1','10.25.130.184', 'localhost','Caistorians_Website.com', 'caistorians.com','caistorians-website.onrender.com']
+ALLOWED_HOSTS = ['127.0.0.1','10.25.130.184', 'localhost','Caistorians_Website.com', 'caistorians.com','caistorians-website.onrender.com','www.caistorians.com']
 
 # Application definition
 
