@@ -37,7 +37,7 @@ STATICFILES_DIRS = [
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #
-ALLOWED_HOSTS = ['127.0.0.1','10.25.130.184', 'localhost','Caistorians_Website.com', 'caistorians.com']
+ALLOWED_HOSTS = ['127.0.0.1','10.25.130.184', 'localhost','Caistorians_Website.com', 'caistorians.com','caistorians-website.onrender.com']
 
 # Application definition
 
@@ -110,12 +110,29 @@ CHANNEL_LAYERS = {
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# DATABASES = {                                         OLD DATABASE
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
+        'OPTIONS': {
+            'sslmode': os.getenv('DB_SSLMODE'),
+            'channel_binding': os.getenv('DB_CHANNEL_BINDING'),
+        }
     }
 }
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
