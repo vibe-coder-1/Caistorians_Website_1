@@ -22,8 +22,6 @@ class CustomUserCreationForm(UserCreationForm):
         return user
 
 
-User = get_user_model()
-
 class UserEditForm(forms.ModelForm):
     class Meta:
         model = User

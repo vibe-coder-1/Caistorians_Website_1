@@ -87,8 +87,6 @@ def register_view(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         gdpr_consent = request.POST.get('gdpr_consent')
-        
-        print(form.username)
 
         if not gdpr_consent:
             messages.error(request, "You must consent to proceed.")
@@ -100,7 +98,8 @@ def register_view(request):
         
     elif request.method == "GET":
         form = CustomUserCreationForm()
-        return render(request, 'accounts/create_account.html', {'form': form})
+        
+    return render(request, 'accounts/create_account.html', {'form': form})
 
 def login_view(request):
     if request.method == 'POST':

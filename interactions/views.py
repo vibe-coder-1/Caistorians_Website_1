@@ -78,4 +78,4 @@ def compose_view(request):
 
         form = MessageForm(initial=initial_data)
 
-        return render(request, "interactions/compose.html", {"form": form})
+    return render(request, "interactions/compose.html", {"form": form})
