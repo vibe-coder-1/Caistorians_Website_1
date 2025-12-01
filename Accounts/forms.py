@@ -16,7 +16,7 @@ class CustomUserCreationForm(UserCreationForm):
     def save(self, commit=True):
         user = super().save(commit=False)
         user.email = self.cleaned_data["email"]
-        user.school = School.objects.get_or_create(name="Caistor Grammar School")[0]
+        user.school = School.objects.get_or_create(name="Caistorians at CGS")[0]
         if commit:
             user.save()
         return user
