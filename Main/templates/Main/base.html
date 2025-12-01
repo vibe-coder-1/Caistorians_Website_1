@@ -18,19 +18,11 @@
     <div class="logo">
       <a href="{% url 'Main:homepage' %}" class="logo1">
         <p class="navtitle">
-          {% if user.is_authenticated %}
-            
-            <!-- Yash code may need looking at -->
-            {% if user.school.logo %}
+          {% if user.is_authenticated and user.school.logo %}
             <img class="navbar-logo" src="{{ user.school.logo.url }}" alt="Logo">
-            {% else %}
-                <img class="navbar-logo" src="{% static 'images/Caistorians_Association_Logo.png' %}" alt="Logo">
-            {% endif %}
-
-
           {% else %}
-            <img class="navbar-logo" src="{% static 'images/Caistorians_Association.png' %}" alt="Logo">
-            {% endif %}
+            <img class="navbar-logo" src="{% static 'images/Caistorians_Association_Logo.png' %}" alt="Logo">
+          {% endif %}
       </a>
     </div>
     <ul class="nav-links">
