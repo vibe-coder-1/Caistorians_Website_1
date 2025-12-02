@@ -99,7 +99,7 @@ def register_view(request):
     elif request.method == "GET":
         form = CustomUserCreationForm()
         
-    return render(request, 'accounts/create_account.html', {'form': form})
+    return render(request, 'Accounts/create_account.html', {'form': form})
 
 def login_view(request):
     if request.method == 'POST':
@@ -112,7 +112,7 @@ def login_view(request):
             messages.error(request, "Invalid username or password.")
     else:
         form = AuthenticationForm()
-    return render(request, 'accounts/login.html', {'form': form})
+    return render(request, 'Accounts/login.html', {'form': form})
 
 @user_login_required
 def logout_view(request):
@@ -125,4 +125,4 @@ def logout_view(request):
 def profile_view(request):
     if not request.user.is_authenticated:
         return redirect('Accounts:login')
-    return render(request, 'accounts/profile.html', {'user': request.user})
+    return render(request, 'Accounts/profile.html', {'user': request.user})
