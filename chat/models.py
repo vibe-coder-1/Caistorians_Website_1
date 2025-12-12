@@ -18,7 +18,7 @@ class GroupMessage(models.Model):
     )
     text = models.TextField()
     sent_at = models.DateTimeField(auto_now_add=True)
-    color = models.CharField(max_length=7, blank=True)  # store hex color
+    color = models.CharField(max_length=500, blank=True)  # store hex color
 
     class Meta:
         ordering = ['sent_at']
