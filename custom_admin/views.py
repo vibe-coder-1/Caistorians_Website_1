@@ -41,7 +41,7 @@ def dashboard(request):
     reports = Report.objects.filter(school=request.user.school, resolved=False)
     chat_logs = Message.objects.filter(
         Q(sender__school=request.user.school) | Q(recipient__school=request.user.school),
-        Q(sender__is_staff_account=False) | Q(recipient__is_staff_account=False)
+        Q(sender__is_staff=False) | Q(recipient__is_staff=False)
     )
     logs = AdminLog.objects.filter(school=request.user.school).order_by('-created_at')[:50]  # last 50 actions
 

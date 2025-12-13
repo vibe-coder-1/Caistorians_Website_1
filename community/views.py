@@ -14,6 +14,8 @@ def upload_photo(request):
         if form.is_valid():
             photo = form.save(commit=False)
             photo.uploaded_by = request.user
+            if request.user.is_staff or request.user.is_superuser:
+                photo.approved = True
             photo.save()
             return redirect("community:gallery")
     else:
