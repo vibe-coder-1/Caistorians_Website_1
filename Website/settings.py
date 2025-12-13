@@ -38,7 +38,8 @@ STATICFILES_DIRS = [
 # SECURITY WARNING: don't run with debug turned on in production!
 #
 ALLOWED_HOSTS = ['127.0.0.1','10.25.130.184', 'localhost','Caistorians_Website.com', 'caistorians.com','caistorians-website.onrender.com','www.caistorians.com']
-
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 # Application definition
 
 INSTALLED_APPS = [
@@ -191,3 +192,8 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 #remember to use 2FA and app passwords when properly launching
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://www.caistorians.com",
+    "https://*.onrender.com",
+]
