@@ -7,7 +7,8 @@ app_name = "community"
 urlpatterns = [
     # Photos
     path("upload-photo/", views.upload_photo, name="upload_photo"),
-    path("gallery/", views.gallery_view, name="gallery"),
+    path("gallery", views.gallery_view, name="gallery"),
+    path("gallery/", views.gallery_photo_view, name="gallery_photo"),
     path("photo/<int:pk>/delete/", views.delete_photo, name="delete_photo"),
     # Stories
     path("submit-story/", views.submit_story, name="submit_story"),

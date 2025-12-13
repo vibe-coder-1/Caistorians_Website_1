@@ -1188,6 +1188,10 @@ textarea {
   max-width: 220px;
 }
 
+.gallery_card a {
+  text-decoration: none;
+}
+
 .gallery_image {
   width: 100%;
   height: 150px;

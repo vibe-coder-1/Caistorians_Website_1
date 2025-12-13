@@ -1,0 +1,22 @@
+{% extends "Main/base.html" %}
+{% block content %}
+    <div style="justify-self: center;">
+        <div style="max-width: 1000px;">
+            <img style="width: 100%; height: 100%; object-fit:contain;" src="{{ photo.image.url }}" alt="{{ photo.caption }}">
+        </div>
+        <p class="gallery_caption">{{ photo.caption }}</p>
+        <p class="gallery_meta">
+        By {{ photo.uploaded_by.username }} on {{ photo.uploaded_at|date:"D, d M Y" }}
+        </p>
+    </div>
+
+    <div class="gallery_container">
+        {% if previous != None %}
+            <a class="gallery_cta" href="{% url 'community:gallery' %}/?id={{ previous.id }}">Previous</a>
+        {% endif %}
+        <a class="gallery_cta" href="{% url 'community:gallery' %}">Back</a>
+        {% if next != None %}
+            <a class="gallery_cta" href="{% url 'community:gallery' %}/?id={{ next.id }}">Next</a>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -26,7 +26,28 @@ def gallery_view(request):
     photos = Photo.objects.filter(school=request.user.school, approved=True).order_by("-uploaded_at")
     #photos = Photo.objects.order_by("-uploaded_at")  ------For testing purposes, show unapproved photos too
     return render(request, "community/gallery.html", {"photos": photos})
+    
+def gallery_photo_view(request):
+    id = request.GET.get("id")
+    photos = Photo.objects.filter(school=request.user.school, approved=True, id=id)
+    if len(photos) == 0:
+        photo = None
+        redirect("community/gallery")
+    else:
+        photo = photos[0]
 
+    try:
+        previous = Photo.objects.filter(school=request.user.school, approved=True, id=int(id)-1)[0]
+    except Exception as err:
+        print(err)
+        previous = None
+
+    try:
+        next = Photo.objects.filter(school=request.user.school, approved=True, id=int(id)+1)[0]
+    except:
+        next = None
+
+    return render(request, "community/gallery_photo_view.html", {"photo": photo, "previous": previous, "next": next})
 
 # --- Delete Photo ---
 @login_required
