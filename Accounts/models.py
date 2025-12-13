@@ -13,7 +13,6 @@ class User(AbstractUser):
     linkedin_url = models.URLField(blank=True)
     profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
     is_staff_account = models.BooleanField(default=False)
-    is_superuser_account = models.BooleanField(default=False)
     is_student_account = models.BooleanField(default=False)
 
 

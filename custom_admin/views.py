@@ -8,7 +8,7 @@ from .models import AdminLog, Report
 from django.db.models import Q
 from interactions.models import Message
 def staff_required(user):
-    if user.is_staff_account or user.is_superuser_account:
+    if user.is_staff_account or user.is_superuser:
         answer = True
     else:
         answer = False
