@@ -19,6 +19,24 @@ class Photo(models.Model):
     def __str__(self):
         return f"{self.uploaded_by.username} - {self.caption[:20]}"
 
+# class Story(models.Model):
+#     school = models.ForeignKey(
+#         School,
+#         on_delete=models.CASCADE,
+#         related_name="story",
+#         default=1
+#     )
+#     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+#     title = models.CharField(max_length=200)
+#     content = models.TextField()
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     approved = models.BooleanField(default=False)  # Admin moderation
+#     text_content = models.TextField(blank=True, null=True)
+#     pdf_file = models.FileField(upload_to='pdfs/', blank=True, null=True)
+#     def __str__(self):
+#         return self.title
+
+
 class Story(models.Model):
     school = models.ForeignKey(
         School,
@@ -33,6 +51,11 @@ class Story(models.Model):
     approved = models.BooleanField(default=False)  # Admin moderation
     text_content = models.TextField(blank=True, null=True)
     pdf_file = models.FileField(upload_to='pdfs/', blank=True, null=True)
+
+    # --- NEW FIELDS ---
+    price = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
+    is_magazine = models.BooleanField(default=False)
+    thumbnail = models.ImageField(upload_to='story_thumbnails/', blank=True, null=True)
+
     def __str__(self):
         return self.title
-

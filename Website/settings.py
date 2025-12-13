@@ -102,12 +102,33 @@ WSGI_APPLICATION = 'Website.wsgi.application'
 ASGI_APPLICATION = "Website.asgi.application"
 
 # Development channel layer (in-memory). Replace with Redis in production.
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels.layers.InMemoryChannelLayer",
+#     },
+# }
+
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "CONFIG": {
+#             "hosts": [os.environ.get("REDIS_URL")],
+#         },
+#     },
+# }
+
+# import os
+
 CHANNEL_LAYERS = {
     "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer",
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [os.environ.get("REDIS_URL", "redis://127.0.0.1:6379/0")],
+        },
     },
 }
 
+#
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 

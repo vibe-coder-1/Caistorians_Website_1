@@ -3,29 +3,64 @@
 <div class="story_submit_page">
   <h2 class="story_submit_title">Submit Your Story</h2>
 
-<form method="post" class="story_submit_form" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <div class="story_submit_cta">
-        <button type="submit" class="btn-primary">Submit</button>
-    </div>
-</form>
+  <form method="post" class="story_submit_form" enctype="multipart/form-data">
+      {% csrf_token %}
+      
+      <p>
+          {{ form.title.label_tag }}<br>
+          {{ form.title }}
+          {% if form.title.errors %}{{ form.title.errors }}{% endif %}
+      </p>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    const textArea = document.querySelector('textarea[name="text_content"]');
-    const pdfInput = document.querySelector('input[name="pdf_file"]');
-    if (!textArea || !pdfInput) return;
+      <p>
+          {{ form.text_content.label_tag }}<br>
+          {{ form.text_content }}
+          {% if form.text_content.errors %}{{ form.text_content.errors }}{% endif %}
+      </p>
 
-    textArea.addEventListener('input', () => {
-        pdfInput.disabled = textArea.value.trim() !== '';
-    });
-    pdfInput.addEventListener('change', () => {
-        textArea.disabled = pdfInput.files.length > 0;
-    });
-});
-</script>
+      <p>
+          {{ form.pdf_file.label_tag }}<br>
+          {{ form.pdf_file }}
+          {% if form.pdf_file.errors %}{{ form.pdf_file.errors }}{% endif %}
+      </p>
 
+      <p>
+          {{ form.price.label_tag }}<br>
+          {{ form.price }}
+          {% if form.price.errors %}{{ form.price.errors }}{% endif %}
+      </p>
+
+      <p>
+          {{ form.is_magazine.label_tag }}
+          {{ form.is_magazine }}
+          {% if form.is_magazine.errors %}{{ form.is_magazine.errors }}{% endif %}
+      </p>
+
+      <p>
+          {{ form.thumbnail.label_tag }}<br>
+          {{ form.thumbnail }}
+          {% if form.thumbnail.errors %}{{ form.thumbnail.errors }}{% endif %}
+      </p>
+
+      <div class="story_submit_cta">
+          <button type="submit" class="btn-primary">Submit</button>
+      </div>
+  </form>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+      const textArea = document.querySelector('textarea[name="text_content"]');
+      const pdfInput = document.querySelector('input[name="pdf_file"]');
+      if (!textArea || !pdfInput) return;
+
+      textArea.addEventListener('input', () => {
+          pdfInput.disabled = textArea.value.trim() !== '';
+      });
+      pdfInput.addEventListener('change', () => {
+          textArea.disabled = pdfInput.files.length > 0;
+      });
+  });
+  </script>
 
   <div class="story_submit_back">
       <a href="{% url 'community:story_list' %}" class="back_link">← Back to Stories</a>
