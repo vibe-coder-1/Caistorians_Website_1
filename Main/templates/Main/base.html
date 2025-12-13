@@ -93,13 +93,13 @@
       <li><a href="{% url 'Accounts:create_account' %}">Create Account</a></li>
       {% endif %}
       <!-- Admin -->
-      {% if user.is_staff_account %}
+      {% if user.is_staff %}
       <li><a href="{% url 'schools:edit_school' user.school.id %}">Edit School</a></li>
       <li><a href="{% url 'custom_admin:dashboard' %}">Admin Dashboard</a></li>
 
       {% endif %}
 
-      {% if user.is_superuser_account or user.is_superuser %}
+      {% if user.is_superuser %}
         <li><a href="{% url 'custom_admin:dashboard' %}">Admin Dashboard</a></li>
         <li><a href="{% url 'schools:create_school' %}">Create School</a></li>
       {% endif %}

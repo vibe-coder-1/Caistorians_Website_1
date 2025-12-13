@@ -12,8 +12,7 @@ class User(AbstractUser):
     bio = models.TextField(blank=True)
     linkedin_url = models.URLField(blank=True)
     profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
-    is_staff_account = models.BooleanField(default=False)
-    is_student_account = models.BooleanField(default=False)
+    is_student = models.BooleanField(default=False)
 
 
     def __str__(self):
