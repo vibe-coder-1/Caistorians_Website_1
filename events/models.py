@@ -45,6 +45,7 @@ class RSVP(models.Model):
     event = models.ForeignKey(Event, related_name="rsvps", on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default="maybe")
+    notes = models.TextField(default="")
 
     class Meta:
         unique_together = ("event", "user")

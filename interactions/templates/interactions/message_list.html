@@ -1,7 +1,7 @@
 {% extends "Main/base.html" %}
 {% block content %}
 <div class="outbox_container">
-  <h2 class="outbox_title">Outbox</h2>
+  <h2 class="outbox_title">{{ title }}</h2>
   <ul class="outbox_list">
     {% for msg in messages %}
       <li class="outbox_item">
@@ -9,7 +9,11 @@
           {{ msg.subject }}
         </a>
         <span class="outbox_arrow">→</span>
-        <span class="outbox_recipient">{{ msg.recipient.username }}</span>
+        {% if title == "Outbox" %}
+          <span class="outbox_recipient">{{ msg.recipient.username }}</span>
+        {% elif title == "Inbox" %}
+          <span class="outbox_recipient">{{ msg.sender.username }}</span>
+        {% endif %}
         <span class="outbox_time">({{ msg.timestamp|date:"M d, Y H:i" }})</span>
       </li>
     {% empty %}

@@ -110,6 +110,6 @@ def rsvp_event(request, pk):
     return render(request, "events/rsvp_form.html", {
         "form": form,
         "event": event,
-        "current_status": rsvp.get_status_display(),
+        "current_status": rsvp.get_status_display()
     })
 

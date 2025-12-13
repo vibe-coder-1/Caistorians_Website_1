@@ -11,12 +11,12 @@ from notifications.utils import create_notification
 @login_required
 def inbox_view(request):
     messages = request.user.received_messages.all()
-    return render(request, "interactions/inbox.html", {"messages": messages})
+    return render(request, "interactions/message_list.html", {"messages": messages, "title": "Inbox"})
 
 @login_required
 def outbox_view(request):
     messages = request.user.sent_messages.all()
-    return render(request, "interactions/outbox.html", {"messages": messages})
+    return render(request, "interactions/message_list.html", {"messages": messages, "title": "Outbox"})
 
 @login_required
 def message_detail_view(request, pk):
