@@ -2,7 +2,18 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
 import json
 import bleach
-from .models import GroupChatRoom, GroupMessage
+from channels.generic.websocket import AsyncWebsocketConsumer
+import json
+
+class ChatConsumer(AsyncWebsocketConsumer):
+
+    async def connect(self):
+        from .models import GroupChatRoom  # IMPORT HERE
+        ...
+    
+    async def receive(self, text_data):
+        from .models import GroupMessage  # IMPORT HERE
+        ...
 
 # Allowed HTML tags and attributes (optional)
 ALLOWED_TAGS = ['b', 'i', 'u', 'strong', 'em', 'a']
