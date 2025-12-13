@@ -80,6 +80,12 @@ def submit_story(request):
             story = form.save(commit=False)
             story.author = request.user
             story.school = request.user.school  # match your existing photo logic
+
+            # --- New fields ---
+            story.price = form.cleaned_data.get("price")  # DecimalField
+            story.is_magazine = form.cleaned_data.get("is_magazine")  # BooleanField
+            story.thumbnail = form.cleaned_data.get("thumbnail")  # ImageField
+
             story.save()
             return redirect("community:story_list")
     else:
