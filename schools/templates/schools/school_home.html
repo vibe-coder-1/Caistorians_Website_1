@@ -20,6 +20,22 @@
 
     </section>
 
+     <!-- MAGAZINES SECTION -->
+    <section class="school_history">
+        <h2>Annual Magazines</h2>
+        <div class="school_history_images">
+            {% for magazine in magazines %}
+                <div class="magazine-container">
+                    <a href="/community/stories/{{ magazine.id }}">
+                        <img src="{{ magazine.thumbnail.url }}" alt="{{ magazine.title }}">
+                        <p>{{ magazine.title }}</p>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+        <a href="/community/stories">Explore All Magazines</a>
+    </section>
+
     <!-- FEATURE BOXES -->
     <section class="school_featureboxes">
         <div class="school_box">
