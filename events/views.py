@@ -10,7 +10,7 @@ from django.urls import reverse
 
 
 def event_list_view(request):
-    events = Event.objects.filter(school=request.user.school).order_by("start_time")
+    events = Event.objects.filter(school=request.user.school, approved=True).order_by("start_time")
     return render(request, "events/event_list.html", {"events": events})
 
 

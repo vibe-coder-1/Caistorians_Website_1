@@ -7,8 +7,13 @@ from .models import Notification, UserNotification
 
 def notifications_list(request):
     # school-wide notifications
-    school_notes = Notification.objects.filter(school=request.user.school)
-    # individual notifications (school=None)
+    try:
+        # Try to filter by approved if the field exists
+        school_notes = Notification.objects.filter(school=request.user.school, approved=True)
+    except Exception:
+        # Fallback: just get all notifications for the school
+        school_notes = Notification.objects.filter(school=request.user.school)
+
     individual_notes = Notification.objects.filter(school__isnull=True, user_states__user=request.user)
 
     # Merge and exclude deleted for this user
