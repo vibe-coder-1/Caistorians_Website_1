@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     'channels',
     'chat',
     'bleach',
+    "storages"
 ]
 
 MIDDLEWARE = [
@@ -199,8 +200,8 @@ AUTH_USER_MODEL = 'Accounts.User'
 
 
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -218,3 +219,33 @@ CSRF_TRUSTED_ORIGINS = [
     "https://www.caistorians.com",
     "https://*.onrender.com",
 ]
+
+AWS_ACCESS_KEY_ID = os.getenv("R2_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.getenv("R2_SECRET_ACCESS_KEY")
+
+AWS_STORAGE_BUCKET_NAME = os.getenv("R2_BUCKET_NAME")
+
+AWS_S3_ENDPOINT_URL = (
+    f"https://{os.getenv('R2_ACCOUNT_ID')}.r2.cloudflarestorage.com"
+)
+
+AWS_S3_REGION_NAME = "auto"
+
+AWS_S3_SIGNATURE_VERSION = "s3v4"
+
+AWS_DEFAULT_ACL = None
+AWS_QUERYSTRING_AUTH = True  # public files
+
+# DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+
+AWS_LOCATION = "media"
+
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}
+
