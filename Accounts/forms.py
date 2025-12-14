@@ -8,7 +8,7 @@ User = get_user_model()
 
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
-    is_student_account = forms.BooleanField(required=False, label="I am a student")
+    is_student_account = forms.BooleanField(required=False, label="I was a student")
     class Meta:
         model = get_user_model()
         #fields = ("username", "email", "school", "is_student_account", "password1", "password2")

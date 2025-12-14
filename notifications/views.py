@@ -7,7 +7,7 @@ from .models import Notification, UserNotification
 
 def notifications_list(request):
     # school-wide notifications
-    school_notes = Notification.objects.filter(school=request.user.school)
+    school_notes = Notification.objects.filter(school=request.user.school,approved=True)
     # individual notifications (school=None)
     individual_notes = Notification.objects.filter(school__isnull=True, user_states__user=request.user)
 
