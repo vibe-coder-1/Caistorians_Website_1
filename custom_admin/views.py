@@ -63,6 +63,9 @@ def dashboard(request):
 @user_passes_test(staff_required)
 def delete_user(request, user_id):
     user = get_object_or_404(User, id=user_id)
+    if user:
+        if user.profile_picture:
+            user.profile_picture.delete(save=False)
     user.delete()
     messages.success(request, "User deleted")
     AdminLog.objects.create(admin=request.user, action=f"Deleted user {user.username}", school=user.school)
@@ -112,6 +115,8 @@ def approve_photo(request, photo_id):
 @user_passes_test(staff_required)
 def delete_photo(request, photo_id):
     photo = get_object_or_404(Photo, id=photo_id)
+    if photo:
+        photo.image.delete(save=False)
     photo.delete()
     messages.success(request, "Photo deleted")
     AdminLog.objects.create(admin=request.user, action=f"Deleted photo {photo.caption}", school=request.user.school)
@@ -134,6 +139,9 @@ def approve_story(request, story_id):
 @user_passes_test(staff_required)
 def delete_story(request, story_id):
     story = get_object_or_404(Story, id=story_id)
+    if story:
+        if story.pdf_file:
+            story.pdf_file.delete(save=False)
     story.delete()
     messages.success(request, "Story deleted")
     AdminLog.objects.create(admin=request.user, action=f"Deleted story {story.title}", school=request.user.school)
