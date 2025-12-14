@@ -26,7 +26,7 @@
         <div class="school_history_images">
             {% for magazine in magazines %}
                 <div class="magazine-container">
-                    <a href="/community/stories/{{ magazine.id }}">
+                    <a href="/community/stories/{{ magazine.id }}/">
                         <img src="{{ magazine.thumbnail.url }}" alt="{{ magazine.title }}">
                         <p>{{ magazine.title }}</p>
                     </a>
