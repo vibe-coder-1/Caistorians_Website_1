@@ -80,6 +80,21 @@ def delete_event(request, event_id):
     AdminLog.objects.create(admin=request.user, action=f"Deleted event {event.title}", school=request.user.school)
     return redirect("custom_admin:dashboard")
 
+@login_required
+@user_passes_test(staff_required)
+def approve_event(request, event_id):
+    event = get_object_or_404(Event, id=event_id)
+    event.approved = True
+    event.save()
+    messages.success(request, "Event approved")
+    AdminLog.objects.create(
+        admin=request.user,
+        action=f"Approved event {event.title}",
+        school=request.user.school
+    )
+    return redirect("custom_admin:dashboard")
+
+
 # ------------------------
 # Photo moderation
 # ------------------------

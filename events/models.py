@@ -22,7 +22,7 @@ class Event(models.Model):
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
+    approved = models.BooleanField(default=False)
     def __str__(self):
         return self.title
 
@@ -46,6 +46,7 @@ class RSVP(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default="maybe")
     notes = models.TextField(default="")
+    
 
     class Meta:
         unique_together = ("event", "user")

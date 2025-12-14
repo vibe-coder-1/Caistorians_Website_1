@@ -21,20 +21,34 @@
         </tr>
         {% endfor %}
     </table>
-
+    
     <h2>Events</h2>
     <table class="admin-table">
-        <tr><th>Title</th><th>Date</th><th>Actions</th></tr>
+        <tr>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Approved</th>
+            <th>Actions</th>
+        </tr>
         {% for event in events %}
         <tr>
             <td>{{ event.title }}</td>
             <td>{{ event.start_time }}</td>
+            <td>{{ event.approved }}</td>
             <td>
-                <a href="{% url 'custom_admin:delete_event' event.id %}" class="btn admin-action-btn">Delete</a>
+                {% if not event.approved %}
+                    <a href="{% url 'custom_admin:approve_event' event.id %}"
+                    class="btn admin-action-btn">Approve</a>
+                {% endif %}
+                <a href="{% url 'custom_admin:delete_event' event.id %}"
+                class="btn admin-action-btn">Delete</a>
             </td>
         </tr>
         {% endfor %}
     </table>
+
+
+
 
     <h2>Photos</h2>
     <table class="admin-table">

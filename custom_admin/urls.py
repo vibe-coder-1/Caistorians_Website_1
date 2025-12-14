@@ -10,6 +10,7 @@ urlpatterns = [
     path("user/<int:user_id>/delete/", views.delete_user, name="delete_user"),
     
     # Events
+    path("approve-event/<int:event_id>/", views.approve_event, name="approve_event"),
     path("event/<int:event_id>/delete/", views.delete_event, name="delete_event"),
     
     # Photos
