@@ -28,5 +28,7 @@ class Payment(models.Model):
 
 
 class UnlockStories(models.Model):
+    story = models.ForeignKey(Story, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    paid = models.BooleanField()
+    paid = models.BooleanField(default=False)
+

@@ -88,7 +88,7 @@ def stripe_webhook(request):
             Payment.objects.create(
                 story=story,
                 user=user,
-                amount=payment_amount,
+                amount=story.price,
                 stripe_payment_intent=session['payment_intent']
             )
         else:
@@ -101,8 +101,14 @@ def stripe_webhook(request):
             )
             fundraiser.total_raised += payment_amount
             fundraiser.save()
-        if payment_amount >= 2:
-            yo = UnlockStories.objects.create(user=user, paid = True)
+        if metadata.get('payment_type') == 'story':
+            story = Story.objects.get(pk=metadata['story_id'])
+            UnlockStories.objects.get_or_create(
+                user=user,
+                story=story,
+                defaults={'paid': True}
+            )
+
     return HttpResponse(status=200)
 
 def success(request):

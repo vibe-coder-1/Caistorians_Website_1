@@ -102,14 +102,13 @@ from django.http import FileResponse
 @login_required
 def story_detail(request, pk):
     story = get_object_or_404(Story, id=pk)
-    
     print(story.content)
     if story.pdf_file:
         pdf = story.pdf_file.url
     else:
         pdf = story.text_content
-    record = UnlockStories.objects.filter(user=request.user).first()
-    has_paid = record is not None and record.paid
+    record = UnlockStories.objects.filter(user=request.user, story=story, paid=True).exists()
+    has_paid = record
     return render(request, 'community/story_detail.html', {
         'story': story,
         'has_paid': has_paid,
