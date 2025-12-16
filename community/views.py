@@ -97,9 +97,12 @@ def story_list(request):
     #stories = Story.objects.order_by("-created_at") -----For testing purposes, show unapproved stories too
     return render(request, "community/story_list.html", {"stories": stories})
 from django.http import FileResponse
+
+
 @login_required
 def story_detail(request, pk):
     story = get_object_or_404(Story, id=pk)
+    
     print(story.content)
     if story.pdf_file:
         pdf = story.pdf_file.url
