@@ -59,3 +59,20 @@ class Story(models.Model):
 
     def __str__(self):
         return self.title
+
+from django.db import models
+from django.conf import settings
+class StoryAccess(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
+    story = models.ForeignKey(
+        Story,
+        on_delete=models.CASCADE
+    )
+    stripe_payment_intent = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ("user", "story")

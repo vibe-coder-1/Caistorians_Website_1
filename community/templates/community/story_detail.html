@@ -20,36 +20,13 @@
     {% else %}
         <div class="story-paywall">
             <p>This story is behind a paywall. Pay to unlock full access.</p>
-            <form id="payment-form" method="post">
+            <form action="{% url 'community:create_story_checkout_session' story.id %}" method="post">
                 {% csrf_token %}
-                <input type="hidden" name="amount" value="200"> <!-- £2.00 -->
-                <button type="submit" id="checkout-button" class="btn btn-primary">
-                    Unlock for £2
+                <button type="submit" class="btn btn-primary">
+                    Unlock for £{{ story.price }}
                 </button>
             </form>
         </div>
-
-        <script src="https://js.stripe.com/v3/"></script>
-        <script>
-            const stripe = Stripe("{{ STRIPE_PUBLISHABLE_KEY }}");
-
-            document.getElementById('payment-form').addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const formData = new FormData(e.target);
-                const response = await fetch("{% url 'fundraisers:create_story_checkout_session' story.id %}", {
-                    method: 'POST',
-                    headers: {'X-CSRFToken': formData.get('csrfmiddlewaretoken')},
-                    body: formData
-                });
-                const data = await response.json();
-
-                if (data.error) {
-                    alert(data.error);
-                    return;
-                }
-                stripe.redirectToCheckout({ sessionId: data.id });
-            });
-        </script>
     {% endif %}
 
     <div class="story-actions">

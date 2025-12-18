@@ -8,19 +8,22 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('community', '0004_storyaccess'),
-        ('fundraisers', '0005_rename_created_at_payment_timestamp_and_more'),
+        ('community', '0003_story_is_magazine_story_price_story_thumbnail'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='UnlockStories',
+            name='StoryAccess',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('paid', models.BooleanField(default=False)),
+                ('stripe_payment_intent', models.CharField(max_length=255)),
+                ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('story', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='community.story')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
+            options={
+                'unique_together': {('user', 'story')},
+            },
         ),
     ]

@@ -1,0 +1,29 @@
+{% extends "Main/base.html" %}
+
+{% block content %}
+<div class="story-success-page">
+    <h2 class="story-title">Payment Successful!</h2>
+    
+    <p class="story-meta">
+        Thank you, {{ user.username }}! You have successfully unlocked the story:
+        <strong>{{ story.title }}</strong>
+    </p>
+    
+    <div class="story-content">
+        {% if story.pdf_file %}
+            <iframe src="{{ story.pdf_file.url }}" width="100%" height="600px"></iframe>
+        {% elif story.text_content %}
+            <div class="text-display">{{ story.text_content|linebreaks }}</div>
+        {% elif story.content %}
+            <div class="text-display">{{ story.content|linebreaks }}</div>
+        {% endif %}
+    </div>
+
+    <div class="story-actions">
+        <a href="{% url 'community:story_list' %}" class="btn btn-back">Back to Stories</a>
+        {% if user == story.author or user.is_staff %}
+            <a href="{% url 'community:delete_story' story.pk %}" class="btn btn-delete">Delete</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

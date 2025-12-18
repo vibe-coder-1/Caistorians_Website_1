@@ -81,12 +81,18 @@
         </ul>
       </li>
     <li class="dropdown">
-      <a href="#">Chat ▾</a>
+      <a href="#">Home ▾</a>
       <ul class="dropdown-menu">
-        <li><a href="{% url 'chat:chat_redirect' %}">Chat</a></li>
+        <li><a href="{% url 'Main:homepage' %}">Home</a></li>
       </ul>
     </li>
 
+    <!-- <li class="dropdown">
+      <a href="#">chat ▾</a>
+      <ul class="dropdown-menu">
+        <li><a href="{% url 'chat:chat_redirect' %}">chat</a></li>
+      </ul>
+    </li> -->
 
       {% else %}
       <li><a href="{% url 'Accounts:login' %}">Login</a></li>
