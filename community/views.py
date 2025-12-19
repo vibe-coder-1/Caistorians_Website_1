@@ -137,6 +137,8 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 # ---------------- STRIPE PAYMENTS ---------------- #
 
+
+
 @csrf_exempt
 @login_required
 def create_story_checkout_session(request, story_id):
@@ -177,6 +179,10 @@ def create_story_checkout_session(request, story_id):
 
     return redirect(session.url)
 
+
+from fundraisers.models import Fundraiser
+from decimal import Decimal
+
 @csrf_exempt
 def stripe_webhook(request):
     payload = request.body
@@ -190,40 +196,99 @@ def stripe_webhook(request):
     except (ValueError, stripe.error.SignatureVerificationError):
         return HttpResponse(status=400)
 
-    # Only care about completed checkout sessions
     if event['type'] != 'checkout.session.completed':
         return HttpResponse(status=200)
 
     session = event['data']['object']
     metadata = session.get('metadata', {})
+    payment_type = metadata.get('payment_type')
 
-    # Ignore non-story payments
-    if metadata.get('payment_type') != 'story':
-        return HttpResponse(status=200)
+    # ---------------- STORY PAYMENT ----------------
+    if payment_type == 'story':
+        user_id = metadata.get('user_id')
+        story_id = metadata.get('story_id')
+        payment_intent = session.get('payment_intent')
 
-    user_id = metadata.get('user_id')
-    story_id = metadata.get('story_id')
-    payment_intent = session.get('payment_intent')
+        if not all([user_id, story_id, payment_intent]):
+            return HttpResponse(status=200)
 
-    if not all([user_id, story_id, payment_intent]):
-        return HttpResponse(status=200)
+        try:
+            user = User.objects.get(pk=user_id)
+            story = Story.objects.get(pk=story_id)
+        except (User.DoesNotExist, Story.DoesNotExist):
+            return HttpResponse(status=200)
 
-    try:
-        user = User.objects.get(pk=user_id)
-        story = Story.objects.get(pk=story_id)
-    except (User.DoesNotExist, Story.DoesNotExist):
-        return HttpResponse(status=200)
+        StoryAccess.objects.get_or_create(
+            user=user,
+            story=story,
+            defaults={'stripe_payment_intent': payment_intent}
+        )
 
-    # Idempotent write
-    StoryAccess.objects.get_or_create(
-        user=user,
-        story=story,
-        defaults={
-            'stripe_payment_intent': payment_intent
-        }
-    )
+    # ---------------- FUNDRAISER PAYMENT ----------------
+    elif payment_type == 'fundraiser':
+        fundraiser_id = metadata.get('fundraiser_id')
+
+        if not fundraiser_id:
+            return HttpResponse(status=200)
+
+        try:
+            fundraiser = Fundraiser.objects.get(pk=fundraiser_id)
+        except Fundraiser.DoesNotExist:
+            return HttpResponse(status=200)
+
+        amount_paid = Decimal(session['amount_total']) / Decimal('100')
+        fundraiser.total_raised += amount_paid
+        fundraiser.save()
 
     return HttpResponse(status=200)
+
+# @csrf_exempt
+# def stripe_webhook(request):
+#     payload = request.body
+#     sig_header = request.META.get('HTTP_STRIPE_SIGNATURE')
+#     endpoint_secret = settings.STRIPE_WEBHOOK_SECRET
+
+#     try:
+#         event = stripe.Webhook.construct_event(
+#             payload, sig_header, endpoint_secret
+#         )
+#     except (ValueError, stripe.error.SignatureVerificationError):
+#         return HttpResponse(status=400)
+
+#     # Only care about completed checkout sessions
+#     if event['type'] != 'checkout.session.completed':
+#         return HttpResponse(status=200)
+
+#     session = event['data']['object']
+#     metadata = session.get('metadata', {})
+
+#     # Ignore non-story payments
+#     if metadata.get('payment_type') != 'story':
+#         return HttpResponse(status=200)
+
+#     user_id = metadata.get('user_id')
+#     story_id = metadata.get('story_id')
+#     payment_intent = session.get('payment_intent')
+
+#     if not all([user_id, story_id, payment_intent]):
+#         return HttpResponse(status=200)
+
+#     try:
+#         user = User.objects.get(pk=user_id)
+#         story = Story.objects.get(pk=story_id)
+#     except (User.DoesNotExist, Story.DoesNotExist):
+#         return HttpResponse(status=200)
+
+#     # Idempotent write
+#     StoryAccess.objects.get_or_create(
+#         user=user,
+#         story=story,
+#         defaults={
+#             'stripe_payment_intent': payment_intent
+#         }
+#     )
+
+#     return HttpResponse(status=200)
 
 
 @login_required

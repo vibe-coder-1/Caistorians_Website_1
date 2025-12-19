@@ -81,7 +81,7 @@ urlpatterns = [
     path("stories/<int:story_id>/create-checkout-session/", views.create_story_checkout_session, name="create_story_checkout_session"),
     path("stories/success/<int:story_id>/", views.story_success, name="story_success"),
     path("stories/cancel/<int:story_id>/", views.story_cancel, name="story_cancel"),
-    path("stripe/webhook/",csrf_exempt(views.stripe_webhook),name="stripe_webhook"),
+    path('stripe/webhook/', views.stripe_webhook, name='stripe_webhook'),
 
 ]
 

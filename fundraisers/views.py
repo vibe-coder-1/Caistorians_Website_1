@@ -60,18 +60,11 @@ def fundraiser_detail(request, fundraiser_id):
 @csrf_exempt
 @login_required
 def create_checkout_session(request, fundraiser_id):
-    if request.method != "POST":
-        return redirect('fundraisers:fundraiser_detail', fundraiser_id=fundraiser_id)
-
     fundraiser = get_object_or_404(Fundraiser, id=fundraiser_id)
 
-    try:
-        amount = int(request.POST.get('amount', 0))
-    except (TypeError, ValueError):
-        amount = 0
-
+    amount = int(request.POST.get('amount', 0))
     if amount <= 0:
-        return redirect('fundraisers:fundraiser_detail', fundraiser_id=fundraiser_id)
+        return redirect('fundraisers:fundraiser_detail', fundraiser_id)
 
     session = stripe.checkout.Session.create(
         payment_method_types=['card'],
@@ -97,45 +90,46 @@ def create_checkout_session(request, fundraiser_id):
     return redirect(session.url)
 
 
-# ----------------- WEBHOOK -----------------
 
-@csrf_exempt
-def stripe_webhook(request):
-    payload = request.body
-    sig_header = request.META.get('HTTP_STRIPE_SIGNATURE')
-    endpoint_secret = settings.STRIPE_WEBHOOK_SECRET
+# # ----------------- WEBHOOK -----------------
 
-    try:
-        event = stripe.Webhook.construct_event(payload, sig_header, endpoint_secret)
-    except (ValueError, stripe.error.SignatureVerificationError):
-        return HttpResponse(status=400)
+# @csrf_exempt
+# def stripe_webhook(request):
+#     payload = request.body
+#     sig_header = request.META.get('HTTP_STRIPE_SIGNATURE')
+#     endpoint_secret = settings.STRIPE_WEBHOOK_SECRET
 
-    if event['type'] != 'checkout.session.completed':
-        return HttpResponse(status=200)
+#     try:
+#         event = stripe.Webhook.construct_event(payload, sig_header, endpoint_secret)
+#     except (ValueError, stripe.error.SignatureVerificationError):
+#         return HttpResponse(status=400)
 
-    session = event['data']['object']
-    metadata = session.get('metadata', {})
-    payment_type = metadata.get('payment_type')
+#     if event['type'] != 'checkout.session.completed':
+#         return HttpResponse(status=200)
 
-    if payment_type != 'fundraiser':
-        return HttpResponse(status=200)
+#     session = event['data']['object']
+#     metadata = session.get('metadata', {})
+#     payment_type = metadata.get('payment_type')
 
-    user_id = metadata.get('user_id')
-    fundraiser_id = metadata.get('fundraiser_id')
-    if not all([user_id, fundraiser_id]):
-        return HttpResponse(status=200)
+#     if payment_type != 'fundraiser':
+#         return HttpResponse(status=200)
 
-    try:
-        user = User.objects.get(pk=user_id)
-        fundraiser = Fundraiser.objects.get(pk=fundraiser_id)
-    except (User.DoesNotExist, Fundraiser.DoesNotExist):
-        return HttpResponse(status=200)
+#     user_id = metadata.get('user_id')
+#     fundraiser_id = metadata.get('fundraiser_id')
+#     if not all([user_id, fundraiser_id]):
+#         return HttpResponse(status=200)
 
-    amount_paid = Decimal(session['amount_total']) / Decimal('100')
-    fundraiser.total_raised += amount_paid
-    fundraiser.save()
+#     try:
+#         user = User.objects.get(pk=user_id)
+#         fundraiser = Fundraiser.objects.get(pk=fundraiser_id)
+#     except (User.DoesNotExist, Fundraiser.DoesNotExist):
+#         return HttpResponse(status=200)
 
-    return HttpResponse(status=200)
+#     amount_paid = Decimal(session['amount_total']) / Decimal('100')
+#     fundraiser.total_raised += amount_paid
+#     fundraiser.save()
+
+#     return HttpResponse(status=200)
 
 # ----------------- SUCCESS / CANCEL -----------------
 
