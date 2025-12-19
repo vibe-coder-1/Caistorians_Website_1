@@ -128,6 +128,12 @@
     <!-- Footer -->
     <footer>
         <p>&copy; {{ year|default:2025 }} The Caistorians' Association. All rights reserved.</p>
+        <br>
+        <p>
+            <a href="{% url 'Main:about' %}">About Us</a> |
+            <a href="{% url 'Main:contact' %}">Contact</a> |
+            <a href="{% url 'Main:privacy_policy' %}">Privacy Policy</a> |
+            <a href="{% url 'Main:terms_of_service' %}">Terms of Service</a>
     </footer>
 </body>
 </html>
