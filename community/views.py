@@ -185,6 +185,9 @@ from decimal import Decimal
 
 @csrf_exempt
 def stripe_webhook(request):
+    print("Webhook hit:", event['type'])
+    print("WJIASJ")
+
     payload = request.body
     sig_header = request.META.get('HTTP_STRIPE_SIGNATURE')
     endpoint_secret = settings.STRIPE_WEBHOOK_SECRET
