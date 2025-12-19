@@ -101,13 +101,17 @@ def create_checkout_session(request, fundraiser_id):
 
 @csrf_exempt
 def stripe_webhook(request):
+    print("Webhook received")  # <- step 1
     payload = request.body
     sig_header = request.META.get('HTTP_STRIPE_SIGNATURE')
     endpoint_secret = settings.STRIPE_WEBHOOK_SECRET
 
     try:
         event = stripe.Webhook.construct_event(payload, sig_header, endpoint_secret)
+        print("Event constructed:", event['type'])  # <- step 2
+
     except (ValueError, stripe.error.SignatureVerificationError):
+        print("Webhook error:", e)
         return HttpResponse(status=400)
 
     if event['type'] != 'checkout.session.completed':
@@ -115,6 +119,8 @@ def stripe_webhook(request):
 
     session = event['data']['object']
     metadata = session.get('metadata', {})
+    print("Session metadata:", metadata)        # <- step 3
+
     payment_type = metadata.get('payment_type')
 
     if payment_type != 'fundraiser':
@@ -132,6 +138,8 @@ def stripe_webhook(request):
         return HttpResponse(status=200)
 
     amount_paid = Decimal(session['amount_total']) / Decimal('100')
+    print(f"Updating fundraiser {fundraiser.id}: adding {amount_paid}")  # <- step 4
+
     fundraiser.total_raised += amount_paid
     fundraiser.save()
 
