@@ -41,7 +41,7 @@
 
       <!-- Interactions -->
       <li class="dropdown">
-        <a href="#">Interactions ▾</a>
+        <a href="#">Direct Messages ▾</a>
         <ul class="dropdown-menu">
           <li><a href="{% url 'interactions:inbox' %}">Inbox</a></li>
           <li><a href="{% url 'interactions:outbox' %}">Outbox</a></li>
@@ -49,7 +49,7 @@
         </ul>
       </li>
 
-
+<!--
       <li class="dropdown">
         <a href="#">Fundraisers ▾</a>
         <ul class="dropdown-menu">
@@ -57,10 +57,13 @@
           <li><a href="{% url 'fundraisers:fundraiser_list' %}">List</a></li>
         </ul>
       </li>
-
-
-
-      <!-- Events -->
+    -->
+      <li>
+          <li><a href="{% url 'fundraisers:fundraiser_list' %}">Fundraisers</a></li>
+        <a href="{% url 'events:event_list' %}">Events </a>
+      </li>
+<!--
+    Events
       <li class="dropdown">
         <a href="#">Events ▾</a>
         <ul class="dropdown-menu">
@@ -68,15 +71,15 @@
           <li><a href="{% url 'events:create_event' %}">Create Event</a></li>
         </ul>
       </li>
-
+    -->
       <!-- Community -->
       <li class="dropdown">
         <a href="#">Community ▾</a>
         <ul class="dropdown-menu">
           <li><a href="{% url 'community:gallery' %}">Gallery</a></li>
           <li><a href="{% url 'community:story_list' %}">Stories</a></li>
-          <li><a href="{% url 'community:submit_story' %}">Submit Story</a></li>
-          <li><a href="{% url 'community:upload_photo' %}">Upload Photo</a></li>
+          <!--<li><a href="{% url 'community:submit_story' %}">Submit Story</a></li>
+          <li><a href="{% url 'community:upload_photo' %}">Upload Photo</a></li>-->
           <!--<li><a href="{% url 'schools:school_list' %}">Schools List</a></li>-->
         </ul>
       </li>
