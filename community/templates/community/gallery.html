@@ -6,13 +6,13 @@
     <div class="gallery_container">
       {% for photo in photos %}
         <div class="gallery_card">
-          <!--<a href="{% url 'community:gallery' %}/?id={{ photo.id }}">-->
+          <a href="{% url 'community:gallery_photo' %}?id={{ photo.id }}">
             <img class="gallery_image" src="{{ photo.image.url }}" alt="{{ photo.caption }}">
             <p class="gallery_caption">{{ photo.caption }}</p>
             <p class="gallery_meta">
               By {{ photo.uploaded_by.username }} on {{ photo.uploaded_at|date:"D, d M Y" }}
             </p>
-          <!--</a>-->
+          </a>
         </div>
       {% endfor %}
     </div>
