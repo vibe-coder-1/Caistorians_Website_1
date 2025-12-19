@@ -23,6 +23,9 @@ from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import get_user_model
 from decimal import Decimal
 import stripe
+import logging
+
+logger = logging.getLogger(__name__)
 
 from .models import Fundraiser
 

@@ -14,3 +14,12 @@ def homepage(request):
         return render(request, 'Main/homepage.html')
 def site_home(request):
     return render(request, 'Main/homepage.html')
+
+def about(request):
+    return render(request, 'Main/about.html')
+def contact(request):
+    return render(request, 'Main/contact.html')
+def privacy_policy(request):
+    return render(request, 'Main/privacy_policy.html')
+def terms_of_service(request):
+    return render(request, 'Main/terms_of_service.html')

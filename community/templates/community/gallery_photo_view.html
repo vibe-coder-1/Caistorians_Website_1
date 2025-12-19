@@ -12,11 +12,11 @@
 
     <div class="gallery_container">
         {% if previous != None %}
-            <a class="gallery_cta" href="{% url 'community:gallery' %}/?id={{ previous.id }}">Previous</a>
+            <a class="gallery_cta" href="{% url 'community:gallery_photo' %}?id={{ previous.id }}">Previous</a>
         {% endif %}
         <a class="gallery_cta" href="{% url 'community:gallery' %}">Back</a>
         {% if next != None %}
-            <a class="gallery_cta" href="{% url 'community:gallery' %}/?id={{ next.id }}">Next</a>
+            <a class="gallery_cta" href="{% url 'community:gallery_photo' %}?id={{ next.id }}">Next</a>
         {% endif %}
     </div>
 {% endblock %}
