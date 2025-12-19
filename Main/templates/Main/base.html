@@ -28,6 +28,11 @@
     <ul class="nav-links">
       <!-- Account -->
       {% if user.is_authenticated %}
+     <li>
+        <li><a href="{% url 'Main:homepage' %}">Home</a></li>
+        <li><a href="{% url 'fundraisers:fundraiser_list' %}">Fundraisers  </a></li>
+        <li><a href="{% url 'events:event_list' %}">Events  </a></li>
+      </li>
       <li class="dropdown">
         <a href="#">Account ▾</a>
         <ul class="dropdown-menu">
@@ -58,10 +63,7 @@
         </ul>
       </li>
     -->
-      <li>
-          <li><a href="{% url 'fundraisers:fundraiser_list' %}">Fundraisers</a></li>
-        <a href="{% url 'events:event_list' %}">Events </a>
-      </li>
+ 
 <!--
     Events
       <li class="dropdown">
@@ -83,14 +85,15 @@
           <!--<li><a href="{% url 'schools:school_list' %}">Schools List</a></li>-->
         </ul>
       </li>
+  <!--
     <li class="dropdown">
       <a href="#">Home ▾</a>
       <ul class="dropdown-menu">
         <li><a href="{% url 'Main:homepage' %}">Home</a></li>
       </ul>
     </li>
-
-    <!-- <li class="dropdown">
+-->
+    <!-- <li class="dropdown">-------------------------------------------------------Chat feature disabled for now. 
       <a href="#">chat ▾</a>
       <ul class="dropdown-menu">
         <li><a href="{% url 'chat:chat_redirect' %}">chat</a></li>
