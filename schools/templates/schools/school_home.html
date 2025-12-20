@@ -27,9 +27,10 @@
             {% for magazine in magazines %}
                 <div class="magazine-container">
                     <a href="/community/stories/{{ magazine.id }}/">
-                        {{ if magazine.thumbnail.url }}
+                        {% if magazine.thumbnail %}
                             <img src="{{ magazine.thumbnail.url }}" alt="{{ magazine.title }}">
-                        {{ endif }}
+                        {% endif %}
+
                         <p>{{ magazine.title }}</p>
                     </a>
                 </div>
