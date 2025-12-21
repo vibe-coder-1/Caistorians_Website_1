@@ -205,6 +205,9 @@ def stripe_webhook(request):
     metadata = session.get('metadata', {})
     payment_type = metadata.get('payment_type')
 
+    if session.get("payment_status") != "paid":
+        return HttpResponse(status=200)
+
     # ---------------- STORY PAYMENT ----------------
     if payment_type == 'story':
         user_id = metadata.get('user_id')
