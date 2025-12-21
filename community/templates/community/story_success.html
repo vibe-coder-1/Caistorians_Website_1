@@ -21,9 +21,9 @@
 
     <div class="story-actions">
         <a href="{% url 'community:story_list' %}" class="btn btn-back">Back to Stories</a>
-        {% if user == story.author or user.is_staff %}
+        <!-- {% if user == story.author or user.is_staff %}
             <a href="{% url 'community:delete_story' story.pk %}" class="btn btn-delete">Delete</a>
-        {% endif %}
+        {% endif %} -->
     </div>
 </div>
 {% endblock %}
