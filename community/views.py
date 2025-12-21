@@ -105,9 +105,9 @@ def delete_story(request, pk):
 
 @login_required
 def story_detail(request, story_id):
-    story = get_object_or_404(Story, id=story_id)
+    sttory = get_object_or_404(Story, id=story_id)
     # Check access
-    has_access = StoryAccess.objects.filter(user=request.user, story=story).exists()
+    has_access = StoryAccess.objects.filter(user=request.user, story=sttory).exists()
     pdf_file = story.pdf_file.url if story.pdf_file else None
     text_content = story.text_content if not story.pdf_file else None
 
