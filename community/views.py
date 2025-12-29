@@ -306,7 +306,7 @@ def story_cancel(request, story_id):
     Display a cancel page if payment is cancelled.
     """
     story = get_object_or_404(Story, id=story_id)
-    return render(request, 'community/story_cancel.html', {'story': story})
+    return redirect('community:story_detail', story_id=story_id)
 
 
 @login_required

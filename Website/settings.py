@@ -215,6 +215,12 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 #remember to use 2FA and app passwords when properly launching
 
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+SECURE_SSL_REDIRECT = False
+
+
 CSRF_TRUSTED_ORIGINS = [
     "https://www.caistorians.com",
     "https://*.onrender.com",
