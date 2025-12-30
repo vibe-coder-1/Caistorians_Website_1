@@ -19,26 +19,35 @@
         </div>
 
     </section>
-
-     <!-- MAGAZINES SECTION -->
+    <!-- MAGAZINES SECTION -->
     <section class="school_history">
         <h2>Annual Magazines</h2>
-        <div class="school_history_images">
-            {% for magazine in magazines %}
+
+        <div class="magazine-carousel">
+            <button class="carousel-btn left">&#10094;</button>
+
+            <div class="school_history_images" id="magazineCarousel">
+                {% for magazine in magazines %}
                 <div class="magazine-container">
                     <a href="/community/stories/{{ magazine.id }}/">
-                        {% if magazine.thumbnail %}
-                            <img src="{{ magazine.thumbnail.url }}" alt="{{ magazine.title }}">
-                        {% endif %}
-
-                        <p>{{ magazine.title }}</p>
+                        <div class="magazine-image-wrap">
+                            {% if magazine.thumbnail %}
+                                <img src="{{ magazine.thumbnail.url }}" alt="{{ magazine.title }}">
+                            {% else %}
+                                <div class="magazine-placeholder"></div>
+                            {% endif %}
+                        </div>
+                        <p class="magazine-title">{{ magazine.title }}</p>
                     </a>
                 </div>
-            {% endfor %}
-        </div>
-        <a href="/community/stories">Explore All Magazines</a>
-    </section>
+                {% endfor %}
+            </div>
 
+            <button class="carousel-btn right">&#10095;</button>
+        </div>
+
+        <a class="explore-link" href="/community/stories">Explore All Magazines</a>
+    </section>
     <!-- FEATURE BOXES -->
     <section class="school_featureboxes">
         <div class="school_box">
@@ -356,5 +365,197 @@ body, html {
     font-size: 1.1rem;
     color: #0073e6;
 }
+/* ============================= */
+/* === MAGAZINE CAROUSEL FIX === */
+/* ============================= */
+
+.school_homepage .magazine-carousel {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Scroll row — FIX left cutoff */
+.school_homepage .school_history_images {
+    display: flex;
+    gap: 1.6rem;
+    overflow-x: auto;
+    padding: 1rem 2.8rem; /* reduced from 3.5rem */
+    scroll-snap-type: x mandatory;
+}
+
+/* Override legacy rule */
+.school_homepage .school_history_images img {
+    max-width: none;
+    margin: 0;
+}
+
+/* Magazine card */
+.school_homepage .magazine-container {
+    flex: 0 0 180px;
+    height: 320px;
+    scroll-snap-align: center;
+}
+
+/* Image wrapper — CLIPS hover scale */
+.school_homepage .magazine-image-wrap {
+    width: 100%;
+    height: 250px;
+    border-radius: 14px;
+    overflow: hidden; /* ← THIS fixes the border pop-out */
+}
+
+/* Image itself */
+.school_homepage .magazine-image-wrap img,
+.school_homepage .magazine-placeholder {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background: #e6e6e6;
+    transition: transform 0.25s ease;
+}
+
+/* Hover effect (safe now) */
+.school_homepage .magazine-container:hover img {
+    transform: scale(1.06);
+}
+
+/* TITLE — now white */
+.school_homepage .magazine-title {
+    margin-top: 0.6rem;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-align: center;
+
+    line-height: 1.2;
+    height: 2.4em;
+    overflow: hidden;
+
+    text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+}
+
+/* Carousel arrows */
+.school_homepage .carousel-btn {
+    position: absolute;
+    z-index: 5;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255,255,255,0.95);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.school_homepage .carousel-btn.left {
+    left: 0.5rem;
+}
+
+.school_homepage .carousel-btn.right {
+    right: 0.5rem;
+}
+
+
+/* SECTION */
+.school_history {
+    padding: 2rem;
+}
+
+/* HORIZONTAL SCROLLER */
+.school_history_images {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+}
+
+/* CARD RESET (very important) */
+.magazine-card {
+    all: unset;
+    display: flex;
+    flex-direction: column;
+    width: 190px;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    flex-shrink: 0;
+}
+
+/* COVER AREA (locks height) */
+.magazine-cover {
+    width: 100%;
+    height: 270px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #2f3438;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* IMAGE */
+.magazine-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* NO IMAGE PLACEHOLDER */
+.magazine-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #3a3f44, #2b2f33);
+    color: #f0f0f0;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-align: center;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* TITLE — STAYS INSIDE CARD */
+.magazine-title {
+    margin-top: 0.6rem;
+    font-size: 0.9rem;
+    text-align: center;
+    line-height: 1.3;
+    padding: 0 0.3rem;
+}
+
+/* LINK BELOW */
+.explore-link {
+    display: inline-block;
+    margin-top: 1rem;
+    font-weight: 600;
+}
+
+/* OPTIONAL: nicer scrollbar */
+.school_history_images::-webkit-scrollbar {
+    height: 8px;
+}
+
+.school_history_images::-webkit-scrollbar-thumb {
+    background: #bbb;
+    border-radius: 8px;
+}
+
 </style>
+<script>
+const carousel = document.getElementById("magazineCarousel");
+const scrollAmount = 400;
+
+document.querySelector(".carousel-btn.left").addEventListener("click", () => {
+    carousel.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+});
+
+document.querySelector(".carousel-btn.right").addEventListener("click", () => {
+    carousel.scrollBy({ left: scrollAmount, behavior: "smooth" });
+});
+</script>
+
 {% endblock %}
