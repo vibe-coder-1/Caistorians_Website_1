@@ -14,9 +14,6 @@ Frontend: i don't even know, just make it look pretty. Main/styles/Main/style.cs
 
 This is part of a larger project than just the caistorians. This can be scaled up to schools across the country. It is possible to create a custom homepage for each school, youll have to understand django to do that though. 
 
-
-
-
 Next steps:
 -Chat rooms for members of a school year group (visibility?)
 -Paywall
@@ -24,3 +21,8 @@ Next steps:
 -Email marketing?
 -Display contact info on profile toggle
 -Email and/or whatsapp campaigns, for meetups etc? Use twilio api to automatically set up WA communities for people? 
+
+## Django Tutorial links
+[Creating a superuser](https://docs.djangoproject.com/en/1.8/intro/tutorial02/#creating-an-admin-user)
+
+[Running test server](https://docs.djangoproject.com/en/1.8/intro/tutorial02/#start-the-development-server)
