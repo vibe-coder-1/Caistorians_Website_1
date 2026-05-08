@@ -1,12 +1,17 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required, user_passes_test
-from django.contrib import messages
-from Accounts.models import User
-from events.models import Event
-from community.models import Photo, Story
-from .models import AdminLog, Report
-from django.db.models import Q
-from interactions.models import Message
+try:
+    from django.shortcuts import render, get_object_or_404, redirect
+    from django.contrib.auth.decorators import login_required, user_passes_test
+    from django.contrib import messages
+    from Accounts.models import User
+    from events.models import Event
+    from community.models import Photo, Story
+    from .models import AdminLog, Report
+    from django.db.models import Q
+    from interactions.models import Message
+except ImportError as e:
+    print(f"\nError: Django not available.\n{e}")
+    print("\nOr models not available.\n")
+
 def staff_required(user):
     if user.is_staff or user.is_superuser:
         answer = True

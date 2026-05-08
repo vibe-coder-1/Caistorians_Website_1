@@ -4,7 +4,7 @@ try:
     from django.contrib.auth.forms import UserCreationForm
     from django.contrib.auth import get_user_model
     from .models import School
-except importError as e:
+except ImportError as e:
     print(f"\nError: Django not available.\n{e}")
 
 User = get_user_model()

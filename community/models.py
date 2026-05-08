@@ -5,6 +5,7 @@ try:
     from Accounts.models import School
 except ImportError as e:
     print(f"\nError: Django not available.\n{e}")
+    print("\nOr models not available.\n")
 
 class Photo(models.Model):
     school = models.ForeignKey(

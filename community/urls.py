@@ -55,6 +55,7 @@ try:
     from django.conf.urls.static import static
 except ImportError as e:
     print(f"\nError: Django not available.\n{e}")   
+    print("\nOr models not available.\n")
 
 app_name = "community"
 

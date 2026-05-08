@@ -1,9 +1,13 @@
-from django.db import models
-from django.conf import settings
-from Accounts.models import User
-from events.models import Event
-from community.models import Photo, Story
-from Accounts.models import School
+try:
+    from django.db import models
+    from django.conf import settings
+    from Accounts.models import User
+    from events.models import Event
+    from community.models import Photo, Story
+    from Accounts.models import School
+except ImportError as e:
+    print(f"\nError: Django not available.\n{e}")
+    print("\n Or required models not found.")
 class AdminLog(models.Model):
     school = models.ForeignKey(
         School,

@@ -13,12 +13,11 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 import os
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
 # Load environment variables from .env file if available
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
 try:
     from dotenv import load_dotenv
+    BASE_DIR = Path(__file__).resolve().parent.parent
     load_dotenv(BASE_DIR / ".env")
 except ImportError:
     print("\nError loading .env file, see commented code\n")
@@ -261,4 +260,3 @@ STORAGES = {
         "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
 }
-

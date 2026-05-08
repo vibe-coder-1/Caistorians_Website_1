@@ -6,7 +6,7 @@ try:
     user = User.objects.get(username='yashva')
 
     # Check the email
-    print(f"User email: {user.email}")
+    print(user.email)
 except ImportError as e:
     print(f"""\n Error: Django is not installed. {e}
      Please install Django using: pip install django\n""")

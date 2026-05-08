@@ -12,6 +12,7 @@ try:
     import stripe
 except ImportError as e:
     print(f"\nError: Django not available.\n{e}")
+    print("\nOr models not available.\n")
 
 User = get_user_model()
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -169,7 +170,6 @@ def create_story_checkout_session(request, story_id):
     )
 
     return redirect(session.url)
-
 
 from fundraisers.models import Fundraiser
 
