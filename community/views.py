@@ -1,21 +1,22 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseForbidden, JsonResponse, HttpResponse
-from django.views.decorators.csrf import csrf_exempt
-from django.conf import settings
-import stripe
-from decimal import Decimal
-
-from .models import Photo, Story, StoryAccess
-from .forms import PhotoUploadForm, StoryForm
-from fundraisers.models import Payment
-from django.contrib.auth import get_user_model
+try:
+    from django.shortcuts import render, redirect, get_object_or_404
+    from django.contrib.auth.decorators import login_required
+    from django.http import HttpResponseForbidden, JsonResponse, HttpResponse
+    from django.views.decorators.csrf import csrf_exempt
+    from django.conf import settings
+    from decimal import Decimal
+    from .models import Photo, Story, StoryAccess
+    from .forms import PhotoUploadForm, StoryForm
+    from fundraisers.models import Payment
+    from django.contrib.auth import get_user_model
+    import stripe
+except ImportError as e:
+    print(f"\nError: Django not available.\n{e}")
 
 User = get_user_model()
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 # ----------------------- PHOTOS -----------------------
-
 @login_required
 def upload_photo(request):
     if request.method == "POST":
@@ -69,7 +70,6 @@ def delete_photo(request, pk):
     return render(request, "community/confirm_delete.html", {"object": photo, "type": "photo"})
 
 # ----------------------- STORIES -----------------------
-
 @login_required
 def submit_story(request):
     if request.method == "POST":
@@ -120,24 +120,15 @@ def story_detail(request, story_id):
     })
 
 # ----------------------- STRIPE PAYMENTS -----------------------
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
-from django.views.decorators.csrf import csrf_exempt
-from django.conf import settings
-from django.urls import reverse
-from django.http import HttpResponse
-from django.contrib.auth import get_user_model
-from decimal import Decimal
-import stripe
-
-from .models import Story, StoryAccess
+try:
+    from django.urls import reverse
+    from django.contrib.auth import get_user_model
+    from .models import Story, StoryAccess
+except ImportError as e:
+    print(f"\nError: Django not available.\n{e}")
 
 User = get_user_model()
 stripe.api_key = settings.STRIPE_SECRET_KEY
-
-# ---------------- STRIPE PAYMENTS ---------------- #
-
-
 
 @csrf_exempt
 @login_required
@@ -181,7 +172,6 @@ def create_story_checkout_session(request, story_id):
 
 
 from fundraisers.models import Fundraiser
-from decimal import Decimal
 
 @csrf_exempt
 def stripe_webhook(request):
@@ -291,14 +281,12 @@ def stripe_webhook(request):
 
 #     return HttpResponse(status=200)
 
-
 @login_required
 def story_success(request, story_id):
     """
     After successful payment, redirect to story_detail.
     """
     return redirect('community:story_detail', story_id=story_id)
-
 
 @login_required
 def story_cancel(request, story_id):
@@ -307,7 +295,6 @@ def story_cancel(request, story_id):
     """
     story = get_object_or_404(Story, id=story_id)
     return redirect('community:story_detail', story_id=story_id)
-
 
 @login_required
 def story_detail(request, story_id):

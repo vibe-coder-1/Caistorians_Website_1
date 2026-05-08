@@ -1,9 +1,15 @@
-from django.shortcuts import render
+try:
+    from django.shortcuts import render
+except ImportError as e:
+    print(f"\nError: Django not available.\n{e}")
 
 # Create your views here.
 # notifications/views.py
-from django.shortcuts import render, get_object_or_404, redirect
-from .models import Notification, UserNotification
+try:
+    from django.shortcuts import render, get_object_or_404, redirect
+    from .models import Notification, UserNotification
+except ImportError as e:
+    print(f"\nError: Django not available.\n{e}")
 
 def notifications_list(request):
     # school-wide notifications
@@ -26,8 +32,12 @@ def notifications_list(request):
     context = {'notifications': all_notifications, 'user_states': {state.notification.id: state for state in user_states}}
     return render(request, 'notifications/notifications_list.html', context)
 
-from django.shortcuts import get_object_or_404, redirect
-from .models import Notification
+try:
+    from django.shortcuts import get_object_or_404, redirect
+    from .models import Notification
+except ImportError as e:
+    print(f"\nError: Django not available.\n{e}")
+
 def mark_as_read(request, pk):
     notification = get_object_or_404(Notification, pk=pk)
     notification.delete()

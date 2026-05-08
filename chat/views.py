@@ -1,6 +1,9 @@
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
-from .models import GroupChatRoom, GroupMessage
+try:
+    from django.contrib.auth.decorators import login_required
+    from django.shortcuts import render, redirect
+    from .models import GroupChatRoom, GroupMessage
+except ImportError as e:
+    print(f"\nError: Django not available.\n{e}")
 
 @login_required
 def redirect_to_chat(request):

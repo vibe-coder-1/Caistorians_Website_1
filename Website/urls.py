@@ -14,27 +14,31 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path, include
-from django.conf import settings
-from django.conf.urls.static import static
+try:
+    from django.contrib import admin
+    from django.urls import path, include
+    from django.conf import settings
+    from django.conf.urls.static import static
+except ImportError as e:
+    print(f"\nError: Django not available.\n{e}")
+    urlpatterns = []
+else:
+    urlpatterns = [
 
-urlpatterns = [
+        path('admin/', admin.site.urls),
+        path('', include('Main.urls')),
+        path('accounts/', include('Accounts.urls')),
+        path('interactions/', include('interactions.urls', namespace='interactions')),
+        path('events/', include('events.urls', namespace='events')),
+        path('community/', include('community.urls', namespace='community')),
+        path('custom_admin/', include('custom_admin.urls', namespace='custom_admin')),
+        path('schools/', include('schools.urls', namespace='schools')),
+        path('news/', include('news.urls', namespace='news')),
+        path('notifications/', include('notifications.urls', namespace='notifications')),
+        path('fundraisers/', include('fundraisers.urls', namespace='fundraisers')),
+        path('chat/', include('chat.urls', namespace='chat')),
+    ]
 
-    path('admin/', admin.site.urls),
-    path('', include('Main.urls')),
-    path('accounts/', include('Accounts.urls')),
-    path('interactions/', include('interactions.urls', namespace='interactions')),
-    path('events/', include('events.urls', namespace='events')),
-    path('community/', include('community.urls', namespace='community')),
-    path('custom_admin/', include('custom_admin.urls', namespace='custom_admin')),
-    path('schools/', include('schools.urls', namespace='schools')),
-    path('news/', include('news.urls', namespace='news')),
-    path('notifications/', include('notifications.urls', namespace='notifications')),
-    path('fundraisers/', include('fundraisers.urls', namespace='fundraisers')),
-    path('chat/', include('chat.urls', namespace='chat')),
-]
-
-# Serve media files in development only
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    # Serve media files in development only
+    if settings.DEBUG:
+        urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

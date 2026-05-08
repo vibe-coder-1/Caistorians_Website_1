@@ -1,6 +1,9 @@
-from django.conf import settings
-from django.db import models
-from Accounts.models import School
+try:
+    from django.conf import settings
+    from django.db import models
+    from Accounts.models import School
+except ImportError as e:
+    print(f"\nError: Django not available.\n{e}")
 # Create your models here.
 class Connection(models.Model):
     school = models.ForeignKey(

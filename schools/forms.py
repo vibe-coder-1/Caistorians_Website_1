@@ -1,8 +1,10 @@
-from django import forms
-from django.forms import modelformset_factory
-from .models import School, HistoricalImage, AlumniHighlight
-from Accounts.models import User
-
+try:
+    from django import forms 
+    from django.forms import modelformset_factory 
+    from .models import School, HistoricalImage, AlumniHighlight
+    from Accounts.models import User
+except ImportError as e:
+    print(f"\nError: Django not available.\n{e}")
 
 class SchoolForm(forms.ModelForm):
     staff_username = forms.CharField(max_length=150)
@@ -48,10 +50,12 @@ HistoricalImageFormSet = modelformset_factory(HistoricalImage, form=HistoricalIm
 AlumniHighlightFormSet = modelformset_factory(AlumniHighlight, form=AlumniHighlightForm, extra=3, can_delete=True)
 
 
-
-from django import forms
-from django.forms import inlineformset_factory
-from .models import School, HistoricalImage, AlumniHighlight
+try:
+    from django import forms
+    from django.forms import inlineformset_factory
+    from .models import School, HistoricalImage, AlumniHighlight
+except ImportError as e:
+    print(f"\nError: Django not available.\n{e}")
 
 class EditSchoolForm(forms.ModelForm):
     class Meta:

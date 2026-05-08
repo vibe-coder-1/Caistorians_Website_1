@@ -1,8 +1,11 @@
 # notifications/utils.py
-from django.core.mail import EmailMessage
-from django.conf import settings
-from django.template.loader import render_to_string
-from .models import Notification, UserNotification
+try:
+    from django.core.mail import EmailMessage
+    from django.conf import settings
+    from django.template.loader import render_to_string
+    from .models import Notification, UserNotification
+except ImportError as e:
+    print(f"\nError: Django not available.\n{e}")
 
 def create_notification(title, message, link=None, school=None, users=None, send_email=False, request=None):
     """

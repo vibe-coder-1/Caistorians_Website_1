@@ -1,7 +1,9 @@
-from django.core.management.base import BaseCommand
-from datetime import datetime
-from Accounts.models import User
-
+try:
+    from django.core.management.base import BaseCommand
+    from datetime import datetime
+    from Accounts.models import User
+except ImportError as e:
+    print(f"\nError: Django or Accounts app not available.\n{e}")
 
 class Command(BaseCommand):
     help = "Update user account statuses (student vs alumni) based on graduation year"

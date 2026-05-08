@@ -1,12 +1,13 @@
-from django.db import models
+try:
+    from django.db import models
+    from django.utils import timezone
+    from schools.models import School
+    from django.contrib.auth import get_user_model
+except ImportError as e:
+    print(f"\nError: Django not available.\n{e}")
 
 # Create your models here.
 # notifications/models.py
-from django.db import models
-
-from django.utils import timezone
-from schools.models import School
-from django.contrib.auth import get_user_model
 User = get_user_model()
 
 class Notification(models.Model):

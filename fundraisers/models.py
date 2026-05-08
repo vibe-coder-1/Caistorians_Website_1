@@ -1,8 +1,10 @@
-from django.db import models
-
+try:
+    from django.db import models
+    from django.contrib.auth import get_user_model
+    User = get_user_model()
+except ImportError as e:
+    print(f"\nError: Django not available.\n{e}")
 # Create your models here.
-from django.contrib.auth import get_user_model
-User = get_user_model()
 
 class Fundraiser(models.Model):
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -24,8 +26,6 @@ class Payment(models.Model):
     amount = models.DecimalField(max_digits=8, decimal_places=2)
     stripe_payment_intent = models.CharField(max_length=255)
     timestamp = models.DateTimeField(auto_now_add=True)
-
-
 
 class UnlockStories(models.Model):
     story = models.ForeignKey(Story, on_delete=models.CASCADE)

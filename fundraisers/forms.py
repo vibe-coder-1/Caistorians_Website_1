@@ -1,6 +1,9 @@
 # fundraisers/forms.py
-from django import forms
-from .models import Fundraiser
+try:
+    from django import forms
+    from .models import Fundraiser
+except ImportError as e:
+    print(f"\nError: Django not available.\n{e}")
 
 class FundraiserForm(forms.ModelForm):
     class Meta:

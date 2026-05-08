@@ -1,8 +1,11 @@
-from django import forms
-from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import get_user_model
-from .models import School
+try:
+    from django import forms
+    from django.contrib.auth.models import User
+    from django.contrib.auth.forms import UserCreationForm
+    from django.contrib.auth import get_user_model
+    from .models import School
+except importError as e:
+    print(f"\nError: Django not available.\n{e}")
 
 User = get_user_model()
 
@@ -20,7 +23,6 @@ class CustomUserCreationForm(UserCreationForm):
         if commit:
             user.save()
         return user
-
 
 class UserEditForm(forms.ModelForm):
     class Meta:

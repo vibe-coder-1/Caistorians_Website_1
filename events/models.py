@@ -1,8 +1,12 @@
-from time import timezone
-from django.conf import settings
-from django.db import models
-from django.utils import timezone
-from Accounts.models import School
+try:
+    from time import timezone
+    from django.conf import settings
+    from django.db import models
+    from django.utils import timezone
+    from Accounts.models import School
+except ImportError as e:
+    print(f"\nError: Django not available.\n{e}")
+
 class Event(models.Model):
     school = models.ForeignKey(
         School,

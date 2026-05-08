@@ -1,4 +1,7 @@
-from django.apps import AppConfig
+try:
+    from django.apps import AppConfig
+except ImportError as e:
+    print(f"\nError: Django not available.\n{e}")
 
 
 class EventsConfig(AppConfig):

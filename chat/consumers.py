@@ -1,9 +1,10 @@
-from channels.generic.websocket import AsyncWebsocketConsumer
-from channels.db import database_sync_to_async
-import json
-import bleach
-from channels.generic.websocket import AsyncWebsocketConsumer
-import json
+try:
+    from channels.generic.websocket import AsyncWebsocketConsumer
+    from channels.db import database_sync_to_async
+    import json
+    import bleach
+except ImportError as e:
+    print(f"\nError: Django Channels or Bleach not available.\n{e}")
 
 class ChatConsumer(AsyncWebsocketConsumer):
 

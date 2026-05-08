@@ -1,11 +1,11 @@
-from django.shortcuts import render
-from django.shortcuts import redirect
-from .forms import Births_Deaths_and_MarriagesForm
-from .models import Births_Deaths_and_Marriages
-from schools.models import School
+try:
+    from django.shortcuts import render, redirect
+    from .forms import Births_Deaths_and_MarriagesForm
+    from .models import Births_Deaths_and_Marriages
+    from schools.models import School
+except ImportError as e:
+    print(f"\nError: Django not available.\n{e}")
 # Create your views here.
-from django.shortcuts import render
-
 def updates(request):
     updates = Births_Deaths_and_Marriages.objects.filter(school=request.user.school).order_by('-created_at')
     context = {'updates': updates}

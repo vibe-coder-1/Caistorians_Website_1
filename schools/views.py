@@ -1,8 +1,11 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.db.models import Q
-from .models import School
-from .forms import SchoolForm, HistoricalImageFormSet, AlumniHighlightFormSet, EditSchoolForm
-from Accounts.models import User  # Only for alumni directory
+try:
+    from django.shortcuts import render, redirect, get_object_or_404
+    from django.db.models import Q
+    from .models import School
+    from .forms import SchoolForm, HistoricalImageFormSet, AlumniHighlightFormSet, EditSchoolForm
+    from Accounts.models import User  # Only for alumni directory
+except ImportError as e:
+    print(f"\nError: Django not available.\n{e}")
 
 # --- Create School ---
 def create_school_view(request):

@@ -48,13 +48,15 @@
 # # Serve media files in development
 # if settings.DEBUG:
 #     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-from django.urls import path
-from . import views
-from django.conf import settings
-from django.conf.urls.static import static
+try:
+    from django.urls import path
+    from . import views
+    from django.conf import settings
+    from django.conf.urls.static import static
+except ImportError as e:
+    print(f"\nError: Django not available.\n{e}")   
 
 app_name = "community"
-
 
 from django.views.decorators.csrf import csrf_exempt
 from . import views
@@ -62,7 +64,6 @@ from . import views
 urlpatterns = [
 
 ]
-
 
 urlpatterns = [
     # Photos
@@ -84,9 +85,6 @@ urlpatterns = [
     path('stripe/webhook/', csrf_exempt(views.stripe_webhook), name='stripe_webhook'),
 
 ]
-
-
-
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

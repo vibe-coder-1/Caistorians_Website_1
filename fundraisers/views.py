@@ -1,37 +1,26 @@
 # fundraisers/views.py
-from django.shortcuts import render, redirect, get_object_or_404
-from django.conf import settings
-from django.http import JsonResponse, HttpResponse
-from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth.decorators import login_required
-import stripe
-from notifications.utils import create_notification
-from .models import *
-from .forms import FundraiserForm
-from decimal import Decimal
-from django.contrib.auth import get_user_model
+try:
+    from django.shortcuts import render, redirect, get_object_or_404
+    from django.conf import settings
+    from django.http import JsonResponse, HttpResponse
+    from django.views.decorators.csrf import csrf_exempt
+    from django.contrib.auth.decorators import login_required
+    from notifications.utils import create_notification
+    from .models import *
+    from .forms import FundraiserForm
+    from decimal import Decimal
+    from django.contrib.auth import get_user_model
+    import stripe
+except ImportError as e:
+    print(f"\nError: Django not available.\n{e}")
+
 User = get_user_model()
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
-
-
-from django.shortcuts import render, redirect, get_object_or_404
-from django.conf import settings
-from django.contrib.auth.decorators import login_required
-from django.views.decorators.csrf import csrf_exempt
-from django.http import HttpResponse, JsonResponse
-from django.contrib.auth import get_user_model
-from decimal import Decimal
-import stripe
 import logging
-
 logger = logging.getLogger(__name__)
 
 from .models import Fundraiser
-
-User = get_user_model()
-stripe.api_key = settings.STRIPE_SECRET_KEY
-
 # ----------------- FUNDRAISER PAGES -----------------
 
 @login_required

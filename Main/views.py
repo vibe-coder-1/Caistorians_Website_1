@@ -1,5 +1,8 @@
-from django.shortcuts import render, redirect
-from community.models import Story
+try:
+    from django.shortcuts import render, redirect
+    from community.models import Story
+except ImportError as e:
+    print(f"\nError: Django not available.\n{e}")
 
 def homepage(request):
     if request.user.is_authenticated:

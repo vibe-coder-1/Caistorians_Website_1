@@ -1,20 +1,22 @@
-from django.db.models import Q
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
-from .forms import UserEditForm
-from django.shortcuts import get_object_or_404, render
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.shortcuts import redirect
-from django.contrib import messages
-from django.contrib.auth import get_user_model
-User = get_user_model()
-from .forms import CustomUserCreationForm
-from django.contrib.auth.decorators import login_required
-from .models import User
-from schools.models import School
-from django.http import JsonResponse
-
+try:
+    from django.db.models import Q
+    from django.contrib.auth.decorators import login_required
+    from django.shortcuts import render, redirect
+    from .forms import UserEditForm
+    from django.shortcuts import get_object_or_404, render
+    from django.contrib.auth import authenticate, login, logout
+    from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+    from django.shortcuts import redirect
+    from django.contrib import messages
+    from django.contrib.auth import get_user_model
+    User = get_user_model()
+    from .forms import CustomUserCreationForm
+    from django.contrib.auth.decorators import login_required
+    from .models import User
+    from schools.models import School
+    from django.http import JsonResponse
+except ImportError as e:
+    print(f"\nError: Django or Accounts app not available.\n{e}")
 
 def user_login_required(view_func):
     def wrapper(request, *args, **kwargs):
@@ -44,7 +46,6 @@ def directory_view(request):
         alumni_list = alumni_list.filter(graduation_year=year)
 
     return render(request, "Accounts/directory.html", {"alumni_list": alumni_list})
-
 
 @login_required
 def edit_profile_view(request):
@@ -119,7 +120,6 @@ def logout_view(request):
     logout(request)
     messages.info(request, "Logged out successfully.")
     return redirect('Accounts:login')
-
 
 @user_login_required
 def profile_view(request):

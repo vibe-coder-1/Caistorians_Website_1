@@ -1,8 +1,9 @@
-from urllib import request
-from django import forms
-from .models import Births_Deaths_and_Marriages
-
-
+try:
+    from urllib import request
+    from django import forms
+    from .models import Births_Deaths_and_Marriages
+except ImportError as e:
+    print(f"\nError: Required modules are not installed. {e}\nPlease ensure Django is installed using: pip install django\n")
 
 class Births_Deaths_and_MarriagesForm(forms.ModelForm):
     class Meta:

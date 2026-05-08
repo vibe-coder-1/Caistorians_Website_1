@@ -1,7 +1,10 @@
 # Create your models here.
-from django.db import models
-from django.conf import settings
-from Accounts.models import School
+try:
+    from django.db import models
+    from django.conf import settings
+    from Accounts.models import School
+except ImportError as e:
+    print(f"\nError: Django not available.\n{e}")
 
 class Photo(models.Model):
     school = models.ForeignKey(
@@ -60,8 +63,6 @@ class Story(models.Model):
     def __str__(self):
         return self.title
 
-from django.db import models
-from django.conf import settings
 class StoryAccess(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,

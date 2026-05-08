@@ -1,10 +1,13 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import get_user_model
-from django.urls import reverse
-from .models import Message
-from .forms import MessageForm
-from notifications.utils import create_notification
+try:
+    from django.shortcuts import render, redirect, get_object_or_404
+    from django.contrib.auth.decorators import login_required
+    from django.contrib.auth import get_user_model
+    from django.urls import reverse
+    from .models import Message
+    from .forms import MessageForm
+    from notifications.utils import create_notification
+except ImportError as e:
+    print(f"\nError: Django not available.\n{e}")
 
 #Create your views here.
 

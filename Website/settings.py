@@ -12,15 +12,22 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-from pathlib import Path
-from dotenv import load_dotenv
-
 BASE_DIR = Path(__file__).resolve().parent.parent
-load_dotenv(BASE_DIR / ".env")
 
-SECRET_KEY = os.getenv("SECRET_KEY")
-DEBUG = "False"
+# Load environment variables from .env file if available
+try:
+    from dotenv import load_dotenv
+    load_dotenv(BASE_DIR / ".env")
+except ImportError:
+    print("\nError loading .env file, see commented code\n")
+    # python-dotenv not installed, skip loading .env
+    pass
+
+# Environment variables with fallbacks
+SECRET_KEY = os.getenv("SECRET_KEY") or "fallback-secret-key-change-in-production"
+DEBUG = False  # Boolean not string type
 
 STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY")
 STRIPE_PUBLISHABLE_KEY = os.getenv("STRIPE_PUBLISHABLE_KEY")
@@ -213,7 +220,7 @@ EMAIL_HOST_PASSWORD = 'pdhr yikh ahej ytja'  # Gmail app password, not normal pa
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
-#remember to use 2FA and app passwords when properly launching
+# Remember to use 2FA and app passwords when properly launching
 
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

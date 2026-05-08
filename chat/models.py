@@ -1,13 +1,15 @@
-from django.db import models
-from django.conf import settings
-import hashlib
+try:
+    from django.db import models
+    from django.conf import settings
+    import hashlib
+except ImportError as e:
+    print(f"\nError: Django not available.\n{e}")
 
 class GroupChatRoom(models.Model):
     cohort_year = models.IntegerField(unique=True)
 
     def __str__(self):
         return f"Cohort {self.cohort_year}"
-
 
 class GroupMessage(models.Model):
     room = models.ForeignKey(
@@ -45,7 +47,6 @@ class GroupMessage(models.Model):
         light = 70 + (hash_int % 16)
 
         return f"hsl({hue}, {sat}%, {light}%)"
-
 
     def __str__(self):
         return f"{self.sender.username}: {self.text[:30]}"

@@ -1,5 +1,8 @@
-from django import forms
-from .models import Photo, Story
+try: 
+    from django import forms
+    from .models import Photo, Story
+except ImportError as e:
+    print(f"\nError: Django not available.\n{e}")
 
 class PhotoUploadForm(forms.ModelForm):
     class Meta:
@@ -20,8 +23,6 @@ class PhotoUploadForm(forms.ModelForm):
 #     class Meta:
 #         model = Story
 #         fields = ["title", "pdf_file", "text_content"]
-
-
 
 class StoryForm(forms.ModelForm):
     pdf_file = forms.FileField(

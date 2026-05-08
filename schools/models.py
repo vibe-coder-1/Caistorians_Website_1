@@ -1,5 +1,7 @@
-from django.db import models
-
+try:
+   from django.db import models
+except ImportError as e:
+    print(f"\nError: Django not available.\n{e}")   
 
 class School(models.Model):
     name = models.CharField(max_length=255, unique=True)

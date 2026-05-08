@@ -1,7 +1,10 @@
-from django.db import models #type: ignore
-from django.contrib.auth.models import AbstractUser # type: ignore
-from datetime import datetime
-from schools.models import School
+try:
+    from django.db import models #type: ignore
+    from django.contrib.auth.models import AbstractUser # type: ignore
+    from datetime import datetime
+    from schools.models import School
+except ImportError as e:
+    print(f"\nError: Django or Schools app not available.\n{e}")
 
 # Create your models here.
 class User(AbstractUser):
@@ -13,7 +16,6 @@ class User(AbstractUser):
     linkedin_url = models.URLField(blank=True)
     profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
     is_student = models.BooleanField(default=False)
-
 
     def __str__(self):
         return f"{self.username} ({self.first_name} {self.last_name})"

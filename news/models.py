@@ -1,6 +1,9 @@
-from django.utils import timezone
-from django.db import models
-from schools.models import School
+try:
+    from django.utils import timezone
+    from django.db import models
+    from schools.models import School
+except ImportError as e:
+    print(f"\nError: Required modules are not installed. {e}\nPlease ensure Django is installed using: pip install django\n")
 
 # Create your models here.
 

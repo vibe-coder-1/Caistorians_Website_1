@@ -1,10 +1,9 @@
 # events/forms.py
-from django import forms
-from .models import Event
-
-# events/forms.py
-from django import forms
-from .models import Event
+try:
+    from django import forms
+    from .models import Event, RSVP
+except ImportError as e:
+    print(f"\nError: Django not available.\n{e}")
 
 class EventForm(forms.ModelForm):
     class Meta:
@@ -26,10 +25,6 @@ class EventForm(forms.ModelForm):
         for field in ["start_time", "end_time"]:
             if self.instance and getattr(self.instance, field):
                 self.initial[field] = getattr(self.instance, field).strftime("%Y-%m-%dT%H:%M")
-
-
-# events/forms.py
-from .models import RSVP
 
 class RSVPForm(forms.ModelForm):
     class Meta:
