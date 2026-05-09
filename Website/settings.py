@@ -26,7 +26,7 @@ except ImportError:
 
 # Environment variables with fallbacks
 SECRET_KEY = os.getenv("SECRET_KEY") or "fallback-secret-key-change-in-production"
-DEBUG = False  # Boolean not string type
+DEBUG = "False"
 
 STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY")
 STRIPE_PUBLISHABLE_KEY = os.getenv("STRIPE_PUBLISHABLE_KEY")
