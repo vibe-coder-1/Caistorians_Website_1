@@ -3,10 +3,18 @@
 {% block content %}
 <div class="event-list_container">
     <h2 class="event-list_title">Upcoming Events</h2>
-    <a href="{% url 'events:create_event' %}" 
-       style="background-color: #004080; color: white; text-decoration: none; padding: 10px 18px; border-radius: 8px; font-size: 15px; transition: background 0.3s ease;">
-       + Create Event
-    </a>
+    
+	<div style="display: flex; justify-content: space-between;">
+		<a href="{% url 'events:create_event' %}" 
+			style="background-color: #004080; color: white; text-decoration: none; padding: 10px 18px; border-radius: 8px; font-size: 15px; transition: background 0.3s ease;">
+			+ Create Event
+		</a>
+		
+		<a href="{% url 'events:event_confirm_delete' %}" 
+			style="background-color: #cc0000; color: white; text-decoration: none; padding: 10px 18px; border-radius: 8px; font-size: 15px; transition: background 0.3s ease;">
+			- Delete Event
+		</a>
+	</div>
 
     <ul class="event-list_items">
         {% for event in events %}
