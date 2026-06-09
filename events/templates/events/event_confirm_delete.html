@@ -3,16 +3,18 @@
 <div class="event-list_container">
   <h2>Delete Event</h2>
   <p>Are you sure you want to delete "{{ event.title }}"?</p>
-  <form method="post">
-    {% csrf_token %}
-    <button type="submit"
-      style="background-color: #cc0000; color: white; text-decoration: none; padding: 10px 18px; border-radius: 8px; font-size: 15px; transition: background 0.3s ease;">
-    Yes, delete
-	</button>
-  </form>
-  <a href="{% url 'events:event_detail' event.pk %}"
-    style="background-color: #004080; color: white; text-decoration: none; padding: 10px 18px; border-radius: 8px; font-size: 15px; transition: background 0.3s ease;">
-		Cancel
-  </a>
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+  	<form method="post">
+    	{% csrf_token %}
+    	<button type="submit"
+      	style="background-color: #cc0000; color: white; text-decoration: none; padding: 10px 18px; border-radius: 8px; font-size: 15px; transition: background 0.3s ease;">
+    	Yes, delete
+		</button>
+  	</form>
+  	<a href="{% url 'events:event_detail' event.pk %}"
+    	style="background-color: #004080; color: white; text-decoration: none; padding: 10px 18px; border-radius: 8px; font-size: 15px; transition: background 0.3s ease;">
+			Cancel
+  	</a>
+  </div>
 </div>
 {% endblock %}
