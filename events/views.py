@@ -65,7 +65,7 @@ from django.http import HttpResponseForbidden
 @login_required
 def event_update(request, pk):
     event = get_object_or_404(Event, pk=pk)
-    if event.created_by != request.user:
+    if event.created_by != request.user and not request.user.is_superuser:
         return HttpResponseForbidden("You cannot edit this event.")
 
     if request.method == "POST":
@@ -80,7 +80,7 @@ def event_update(request, pk):
 @login_required
 def event_delete(request, pk):
     event = get_object_or_404(Event, pk=pk)
-    if event.created_by != request.user:  # permission check
+    if event.created_by != request.user and not request.user.is_superuser:  # permission check
         return HttpResponseForbidden("You cannot delete this event.")
 
     if request.method == "POST":
