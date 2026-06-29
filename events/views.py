@@ -2,6 +2,7 @@
 try:
     from django.shortcuts import render, get_object_or_404, redirect
     from django.contrib.auth.decorators import login_required
+    from django.db.models import Q
     from .models import Event, RSVP
     from .forms import EventForm, RSVPForm
     from django.contrib import messages
@@ -10,8 +11,10 @@ try:
 except ImportError as e:
     print(f"\nError: Django not available.\n{e}")
 
-def event_list_view(request):
-    events = Event.objects.filter(school=request.user.school, approved=True).order_by("start_time")
+def event_list(request):
+    events = Event.objects.filter(
+        Q(approved=True) |
+        Q(created_by=request.user))
     return render(request, "events/event_list.html", {"events": events})
 
 def event_detail_view(request, pk):
