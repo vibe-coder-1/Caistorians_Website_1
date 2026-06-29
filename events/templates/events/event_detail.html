@@ -22,7 +22,7 @@
         <p><strong>Time:</strong> {{ event.start_time }} - {{ event.end_time }}</p>
         <p><strong>Location:</strong> {{ event.location }}</p>
     </div>
-
+	{%if event.approved %}
     {% if user.is_authenticated %}
     <div class="event-detail_rsvp-form">
         <form method="post" action="{% url 'events:event_rsvp' event.pk %}">
@@ -33,7 +33,6 @@
         </form>
     </div>
     {% endif %}
-
     <div class="event-detail_rsvp-summary">
         <h3>RSVPs</h3>
         <ul>
@@ -42,7 +41,7 @@
             <li><span class="no">✘ No:</span> {{ rsvps_no }}</li>
         </ul>
     </div>
-
+	{% endif %}
     <a href="{% url 'events:event_list' %}" class="event-detail_back">← Back to Events</a>
 </div>
 
