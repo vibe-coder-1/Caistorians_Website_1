@@ -11,7 +11,7 @@ try:
 except ImportError as e:
     print(f"\nError: Django not available.\n{e}")
 
-def event_list(request):
+def event_list_view(request):
     events = Event.objects.filter(
         Q(approved=True) |
         Q(created_by=request.user))
