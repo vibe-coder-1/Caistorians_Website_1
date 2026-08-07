@@ -1,39 +1,39 @@
 {% extends "Main/base.html" %}
 
 {% block content %}
-<div class="create-fundraiser_container">
-    <h2 class="create-fundraiser_title">
+<div class="create-event_container">
+    <h2 class="create-event_title">
         {% if form.instance.pk %}Edit Fundraiser{% else %}Create Fundraiser{% endif %}
     </h2>
 
-    <form method="post" class="create-fundraiser_form">
+    <form method="post" class="create-event_form">
         {% csrf_token %}
 
-        <div class="create-fundraiser_field">
+        <div class="create-event_field">
             {{ form.title.label_tag }}
             {{ form.title }}
         </div>
 
-        <div class="create-fundraiser_field">
+        <div class="create-event_field">
             {{ form.description.label_tag }}
             {{ form.description }}
         </div>
 
-        <div class="create-fundraiser_field">
+        <div class="create-event_field">
             {{ form.goal_amount.label_tag }}
             {{ form.goal_amount }}
         </div>
 
-        <button type="submit" class="create-fundraiser_submit">
+        <button type="submit" class="create-event_submit">
             {% if form.instance.pk %}Update Fundraiser{% else %}Create Fundraiser{% endif %}
         </button>
     </form>
 
-    <p class="create-fundraiser_note">
+    <p class="create-event_note">
         Fundraisers help support school projects and alumni initiatives.
     </p>
 
-    <a href="{% url 'fundraisers:fundraiser_list' %}" class="create-fundraiser_back">
+    <a href="{% url 'fundraisers:fundraiser_list' %}" class="create-event_back">
         ← Back to Fundraisers
     </a>
 </div>
