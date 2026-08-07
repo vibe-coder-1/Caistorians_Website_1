@@ -34,7 +34,7 @@
         <li><a href="{% url 'events:event_list' %}">Events  </a></li>
       </li>
       <li class="dropdown">
-        <a href="#">Account ▾</a>
+        <a href="{% url 'Accounts:profile' %}">Account ▾</a>
         <ul class="dropdown-menu">
           <li><a href="{% url 'Accounts:profile' %}">My Profile</a></li>
           <li><a href="{% url 'Accounts:edit_profile' %}">Edit Profile</a></li>
@@ -46,7 +46,7 @@
 
       <!-- Interactions -->
       <li class="dropdown">
-        <a href="#">Direct Messages ▾</a>
+        <a href="{% url 'interactions:inbox' %}">Direct Messages ▾</a>
         <ul class="dropdown-menu">
           <li><a href="{% url 'interactions:inbox' %}">Inbox</a></li>
           <li><a href="{% url 'interactions:outbox' %}">Outbox</a></li>
@@ -54,29 +54,9 @@
         </ul>
       </li>
 
-<!--
-      <li class="dropdown">
-        <a href="#">Fundraisers ▾</a>
-        <ul class="dropdown-menu">
-          <li><a href="{% url 'fundraisers:create_fundraiser' %}">Create</a></li>
-          <li><a href="{% url 'fundraisers:fundraiser_list' %}">List</a></li>
-        </ul>
-      </li>
-    -->
- 
-<!--
-    Events
-      <li class="dropdown">
-        <a href="#">Events ▾</a>
-        <ul class="dropdown-menu">
-          <li><a href="{% url 'events:event_list' %}">Event List</a></li>
-          <li><a href="{% url 'events:create_event' %}">Create Event</a></li>
-        </ul>
-      </li>
-    -->
       <!-- Community -->
       <li class="dropdown">
-        <a href="#">Community ▾</a>
+        <a href="{% url 'community:gallery' %}">Community ▾</a>
         <ul class="dropdown-menu">
           <li><a href="{% url 'community:gallery' %}">Gallery</a></li>
           <li><a href="{% url 'community:story_list' %}">Stories</a></li>
@@ -85,14 +65,7 @@
           <!--<li><a href="{% url 'schools:school_list' %}">Schools List</a></li>-->
         </ul>
       </li>
-  <!--
-    <li class="dropdown">
-      <a href="#">Home ▾</a>
-      <ul class="dropdown-menu">
-        <li><a href="{% url 'Main:homepage' %}">Home</a></li>
-      </ul>
-    </li>
--->
+  
     <!-- <li class="dropdown">-------------------------------------------------------Chat feature disabled for now. 
       <a href="#">chat ▾</a>
       <ul class="dropdown-menu">
