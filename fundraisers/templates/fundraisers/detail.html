@@ -3,9 +3,17 @@
 {% block content %}
 <div style="max-width: 700px; margin: 60px auto; background: #ffffff; padding: 40px; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: 'Segoe UI', sans-serif;">
 
-  <h2 style="text-align: center; color: #002147; font-size: 30px; margin-bottom: 10px;">
-    {{ fundraiser.title }}
-  </h2>
+  <div style="display:flex; justify-content:space-between; align-items:center; gap: 12px; margin-bottom:15px;">
+    <h2 style="text-align: center; color: #002147; font-size: 30px; margin: 0; flex: 1;">
+      {{ fundraiser.title }}
+    </h2>
+    {% if user.is_authenticated and (fundraiser.creator == user or user.is_superuser) %}
+    <a href="{% url 'fundraisers:fundraiser_delete' fundraiser.id %}"
+       style="background-color: #cc0000; color: white; text-decoration: none; padding: 10px 18px; border-radius: 8px; font-size: 15px; transition: background 0.3s ease; white-space: nowrap;">
+      - Delete Fundraiser
+    </a>
+    {% endif %}
+  </div>
   
   <p style="text-align: center; color: #555; font-size: 17px; margin-bottom: 30px;">
     {{ fundraiser.description }}
@@ -17,7 +25,7 @@
       <strong>£{{ fundraiser.goal_amount }}</strong> goal
     </p>
     <div style="height: 12px; background: #d8e0eb; border-radius: 6px; overflow: hidden; margin-top: 10px;">
-      <div style="width: calc({{ fundraiser.total_raised }}/{{ fundraiser.goal_amount }} * 100%); background: #004080; height: 100%;"></div>
+      <div style="width: {{ progress_percent }}%; background: #004080; height: 100%;"></div>
     </div>
   </div>
 

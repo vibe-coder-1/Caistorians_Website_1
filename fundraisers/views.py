@@ -2,7 +2,7 @@
 try:
     from django.shortcuts import render, redirect, get_object_or_404
     from django.conf import settings
-    from django.http import JsonResponse, HttpResponse
+    from django.http import JsonResponse, HttpResponse, HttpResponseForbidden
     from django.views.decorators.csrf import csrf_exempt
     from django.contrib.auth.decorators import login_required
     from notifications.utils import create_notification
@@ -44,9 +44,25 @@ def fundraiser_list(request):
 @login_required
 def fundraiser_detail(request, fundraiser_id):
     fundraiser = get_object_or_404(Fundraiser, id=fundraiser_id)
+    progress_percent = 0
+    if fundraiser.goal_amount:
+        progress_percent = min(100, round((fundraiser.total_raised / fundraiser.goal_amount) * 100, 2))
     return render(request, 'fundraisers/detail.html', {
-        'fundraiser': fundraiser
+        'fundraiser': fundraiser,
+        'progress_percent': progress_percent,
     })
+
+@login_required
+def fundraiser_delete(request, fundraiser_id):
+    fundraiser = get_object_or_404(Fundraiser, id=fundraiser_id)
+    if fundraiser.creator != request.user and not request.user.is_superuser:
+        return HttpResponseForbidden("You cannot delete this fundraiser.")
+
+    if request.method == 'POST':
+        fundraiser.delete()
+        return redirect('fundraisers:fundraiser_list')
+
+    return render(request, 'fundraisers/fundraiser_confirm_delete.html', {'fundraiser': fundraiser})
 
 # ----------------- FUNDRAISER CHECKOUT -----------------
 @csrf_exempt

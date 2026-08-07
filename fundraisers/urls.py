@@ -11,6 +11,7 @@ urlpatterns = [
     path('list/', views.fundraiser_list, name='fundraiser_list'),
     path('create/', views.create_fundraiser, name='create_fundraiser'),
     path('<int:fundraiser_id>/', views.fundraiser_detail, name='fundraiser_detail'),
+    path('<int:fundraiser_id>/delete/', views.fundraiser_delete, name='fundraiser_delete'),
 
     # Fundraiser checkout (creates Stripe session)
     path('<int:fundraiser_id>/checkout/', views.create_checkout_session, name='checkout'),
