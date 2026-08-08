@@ -50,7 +50,7 @@ a:focus-visible {
    SKIP LINK
    ========================================================= */
 
-.skip-link {
+.site_skip-link {
     position: absolute;
     left: -9999px;
     top: 0;
@@ -61,7 +61,7 @@ a:focus-visible {
     border-radius: 0 0 0.5rem 0;
 }
 
-.skip-link:focus {
+.site_skip-link:focus {
     left: 0;
 }
 
@@ -70,13 +70,7 @@ a:focus-visible {
    NAVBAR + FOOTER
    ========================================================= */
 
-/*
-   IMPORTANT:
-   The sticky positioning belongs ONLY on the nav.
-   Do not put position: sticky on .nav-container.
-*/
-
-nav {
+.site_nav {
     position: sticky;
     position: -webkit-sticky;
     top: 0;
@@ -86,9 +80,11 @@ nav {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
 
-.nav-container {
+.site_nav-container {
     width: 100%;
+    max-width: 1200px;
     min-height: 72px;
+    margin: 0 auto;
     padding: 0 1rem;
     display: flex;
     align-items: center;
@@ -98,27 +94,20 @@ nav {
 
 /* Logo area */
 
-.logo {
+.site_nav-logo {
     display: flex;
     align-items: center;
     flex-shrink: 0;
 }
 
-.logo1 {
+.site_nav-logo-link {
     display: flex;
     align-items: center;
     text-decoration: none;
     color: inherit;
 }
 
-.navtitle {
-    display: flex;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-}
-
-.navbar-logo {
+.site_nav-logo-image {
     display: block;
     width: auto;
     height: auto;
@@ -131,7 +120,7 @@ nav {
 
 /* Desktop navigation */
 
-.nav-links {
+.site_nav-links {
     list-style: none;
     display: flex;
     align-items: center;
@@ -141,11 +130,11 @@ nav {
     padding: 0;
 }
 
-.nav-links li {
+.site_nav-item {
     position: relative;
 }
 
-.nav-links a {
+.site_nav-link {
     display: block;
     padding: 0.6rem 0.75rem;
     border-radius: 0.4rem;
@@ -154,8 +143,8 @@ nav {
     white-space: nowrap;
 }
 
-.nav-links a:hover,
-.nav-links a:focus-visible {
+.site_nav-link:hover,
+.site_nav-link:focus-visible {
     color: #ffffff;
     background: #2c4c72;
 }
@@ -163,7 +152,7 @@ nav {
 
 /* Dropdown menus */
 
-.dropdown-menu {
+.site_nav-dropdown-menu {
     display: none;
     position: absolute;
     top: calc(100% + 2px);
@@ -178,35 +167,43 @@ nav {
     z-index: 1100;
 }
 
-.dropdown-menu li {
+.site_nav-dropdown-menu li {
     width: 100%;
 }
 
-.dropdown-menu li a {
+.site_nav-dropdown-menu li a {
+    display: block;
     width: 100%;
     padding: 0.65rem 1rem;
     border-radius: 0;
+    color: #f1f5f9;
+    text-decoration: none;
 }
 
-.dropdown-menu li:first-child a {
+.site_nav-dropdown-menu li a:hover,
+.site_nav-dropdown-menu li a:focus-visible {
+    background: #355a7f;
+}
+
+.site_nav-dropdown-menu li:first-child a {
     border-radius: 0.4rem 0.4rem 0 0;
 }
 
-.dropdown-menu li:last-child a {
+.site_nav-dropdown-menu li:last-child a {
     border-radius: 0 0 0.4rem 0.4rem;
 }
 
 /* Desktop dropdown behaviour */
 
-.dropdown:hover > .dropdown-menu,
-.dropdown:focus-within > .dropdown-menu {
+.site_nav-dropdown:hover > .site_nav-dropdown-menu,
+.site_nav-dropdown:focus-within > .site_nav-dropdown-menu {
     display: block;
 }
 
 
 /* Mobile menu button */
 
-.nav-toggle {
+.site_nav-toggle {
     display: none;
     flex-direction: column;
     justify-content: center;
@@ -222,17 +219,65 @@ nav {
     flex-shrink: 0;
 }
 
-.nav-toggle:hover,
-.nav-toggle:focus-visible {
+.site_nav-toggle:hover,
+.site_nav-toggle:focus-visible {
     background: #2c4c72;
 }
 
-.nav-toggle span {
+.site_nav-toggle span {
     display: block;
     width: 1.35rem;
     height: 2px;
     background: #f1f5f9;
     border-radius: 2px;
+}
+
+@media (max-width: 768px) {
+    .site_nav-toggle {
+        display: flex;
+    }
+
+    .site_nav-links {
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        position: absolute;
+        top: calc(100% + 0.35rem);
+        right: 1rem;
+        width: min(92vw, 320px);
+        max-height: calc(100vh - 90px);
+        overflow-y: auto;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        background: #1e3a5f;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .site_nav-links-open {
+        display: flex;
+    }
+
+    .site_nav-item {
+        width: 100%;
+    }
+
+    .site_nav-link {
+        padding: 0.75rem 0.9rem;
+    }
+
+    .site_nav-dropdown-menu {
+        position: static;
+        display: none;
+        min-width: 100%;
+        margin-top: 0.25rem;
+        padding-left: 0.75rem;
+        background: transparent;
+        box-shadow: none;
+    }
+
+    .site_nav-dropdown-open > .site_nav-dropdown-menu {
+        display: block;
+    }
 }
 
 
