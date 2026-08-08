@@ -11,14 +11,17 @@ User = get_user_model()
 
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
+    first_name = forms.CharField(required=True)
+    last_name = forms.CharField(required=True)
     is_student_account = forms.BooleanField(required=False, label="I was a student")
     class Meta:
         model = get_user_model()
-        #fields = ("username", "email", "school", "is_student_account", "password1", "password2")
-        fields = ("username", "email", "is_student_account", "password1", "password2")
+        fields = ("username","first_name", "last_name", "email", "is_student_account", "password1", "password2")
     def save(self, commit=True):
         user = super().save(commit=False)
         user.email = self.cleaned_data["email"]
+        user.first_name = self.cleaned_data["first_name"]
+        user.last_name = self.cleaned_data["last_name"]
         user.school = School.objects.get_or_create(name="Caistorians at CGS")[0]
         if commit:
             user.save()
