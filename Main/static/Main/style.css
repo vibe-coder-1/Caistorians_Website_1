@@ -1,5 +1,7 @@
-/*  Update using classes. Name the class as {name of template}_{something useful}, eg. class="homepage_maintitle", then in css .homepage_maintitle {} */
-/* NAV + FOOTER */
+/* =========================================================
+   GLOBAL STYLES
+   ========================================================= */
+
 :root {
     color-scheme: light;
 }
@@ -43,6 +45,11 @@ a:focus-visible {
     outline-offset: 3px;
 }
 
+
+/* =========================================================
+   SKIP LINK
+   ========================================================= */
+
 .skip-link {
     position: absolute;
     left: -9999px;
@@ -58,14 +65,141 @@ a:focus-visible {
     left: 0;
 }
 
+
+/* =========================================================
+   NAVIGATION + FOOTER
+   ========================================================= */
+
 nav {
     background: #1e3a5f;
     position: sticky;
     top: 0;
     width: 100%;
     z-index: 1000;
-    align-self: flex-start;
 }
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 72px;
+    padding: 0.5rem 1rem;
+    position: relative;
+    width: 100%;
+}
+
+.logo {
+    flex-shrink: 0;
+}
+
+.logo1 {
+    display: block;
+    text-decoration: none;
+}
+
+.navtitle {
+    color: #f1f5f9;
+    text-decoration: none;
+    padding: 0.25rem 0;
+    display: block;
+    margin: 0;
+}
+
+.navbar-logo {
+    display: block;
+    min-height: 50px;
+    max-width: 120px;
+    max-height: 60px;
+    height: auto;
+    width: auto;
+    object-fit: contain;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    position: relative;
+}
+
+.nav-links a {
+    color: #f1f5f9;
+    text-decoration: none;
+    padding: 0.6rem 0.7rem;
+    display: block;
+    border-radius: 0.4rem;
+    white-space: nowrap;
+}
+
+.nav-links a:hover,
+.nav-links a:focus-visible {
+    background: #2c4c72;
+}
+
+
+/* Hamburger button */
+
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.3rem;
+    border: 1px solid #f1f5f9;
+    background: transparent;
+    padding: 0.45rem;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.nav-toggle span {
+    display: block;
+    width: 1.35rem;
+    height: 2px;
+    background: #f1f5f9;
+}
+
+
+/* Desktop dropdown */
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 0.15rem);
+    left: 0;
+    background: #2c4c72;
+    list-style: none;
+    margin: 0;
+    padding: 0.25rem 0;
+    min-width: 200px;
+    z-index: 1001;
+    border-radius: 0.4rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-menu li {
+    width: 100%;
+}
+
+.dropdown-menu li a {
+    padding: 0.65rem 1rem;
+    width: 100%;
+}
+
+.dropdown:hover > .dropdown-menu,
+.dropdown:focus-within > .dropdown-menu,
+.dropdown.open > .dropdown-menu {
+    display: block;
+}
+
+
+/* Footer */
 
 .site-footer {
     background: #1e3a5f;
@@ -97,104 +231,16 @@ nav {
     text-decoration: underline;
 }
 
-.nav-container {
-    position: sticky;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    min-height: 72px;
-    padding-bottom: 0.5rem;
-    padding-right: 1rem;
-    position: relative;
-}
-
-.nav-links {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin: 0;
-    padding: 0;
-}
-
-.nav-links li {
-    position: relative;
-}
-
-.logo1 {
-    text-decoration: none;
-    color: inherit;
-}
-
-.navtitle {
-    color: #f1f5f9;
-    text-decoration: none;
-    padding: 0.25rem 0;
-    display: block;
-    margin: 0;
-}
-
-.nav-links a {
-    color: #f1f5f9;
-    text-decoration: none;
-    padding: 0.6rem 0.75rem;
-    display: block;
-    border-radius: 0.4rem;
-}
-
-.nav-links a:hover,
-.nav-links a:focus-visible {
-    background: #2c4c72;
-}
-
-.nav-toggle {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    gap: 0.3rem;
-    border: 1px solid #f1f5f9;
-    background: transparent;
-    padding: 0.45rem;
-    border-radius: 0.4rem;
-    cursor: pointer;
-}
-
-.nav-toggle span {
-    display: block;
-    width: 1.35rem;
-    height: 2px;
-    background: #f1f5f9;
-}
-
-.dropdown-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: #2c4c72;
-    list-style: none;
-    margin: 0;
-    padding: 0.25rem 0;
-    min-width: 180px;
-    z-index: 10;
-    border-radius: 0.4rem;
-}
-
-.dropdown-menu li a {
-    padding: 0.6rem 1rem;
-}
-
-.dropdown:hover .dropdown-menu,
-.dropdown:focus-within .dropdown-menu {
-    display: block;
-}
-
 .site-main {
     flex: 1;
     padding-top: 1.5rem;
 }
 
-/* Homepage styles -------------------------------------------------------------------------------------Homepage---------------------------*/
+
+/* =========================================================
+   HOMEPAGE
+   ========================================================= */
+
 .homepage_container {
     text-align: center;
 }
@@ -326,65 +372,10 @@ nav {
     text-align: center;
     background: #f8f9fa;
     border-radius: 8px;
-    padding: 3rem 1.25rem;
-    margin-top: 2rem;
+    padding: 4rem 2rem;
+    margin-top: 4rem;
 }
 
-@media (max-width: 768px) {
-    .nav-toggle {
-        display: flex;
-    }
-
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: calc(100% + 0.25rem);
-        right: 1rem;
-        background: #1e3a5f;
-        min-width: 220px;
-        padding: 0.5rem;
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        border-radius: 0.5rem;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    }
-
-    .nav-links.open {
-        display: flex;
-    }
-
-    .dropdown:hover .dropdown-menu,
-    .dropdown:focus-within .dropdown-menu {
-        display: none;
-    }
-
-    .dropdown-menu {
-        position: static;
-        display: none;
-        background: transparent;
-        min-width: 100%;
-        padding-left: 0.75rem;
-    }
-
-    .dropdown.open .dropdown-menu {
-        display: block;
-    }
-
-    .homepage_hero {
-        padding: 3rem 1rem;
-    }
-
-    .homepage_features {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .homepage_featurecard {
-        max-width: none;
-    }
-}
-
-/* Why Alumni Societies */
 .homepage_twocolumns {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -410,7 +401,6 @@ nav {
     font-size: 0.9rem;
 }
 
-/* Use Cases */
 .homepage_usecasesgrid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -426,31 +416,26 @@ nav {
     text-align: center;
 }
 
-/* Upcoming Features */
 .homepage_future {
     text-align: center;
 }
+
 .homepage_futurelist {
     list-style: none;
     padding: 0;
     margin: 2rem 0;
 }
+
 .homepage_futurelist li {
     margin-bottom: 0.75rem;
     font-size: 1.1rem;
 }
 
-/* CTA Section */
-.homepage_ctasection {
-    text-align: center;
-    background: #f8f9fa;
-    border-radius: 8px;
-    padding: 4rem 2rem;
-    margin-top: 4rem;
-}
 
+/* =========================================================
+   LOGIN
+   ========================================================= */
 
-/* Login page styles ------------------------------------------------------------------------------   Login----------------------------------------------*/
 .login-container {
     max-width: 400px;
     margin: 3rem auto;
@@ -513,9 +498,10 @@ nav {
 }
 
 
+/* =========================================================
+   CREATE EVENT
+   ========================================================= */
 
-
-/* CREATE EVENT PAGE */
 .create-event_container {
     max-width: 600px;
     margin: 2rem auto;
@@ -567,7 +553,7 @@ nav {
 }
 
 .create-event_submit {
-    background-color: #007bff; /* Same blue as edit profile save */
+    background-color: #007bff;
     color: #fff;
     font-size: 1rem;
     font-weight: bold;
@@ -596,7 +582,11 @@ nav {
     text-decoration: underline;
 }
 
-/* EVENT LIST PAGE */
+
+/* =========================================================
+   EVENT LIST
+   ========================================================= */
+
 .event-list_container {
     max-width: 700px;
     margin: 2rem auto;
@@ -661,7 +651,10 @@ nav {
 }
 
 
-/* EVENT DETAIL PAGE */
+/* =========================================================
+   EVENT DETAIL
+   ========================================================= */
+
 .event-detail_container {
     max-width: 700px;
     margin: 2rem auto;
@@ -770,7 +763,11 @@ nav {
     text-decoration: underline;
 }
 
-/* RSVP PAGE */
+
+/* =========================================================
+   RSVP
+   ========================================================= */
+
 .event-rsvp_container {
     max-width: 600px;
     margin: 2rem auto;
@@ -839,20 +836,23 @@ nav {
 }
 
 
+/* =========================================================
+   SCHOOL HOMEPAGE
+   ========================================================= */
 
-/*School Homepage ----------------------------------------------------------------------------------------------------------------Schol Homepage ------------------------*/
-/* Hero Section */
 .school_hero {
     position: relative;
     width: 100%;
     height: 600px;
     overflow: hidden;
 }
+
 .school_hero_image {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
+
 .school_hero_overlay {
     position: absolute;
     top: 50%;
@@ -864,21 +864,23 @@ nav {
     border-radius: 10px;
     color: #fff;
 }
+
 .school_hero_title {
     font-size: 3rem;
     margin-bottom: 1rem;
 }
+
 .school_hero_tagline {
     font-size: 1.2rem;
 }
 
-/* Feature Boxes */
 .school_featureboxes {
     display: flex;
     flex-wrap: wrap;
     gap: 1.5rem;
     margin: 3rem 0;
 }
+
 .school_box {
     flex: 1 1 250px;
     background: #fff;
@@ -887,11 +889,13 @@ nav {
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     text-align: center;
 }
+
 .school_box img {
     max-width: 100%;
     border-radius: 8px;
     margin-bottom: 1rem;
 }
+
 .school_box a {
     display: inline-block;
     margin-top: 0.5rem;
@@ -899,28 +903,31 @@ nav {
     text-decoration: none;
     font-weight: 500;
 }
+
 .school_box a:hover {
     text-decoration: underline;
 }
 
-/* Historical Section */
 .school_history {
     background: #f4f4f4;
     padding: 3rem 1rem;
     text-align: center;
 }
+
 .school_history_images {
     display: flex;
     justify-content: center;
     gap: 1rem;
     margin: 2rem 0;
 }
+
 .school_history_images img {
     width: 200px;
     height: auto;
     border-radius: 8px;
     object-fit: cover;
 }
+
 .school_history a {
     display: inline-block;
     margin-top: 1rem;
@@ -930,44 +937,35 @@ nav {
     border-radius: 6px;
     text-decoration: none;
 }
+
 .school_history a:hover {
     background: #495057;
 }
 
-.navbar-logo {
-    min-height: 50px;
-    max-width: 120px;    /* adjust to fit your navbar */
-    max-height: 60px;    /* optional: constrain height */
-    height: auto;        /* maintain aspect ratio */
-    width: auto;         /* maintain aspect ratio */
-    object-fit: contain; /* ensures it scales nicely without cropping */
-}
-
-
-/* Alumni Slider */
 .school_alumni_slider {
     margin: 3rem 0;
     text-align: center;
 }
+
 .alumni_slider_container {
     display: flex;
     gap: 1rem;
     padding-bottom: 1rem;
-    overflow-x: auto;           /* horizontal scroll if needed */
-    justify-content: center;    /* center cards if few items */
-    flex-wrap: nowrap;          /* keep in a single row */
-    scroll-snap-type: x mandatory; /* optional: nice snapping effect */
+    overflow-x: auto;
+    justify-content: center;
+    flex-wrap: nowrap;
+    scroll-snap-type: x mandatory;
 }
 
 .alumni_slide {
-    flex: 0 1 180px;           /* fixed min width, can shrink slightly */
-    max-width: 180px;          /* prevents stretching too much */
+    flex: 0 1 180px;
+    max-width: 180px;
     background: #fff;
     border-radius: 10px;
     padding: 1rem;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     text-align: center;
-    scroll-snap-align: start;  /* optional: aligns each card to container start */
+    scroll-snap-align: start;
 }
 
 .alumni_slide img {
@@ -977,39 +975,30 @@ nav {
     border-radius: 8px;
     margin-bottom: 0.5rem;
 }
+
 .alumni_name {
     font-weight: bold;
 }
+
 .alumni_quote {
     font-size: 0.9rem;
     font-style: italic;
 }
+
 .alumni_cta {
     margin-top: 1rem;
     font-weight: bold;
 }
 
-/* Responsive */
-@media(max-width: 900px){
-    .school_featureboxes {
-        flex-direction: column;
-    }
-    .school_history_images {
-        flex-direction: column;
-        gap: 1rem;
-    }
-    .alumni_slide {
-        width: 150px;
-    }
-}
 
+/* =========================================================
+   PERSONAL PROFILE
+   ========================================================= */
 
-/*Personal_profile ----------------------------------------------------------------------------------------Profile-----------------------------------------------------------------*/
 .personal-profile-container {
     max-width: 900px;
     margin: 2rem auto;
     padding: 2rem;
-
     background: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
@@ -1018,7 +1007,6 @@ nav {
 .personal-profile-box {
     display: flex;
     flex-wrap: wrap;
-
     padding: 2rem;
     gap: 2rem;
 }
@@ -1079,9 +1067,9 @@ nav {
 }
 
 
-/*Directory ----------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
-
+/* =========================================================
+   DIRECTORY
+   ========================================================= */
 
 .directory-title {
     text-align: center;
@@ -1162,7 +1150,7 @@ nav {
     text-decoration: none;
     color: inherit;
     transition: transform 0.15s, box-shadow 0.15s;
-    display: inline-block; /* ensures proper spacing in flex container */
+    display: inline-block;
 }
 
 .directory-card-link:hover .directory-card {
@@ -1171,8 +1159,10 @@ nav {
 }
 
 
+/* =========================================================
+   PUBLIC PROFILE
+   ========================================================= */
 
-/*Public Profile ------------------------------------------------------------------------------------------------------------------------------------------------------*/
 .profile-display {
     background: #fff;
     border-radius: 8px;
@@ -1185,7 +1175,6 @@ nav {
     gap: 2rem;
     padding: 2rem;
     justify-content: center;
-
     display: flex;
 }
 
@@ -1229,7 +1218,10 @@ nav {
 }
 
 
-/*Edit Profile ---------------------------------------------------------------------------------------------------------------------------*/
+/* =========================================================
+   EDIT PROFILE
+   ========================================================= */
+
 .profile-edit-container {
     max-width: 960px;
     margin: 3rem auto;
@@ -1327,651 +1319,657 @@ textarea {
     transform: translateY(-2px);
 }
 
-@media (max-width: 768px) {
-    .profile-edit-row {
-        flex-direction: column;
-    }
-}
 
+/* =========================================================
+   GALLERY
+   ========================================================= */
 
-/*-------------------------------------------------------------------------Gallery-------------------------------------*/
-/* PHOTO GALLERY */
 .gallery_title {
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
-  text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    text-align: center;
 }
 
 .gallery_container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
 }
 
 .gallery_card {
-  background: #fff;
-  border-radius: 10px;
-  padding: 1rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  text-align: center;
-  max-width: 220px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    text-align: center;
+    max-width: 220px;
 }
 
 .gallery_card a {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 .gallery_image {
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 0.5rem;
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
 }
 
 .gallery_caption {
-  font-weight: bold;
-  margin-bottom: 0.3rem;
+    font-weight: bold;
+    margin-bottom: 0.3rem;
 }
 
 .gallery_meta {
-  font-size: 0.85rem;
-  color: #555;
+    font-size: 0.85rem;
+    color: #555;
 }
 
 .gallery_empty {
-  text-align: center;
-  font-style: italic;
-  margin: 2rem 0;
+    text-align: center;
+    font-style: italic;
+    margin: 2rem 0;
 }
 
-/* Match Edit Profile Save Changes button (gradient + hover) + centered */
 .gallery_cta {
-  display: block;
-  width: fit-content;            /* keeps the button to its content width */
-  margin: 2rem auto 3rem auto;   /* top, center horizontally, bottom */
-  padding: 0.85rem 2rem;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #fff;
-  background: linear-gradient(90deg, #007bff, #0056b3); /* same gradient */
-  border: none;
-  border-radius: 10px;
-  text-decoration: none;
-  text-align: center;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-  cursor: pointer;
-  transition: background 0.25s, transform 0.18s, box-shadow 0.18s;
+    display: block;
+    width: fit-content;
+    margin: 2rem auto 3rem auto;
+    padding: 0.85rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    border: none;
+    border-radius: 10px;
+    text-decoration: none;
+    text-align: center;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    cursor: pointer;
+    transition: background 0.25s, transform 0.18s, box-shadow 0.18s;
 }
 
 .gallery_cta:hover {
-  background: linear-gradient(90deg, #0056b3, #003f7f); /* same hover gradient */
-  transform: translateY(-2px);
-  box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+    background: linear-gradient(90deg, #0056b3, #003f7f);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.12);
 }
 
 .gallery_cta:active {
-  transform: translateY(0);
-  filter: brightness(0.96);
+    transform: translateY(0);
+    filter: brightness(0.96);
 }
 
 
-/*--------------------------------------Notifications-----------------------------------------*/
+/* =========================================================
+   NOTIFICATIONS
+   ========================================================= */
 
-/* Notifications Page */
 .notifications-container {
-  max-width: 960px;
-  margin: 3rem auto;
-  padding: 0 1rem;
-  font-family: 'Inter', sans-serif;
+    max-width: 960px;
+    margin: 3rem auto;
+    padding: 0 1rem;
+    font-family: 'Inter', sans-serif;
 }
 
 .notifications-title {
-  font-size: 2rem;
-  font-weight: 600;
-  text-align: center;
-  margin-bottom: 2rem;
-  color: #333;
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #333;
 }
 
 .notifications-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
 .notification-card {
-  background: #fff;
-  border-radius: 12px;
-  padding: 1.5rem 2rem;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-  transition: transform 0.2s, box-shadow 0.2s;
+    background: #fff;
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .notification-card.unread {
-  border-left: 6px solid #007bff;
+    border-left: 6px solid #007bff;
 }
 
 .notification-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
 
 .notification-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
 }
 
 .notification-title {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #222;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #222;
 }
 
 .notification-date {
-  font-size: 0.9rem;
-  color: #777;
+    font-size: 0.9rem;
+    color: #777;
 }
 
 .notification-message {
-  margin: 0.5rem 0 1rem;
-  font-size: 1rem;
-  color: #444;
+    margin: 0.5rem 0 1rem;
+    font-size: 1rem;
+    color: #444;
 }
 
 .notification-actions {
-  display: flex;
-  gap: 1rem;
+    display: flex;
+    gap: 1rem;
 }
 
 .btn.notification-btn {
-  padding: 0.5rem 1.2rem;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #fff;
-  background: linear-gradient(90deg, #007bff, #0056b3);
-  border: none;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: background 0.25s, transform 0.2s;
+    padding: 0.5rem 1.2rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.25s, transform 0.2s;
 }
 
 .btn.notification-btn:hover {
-  background: linear-gradient(90deg, #0056b3, #003f7f);
-  transform: translateY(-2px);
+    background: linear-gradient(90deg, #0056b3, #003f7f);
+    transform: translateY(-2px);
 }
 
 .notification-empty {
-  text-align: center;
-  color: #666;
-  font-style: italic;
+    text-align: center;
+    color: #666;
+    font-style: italic;
 }
 
 
-/*---------------------------------------------------INBOX--------------------------------------------------------*/
+/* =========================================================
+   INBOX
+   ========================================================= */
 
-/* Inbox Page */
 .inbox-container {
-  max-width: 960px;
-  margin: 3rem auto;
-  padding: 0 1rem;
-  font-family: 'Inter', sans-serif;
+    max-width: 960px;
+    margin: 3rem auto;
+    padding: 0 1rem;
+    font-family: 'Inter', sans-serif;
 }
 
 .inbox-title {
-  font-size: 2rem;
-  font-weight: 600;
-  text-align: center;
-  margin-bottom: 2rem;
-  color: #333;
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #333;
 }
 
 .inbox-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
 .inbox-card {
-  background: #fff;
-  border-radius: 12px;
-  padding: 1.2rem 1.5rem;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-  transition: transform 0.2s, box-shadow 0.2s;
+    background: #fff;
+    border-radius: 12px;
+    padding: 1.2rem 1.5rem;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .inbox-card.unread {
-  border-left: 6px solid #007bff;
+    border-left: 6px solid #007bff;
 }
 
 .inbox-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
 
 .inbox-link {
-  text-decoration: none;
-  color: inherit;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .inbox-header {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .inbox-subject {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #222;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #222;
 }
 
 .inbox-sender {
-  font-size: 0.9rem;
-  color: #555;
+    font-size: 0.9rem;
+    color: #555;
 }
 
 .inbox-status {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #007bff;
-  background: rgba(0,123,255,0.1);
-  padding: 0.2rem 0.6rem;
-  border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #007bff;
+    background: rgba(0,123,255,0.1);
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
 }
-  
+
 .inbox-empty {
-  text-align: center;
-  color: #666;
-  font-style: italic;
+    text-align: center;
+    color: #666;
+    font-style: italic;
 }
 
 
-/* OUTBOX */
+/* =========================================================
+   OUTBOX
+   ========================================================= */
+
 .outbox_container {
-  max-width: 1200px;
-  margin: 2rem auto;
-  padding: 2rem;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
 }
 
 .outbox_title {
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
-  border-bottom: 2px solid #e5e7eb;
-  padding-bottom: 0.5rem;
-  justify-self: center;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 0.5rem;
+    justify-self: center;
 }
 
 .outbox_list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .outbox_item {
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  padding: 1rem;
-  margin-bottom: 0.75rem;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
 .outbox_subject {
-  font-weight: 600;
-  color: #2563eb; /* same blue as Save Changes */
-  text-decoration: none;
-  margin-right: 0.5rem;
+    font-weight: 600;
+    color: #2563eb;
+    text-decoration: none;
+    margin-right: 0.5rem;
 }
 
 .outbox_subject:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 .outbox_arrow {
-  margin: 0 0.5rem;
-  color: #6b7280;
+    margin: 0 0.5rem;
+    color: #6b7280;
 }
 
 .outbox_recipient {
-  font-weight: 500;
-  color: #111827;
-  margin-right: 0.5rem;
+    font-weight: 500;
+    color: #111827;
+    margin-right: 0.5rem;
 }
 
 .outbox_time {
-  font-size: 0.85rem;
-  color: #6b7280;
+    font-size: 0.85rem;
+    color: #6b7280;
 }
 
 .outbox_empty {
-  text-align: center;
-  color: #6b7280;
-  font-style: italic;
+    text-align: center;
+    color: #6b7280;
+    font-style: italic;
 }
 
-/* COMPOSE MESSAGE */
+
+/* =========================================================
+   COMPOSE MESSAGE
+   ========================================================= */
+
 .compose_container {
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 1.5rem;
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
-  border-radius: 10px;
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
 }
 
 .compose_title {
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
-  border-bottom: 2px solid #e5e7eb;
-  padding-bottom: 0.5rem;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 0.5rem;
 }
 
 .compose_form p {
-  margin-bottom: 1rem;
+    margin-bottom: 1rem;
 }
 
 .compose_form label {
-  display: block;
-  font-weight: 600;
-  margin-bottom: 0.25rem;
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
 }
 
 .compose_form input,
 .compose_form textarea,
 .compose_form select {
-  width: 100%;
-  padding: 0.6rem;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
-  font-size: 1rem;
-  margin-bottom: 1rem;
-  background: #fff;
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    background: #fff;
 }
 
 .compose_form input:focus,
 .compose_form textarea:focus,
 .compose_form select:focus {
-  border-color: #2563eb;
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+    border-color: #2563eb;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
 }
 
 .compose_btn {
-  display: block;
-  margin: 1rem auto 0;
-  background: #2563eb; /* same blue as Save Changes */
-  color: white;
-  font-weight: 600;
-  padding: 0.6rem 1.2rem;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.2s ease;
+    display: block;
+    margin: 1rem auto 0;
+    background: #2563eb;
+    color: white;
+    font-weight: 600;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s ease;
 }
 
 .compose_btn:hover {
-  background: #1e40af;
+    background: #1e40af;
 }
 
 
-/* MESSAGE DETAIL */
+/* =========================================================
+   MESSAGE DETAIL
+   ========================================================= */
+
 .message_detail {
-  max-width: 700px;
-  margin: 2rem auto;
-  padding: 1.5rem 2rem;
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
-  border-radius: 10px;
+    max-width: 700px;
+    margin: 2rem auto;
+    padding: 1.5rem 2rem;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
 }
 
 .message_subject {
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
-  color: #1f2937;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #1f2937;
 }
 
 .message_meta p {
-  margin: 0.3rem 0;
-  color: #374151;
+    margin: 0.3rem 0;
+    color: #374151;
 }
 
 .message_body {
-  margin-top: 1rem;
-  font-size: 1.05rem;
-  line-height: 1.6;
-  color: #111827;
+    margin-top: 1rem;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #111827;
 }
 
 .reply_btn {
-  display: inline-block;
-  margin-top: 1.5rem;
-  padding: 0.6rem 1.2rem;
-  background: linear-gradient(90deg, #007bff, #0056b3);
-  color: #fff;
-  font-weight: 600;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: background 0.25s, transform 0.2s;
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.6rem 1.2rem;
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    color: #fff;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.25s, transform 0.2s;
 }
 
 .reply_btn:hover {
-  background: linear-gradient(90deg, #0056b3, #003f7f);
-  transform: translateY(-2px);
+    background: linear-gradient(90deg, #0056b3, #003f7f);
+    transform: translateY(-2px);
 }
 
 
-/*--------------------------------------------------------Stories----------------------------------*/
+/* =========================================================
+   STORIES
+   ========================================================= */
+
 .stories_page {
-  max-width: 800px;
-  margin: 2rem auto;
-  padding: 1.5rem 2rem;
-  background: #f9fafb;
-  border-radius: 10px;
-  border: 1px solid #e5e7eb;
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1.5rem 2rem;
+    background: #f9fafb;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
 }
 
 .stories_title {
-  font-size: 1.8rem;
-  margin-bottom: 1.5rem;
-  color: #1f2937;
-  text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #1f2937;
+    text-align: center;
 }
 
 .stories_list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .story_item {
-  padding: 0.5rem 0;
-  border-bottom: 1px solid #e5e7eb;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e5e7eb;
 }
 
 .story_item:last-child {
-  border-bottom: none;
+    border-bottom: none;
 }
 
 .story_link {
-  font-weight: 600;
-  color: #007bff;
-  text-decoration: none;
-  transition: color 0.2s;
+    font-weight: 600;
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.2s;
 }
 
 .story_link:hover {
-  text-decoration: underline;
-  color: #0056b3;
+    text-decoration: underline;
+    color: #0056b3;
 }
 
 .story_meta {
-  font-size: 0.9rem;
-  color: #555;
-  margin-left: 0.3rem;
+    font-size: 0.9rem;
+    color: #555;
+    margin-left: 0.3rem;
 }
 
 .no_stories {
-  text-align: center;
-  font-size: 1rem;
-  color: #666;
-  margin: 1rem 0;
+    text-align: center;
+    font-size: 1rem;
+    color: #666;
+    margin: 1rem 0;
 }
 
 .stories_cta {
-  text-align: center;
-  margin-top: 2rem;
+    text-align: center;
+    margin-top: 2rem;
 }
 
 .btn-primary {
-  display: inline-block;          /* Use block if you want full-width centered buttons */
-  padding: 0.85rem 2rem;          /* Comfortable padding */
-  font-size: 1rem;                /* Explicit font size */
-  font-weight: 600;
-  color: #fff;
-  background: linear-gradient(90deg, #007bff, #0056b3);
-  border: none;
-  border-radius: 10px;
-  text-decoration: none;
-  cursor: pointer;
-  transition: background 0.25s, transform 0.2s;
-  text-align: center;             /* Ensure text is centered for block buttons */
-  margin: 0;                      /* Remove default margins, set per container if needed */
+    display: inline-block;
+    padding: 0.85rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    border: none;
+    border-radius: 10px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.25s, transform 0.2s;
+    text-align: center;
+    margin: 0;
 }
-
-
 
 .btn-primary:hover {
-  background: linear-gradient(90deg, #0056b3, #003f7f);
-  transform: translateY(-2px);
+    background: linear-gradient(90deg, #0056b3, #003f7f);
+    transform: translateY(-2px);
 }
 
-
 .story_submit_page {
-  max-width: 700px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background: #f9fafb;
-  border-radius: 10px;
-  border: 1px solid #e5e7eb;
+    max-width: 700px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #f9fafb;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
 }
 
 .story_submit_title {
-  text-align: center;
-  font-size: 1.8rem;
-  margin-bottom: 2rem;
-  color: #1f2937;
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    color: #1f2937;
 }
 
 .story_submit_form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
 .story_submit_form input,
 .story_submit_form textarea {
-  padding: 0.65rem 0.8rem;
-  font-size: 1rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  transition: border-color 0.2s, box-shadow 0.2s;
+    padding: 0.65rem 0.8rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .story_submit_form input:focus,
 .story_submit_form textarea:focus {
-  outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.15);
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.15);
 }
 
 .story_submit_cta {
-  text-align: center;
-  margin-top: 1rem;
+    text-align: center;
+    margin-top: 1rem;
 }
 
-
-
-
 .story_submit_back {
-  text-align: center;
-  margin-top: 1.5rem;
+    text-align: center;
+    margin-top: 1.5rem;
 }
 
 .back_link {
-  text-decoration: none;
-  color: #007bff;
-  font-weight: 500;
+    text-decoration: none;
+    color: #007bff;
+    font-weight: 500;
 }
 
 .back_link:hover {
-  text-decoration: underline;
-  color: #0056b3;
+    text-decoration: underline;
+    color: #0056b3;
 }
 
 
+/* =========================================================
+   PHOTO UPLOAD
+   ========================================================= */
+
 .photo_upload_page {
-  max-width: 700px;
-  margin: 2rem auto;
+    max-width: 700px;
+    margin: 2rem auto;
 }
 
 .photo_upload_title {
-  font-size: 1.8rem;
-  text-align: center;
-  margin-bottom: 1.5rem;
-  color: #1f2937;
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #1f2937;
 }
 
 .photo_upload_card {
-  background: #fff;
-  border-radius: 12px;
-  padding: 2rem;
-  border: 1px solid #e5e7eb;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  margin-bottom: 1.5rem;
+    background: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    margin-bottom: 1.5rem;
 }
 
 .photo_upload_form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
-
-
-
 .photo_upload_back {
-  text-align: center;
-  margin-top: 1rem;
+    text-align: center;
+    margin-top: 1rem;
 }
 
 .story_back_link {
-  color: #007bff;
-  text-decoration: none;
-  font-weight: 500;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
 }
 
 .story_back_link:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 
+/* =========================================================
+   ADMIN
+   ========================================================= */
 
-
-/* Admin Container */
 .admin-container {
     max-width: 1200px;
     margin: 2rem auto;
@@ -1980,7 +1978,6 @@ textarea {
     color: #1e3a5f;
 }
 
-/* Search Form */
 .admin-search {
     margin-bottom: 2rem;
     display: flex;
@@ -1999,7 +1996,6 @@ textarea {
     padding: 0.55rem 1.2rem;
 }
 
-/* Tables */
 .admin-table {
     width: 100%;
     border-collapse: collapse;
@@ -2023,7 +2019,6 @@ textarea {
     background: #f8f9fa;
 }
 
-/* Buttons (CTA style) */
 .btn.admin-action-btn {
     display: inline-block;
     font-size: 0.9rem;
@@ -2043,18 +2038,21 @@ textarea {
     transform: translateY(-1px);
 }
 
-/* Admin Logs */
 .admin-log {
     list-style: disc;
     padding-left: 1.5rem;
     color: #475569;
 }
+
 .admin-log li {
     margin-bottom: 0.5rem;
 }
 
 
-/* Create School Page Styles --------------------------------------------------- */
+/* =========================================================
+   CREATE SCHOOL
+   ========================================================= */
+
 .create-school_container {
     max-width: 800px;
     margin: 2rem auto;
@@ -2064,7 +2062,6 @@ textarea {
     box-shadow: 0 4px 15px rgba(0,0,0,0.08);
 }
 
-/* Section cards */
 .create-school_section {
     margin-bottom: 2rem;
     padding: 1.5rem;
@@ -2080,7 +2077,6 @@ textarea {
     color: #1e3a5f;
 }
 
-/* Inline formset entries */
 .create-school_inlineform {
     margin-bottom: 1rem;
     padding: 1rem;
@@ -2089,7 +2085,6 @@ textarea {
     border-radius: 6px;
 }
 
-/* Form fields */
 .create-school_form input,
 .create-school_form select,
 .create-school_form textarea {
@@ -2109,7 +2104,6 @@ textarea {
     display: block;
 }
 
-/* CTA Button */
 .create-school_ctabutton {
     display: inline-block;
     padding: 0.75rem 1.5rem;
@@ -2128,9 +2122,11 @@ textarea {
     transform: translateY(-2px);
 }
 
-/*--------------------------------------------------EDIT SCHOOL-------------------------------------------------*/
 
-/* ==== Edit School Page ==== */
+/* =========================================================
+   EDIT SCHOOL
+   ========================================================= */
+
 .edit-school-container {
     max-width: 800px;
     margin: 2rem auto;
@@ -2190,7 +2186,7 @@ textarea {
 }
 
 .edit-school_button {
-    background: #007bff; /* Bootstrap blue */
+    background: #007bff;
     color: white;
     border: none;
     padding: 0.75rem 2rem;
@@ -2205,7 +2201,10 @@ textarea {
 }
 
 
-/* --- Create Account Page --- */
+/* =========================================================
+   CREATE ACCOUNT
+   ========================================================= */
+
 .create-account-page {
     display: flex;
     flex-direction: column;
@@ -2217,7 +2216,7 @@ textarea {
 
 .create-account-page h2 {
     font-size: 2rem;
-    color: #1d4ed8; /* Oxford blue tone */
+    color: #1d4ed8;
     margin-bottom: 1.5rem;
 }
 
@@ -2292,7 +2291,10 @@ textarea {
 }
 
 
-/* Story Detail Page */
+/* =========================================================
+   STORY DETAIL
+   ========================================================= */
+
 .story-detail-page {
     max-width: 800px;
     margin: 40px auto;
@@ -2357,7 +2359,10 @@ textarea {
 }
 
 
-/* Delete Confirmation Page */
+/* =========================================================
+   DELETE CONFIRMATION
+   ========================================================= */
+
 .delete-confirm-page {
     max-width: 600px;
     margin: 50px auto;
@@ -2426,11 +2431,182 @@ textarea {
 }
 
 
-/* Magazines */
+/* =========================================================
+   MAGAZINES
+   ========================================================= */
+
 .magazine-container {
-    text-decoration: none
+    text-decoration: none;
 }
 
 .magazine-container a {
     text-decoration: none;
+}
+
+
+/* =========================================================
+   RESPONSIVE STYLES
+   ========================================================= */
+
+/*
+   IMPORTANT:
+   The navbar switches at 900px because
+   logged-in users have more links.
+*/
+
+@media (max-width: 900px) {
+
+    /* Navbar */
+
+    .nav-container {
+        min-height: 68px;
+    }
+
+    .nav-toggle {
+        display: flex;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        position: absolute;
+        top: calc(100% + 0.25rem);
+        left: 1rem;
+        right: 1rem;
+        background: #1e3a5f;
+        padding: 0.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 0.5rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        max-height: calc(100vh - 90px);
+        overflow-y: auto;
+        z-index: 1000;
+    }
+
+    .nav-links.open {
+        display: flex;
+    }
+
+    .nav-links > li {
+        width: 100%;
+    }
+
+    .nav-links > li > a {
+        width: 100%;
+        padding: 0.75rem 1rem;
+    }
+
+    /*
+       Disable desktop hover behaviour on mobile.
+       Dropdowns are controlled by JavaScript instead.
+    */
+
+    .dropdown:hover > .dropdown-menu,
+    .dropdown:focus-within > .dropdown-menu {
+        display: none;
+    }
+
+    /*
+       JavaScript adds .open to the dropdown.
+    */
+
+    .dropdown.open > .dropdown-menu {
+        display: block;
+    }
+
+    .dropdown-menu {
+        position: static;
+        width: 100%;
+        min-width: 0;
+        background: #2c4c72;
+        padding: 0;
+        margin: 0;
+        border-radius: 0.35rem;
+        box-shadow: none;
+    }
+
+    .dropdown-menu li a {
+        padding: 0.65rem 1.5rem;
+    }
+
+
+    /* Homepage */
+
+    .homepage_hero {
+        padding: 3rem 1rem;
+    }
+
+    .homepage_features {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .homepage_featurecard {
+        max-width: none;
+    }
+
+
+    /* School homepage */
+
+    .school_featureboxes {
+        flex-direction: column;
+    }
+
+    .school_history_images {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .alumni_slide {
+        width: 150px;
+    }
+
+
+    /* Profile editing */
+
+    .profile-edit-row {
+        flex-direction: column;
+    }
+
+
+    /* Two columns */
+
+    .homepage_twocolumns {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* Small phones */
+
+@media (max-width: 500px) {
+
+    .nav-container {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+    }
+
+    .navbar-logo {
+        max-width: 90px;
+        max-height: 50px;
+    }
+
+    .nav-links {
+        left: 0.75rem;
+        right: 0.75rem;
+    }
+
+    .profile-edit-container {
+        padding: 1.5rem;
+    }
+
+    .create-event_container,
+    .event-detail_container,
+    .event-rsvp_container,
+    .story_submit_page,
+    .message_detail {
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
 }

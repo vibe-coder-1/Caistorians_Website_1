@@ -2,133 +2,554 @@
 <html lang="en">
 <head>
     {% load static %}
+
     {% if user.is_authenticated and user.school.logo %}
-      <link rel="icon" href="{{ user.school.logo.url }}" type="image/png">
+        <link rel="icon" href="{{ user.school.logo.url }}" type="image/png">
     {% else %}
-      <link rel="icon" href="{% static 'images/Caistorians_Association_Logo.png' %}" type="image/png">
+        <link rel="icon" href="{% static 'images/Caistorians_Association_Logo.png' %}" type="image/png">
     {% endif %}
+
     <meta charset="UTF-8">
-    <title>{% block title %}The Caistorians' Association{% endblock %}</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}
+            The Caistorians' Association
+        {% endblock %}
+    </title>
+
     <link rel="stylesheet" href="{% static 'Main/style.css' %}">
 </head>
-<body>
-    <a class="skip-link" href="#main-content">Skip to main content</a>
 
-    <!-- Navbar -->
+<body>
+
+    <!-- Skip link -->
+    <a class="skip-link" href="#main-content">
+        Skip to main content
+    </a>
+
+
+    <!-- =====================================================
+         NAVBAR
+         ===================================================== -->
+
     <nav aria-label="Primary navigation">
-      <div class="nav-container">
-        <div class="logo">
-          <a href="{% url 'Main:homepage' %}" class="logo1" aria-label="Go to the homepage">
-            <p class="navtitle">
-              {% if user.is_authenticated and user.school.logo %}
-                <img class="navbar-logo" src="{{ user.school.logo.url }}" alt="School logo">
-              {% else %}
-                <img class="navbar-logo" src="{% static 'images/Caistorians_Association_Logo.png' %}" alt="The Caistorians' Association logo">
-              {% endif %}
-            </p>
-          </a>
+
+        <div class="nav-container">
+
+            <!-- Logo -->
+
+            <div class="logo">
+                <a
+                    href="{% url 'Main:homepage' %}"
+                    class="logo1"
+                    aria-label="Go to the homepage"
+                >
+
+                    <p class="navtitle">
+
+                        {% if user.is_authenticated and user.school.logo %}
+
+                            <img
+                                class="navbar-logo"
+                                src="{{ user.school.logo.url }}"
+                                alt="School logo"
+                            >
+
+                        {% else %}
+
+                            <img
+                                class="navbar-logo"
+                                src="{% static 'images/Caistorians_Association_Logo.png' %}"
+                                alt="The Caistorians' Association logo"
+                            >
+
+                        {% endif %}
+
+                    </p>
+
+                </a>
+            </div>
+
+
+            <!-- Mobile hamburger button -->
+
+            <button
+                class="nav-toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="site-nav"
+                aria-label="Toggle navigation menu"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+
+            <!-- Navigation links -->
+
+            <ul id="site-nav" class="nav-links">
+
+                {% if user.is_authenticated %}
+
+                    <!-- Home -->
+
+                    <li>
+                        <a href="{% url 'Main:homepage' %}">
+                            Home
+                        </a>
+                    </li>
+
+
+                    <!-- Fundraisers -->
+
+                    <li>
+                        <a href="{% url 'fundraisers:fundraiser_list' %}">
+                            Fundraisers
+                        </a>
+                    </li>
+
+
+                    <!-- Events -->
+
+                    <li>
+                        <a href="{% url 'events:event_list' %}">
+                            Events
+                        </a>
+                    </li>
+
+
+                    <!-- Account dropdown -->
+
+                    <li class="dropdown">
+
+                        <a
+                            href="{% url 'Accounts:profile' %}"
+                            aria-haspopup="true"
+                        >
+                            Account ▾
+                        </a>
+
+                        <ul class="dropdown-menu">
+
+                            <li>
+                                <a href="{% url 'Accounts:profile' %}">
+                                    My Profile
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{% url 'Accounts:edit_profile' %}">
+                                    Edit Profile
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{% url 'Accounts:directory' %}">
+                                    Alumni Directory
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{% url 'Accounts:logout' %}">
+                                    Logout
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{% url 'notifications:list' %}">
+                                    Notifications
+                                </a>
+                            </li>
+
+                        </ul>
+
+                    </li>
+
+
+                    <!-- Direct Messages dropdown -->
+
+                    <li class="dropdown">
+
+                        <a
+                            href="{% url 'interactions:inbox' %}"
+                            aria-haspopup="true"
+                        >
+                            Direct Messages ▾
+                        </a>
+
+                        <ul class="dropdown-menu">
+
+                            <li>
+                                <a href="{% url 'interactions:inbox' %}">
+                                    Inbox
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{% url 'interactions:outbox' %}">
+                                    Outbox
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{% url 'interactions:compose' %}">
+                                    Compose
+                                </a>
+                            </li>
+
+                        </ul>
+
+                    </li>
+
+
+                    <!-- Community dropdown -->
+
+                    <li class="dropdown">
+
+                        <a
+                            href="{% url 'community:gallery' %}"
+                            aria-haspopup="true"
+                        >
+                            Community ▾
+                        </a>
+
+                        <ul class="dropdown-menu">
+
+                            <li>
+                                <a href="{% url 'community:gallery' %}">
+                                    Gallery
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{% url 'community:story_list' %}">
+                                    Stories
+                                </a>
+                            </li>
+
+                        </ul>
+
+                    </li>
+
+
+                {% else %}
+
+                    <!-- Logged out navigation -->
+
+                    <li>
+                        <a href="{% url 'Accounts:login' %}">
+                            Login
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'Accounts:create_account' %}">
+                            Create Account
+                        </a>
+                    </li>
+
+                {% endif %}
+
+
+                <!-- Staff navigation -->
+
+                {% if user.is_staff or user.is_superuser %}
+
+                    <li>
+                        <a href="{% url 'custom_admin:dashboard' %}">
+                            Admin Dashboard
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'schools:edit_school' user.school.id %}">
+                            Edit School
+                        </a>
+                    </li>
+
+                {% endif %}
+
+
+                <!-- Superuser navigation -->
+
+                {% if user.is_superuser %}
+
+                    <li>
+                        <a href="{% url 'schools:create_school' %}">
+                            Create School
+                        </a>
+                    </li>
+
+                {% endif %}
+
+            </ul>
+
         </div>
 
-        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle navigation menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-
-        <ul id="site-nav" class="nav-links">
-          {% if user.is_authenticated %}
-            <li><a href="{% url 'Main:homepage' %}">Home</a></li>
-            <li><a href="{% url 'fundraisers:fundraiser_list' %}">Fundraisers</a></li>
-            <li><a href="{% url 'events:event_list' %}">Events</a></li>
-            <li class="dropdown">
-              <a href="{% url 'Accounts:profile' %}">Account ▾</a>
-              <ul class="dropdown-menu">
-                <li><a href="{% url 'Accounts:profile' %}">My Profile</a></li>
-                <li><a href="{% url 'Accounts:edit_profile' %}">Edit Profile</a></li>
-                <li><a href="{% url 'Accounts:directory' %}">Alumni Directory</a></li>
-                <li><a href="{% url 'Accounts:logout' %}">Logout</a></li>
-                <li><a href="{% url 'notifications:list' %}">Notifications</a></li>
-              </ul>
-            </li>
-
-            <li class="dropdown">
-              <a href="{% url 'interactions:inbox' %}">Direct Messages ▾</a>
-              <ul class="dropdown-menu">
-                <li><a href="{% url 'interactions:inbox' %}">Inbox</a></li>
-                <li><a href="{% url 'interactions:outbox' %}">Outbox</a></li>
-                <li><a href="{% url 'interactions:compose' %}">Compose</a></li>
-              </ul>
-            </li>
-
-            <li class="dropdown">
-              <a href="{% url 'community:gallery' %}">Community ▾</a>
-              <ul class="dropdown-menu">
-                <li><a href="{% url 'community:gallery' %}">Gallery</a></li>
-                <li><a href="{% url 'community:story_list' %}">Stories</a></li>
-              </ul>
-            </li>
-          {% else %}
-            <li><a href="{% url 'Accounts:login' %}">Login</a></li>
-            <li><a href="{% url 'Accounts:create_account' %}">Create Account</a></li>
-          {% endif %}
-
-          {% if user.is_staff or user.is_superuser %}
-            <li><a href="{% url 'custom_admin:dashboard' %}">Admin Dashboard</a></li>
-            <li><a href="{% url 'schools:edit_school' user.school.id %}">Edit School</a></li>
-          {% endif %}
-
-          {% if user.is_superuser %}
-            <li><a href="{% url 'schools:create_school' %}">Create School</a></li>
-          {% endif %}
-        </ul>
-      </div>
     </nav>
 
-    <!-- Main Content -->
+
+    <!-- =====================================================
+         MAIN CONTENT
+         ===================================================== -->
+
     <main id="main-content" class="site-main">
+
         {% block content %}
         {% endblock %}
+
     </main>
 
-    <!-- Footer -->
-    <footer class="site-footer">
-      <p class="site-footer-copy">
-        &copy; {{ year|default:2026 }} The Caistorians' Association. All rights reserved.
-      </p>
 
-      <p class="site-footer-links">
-        <a href="{% url 'Main:about' %}">About Us</a>
-        <span aria-hidden="true">|</span>
-        <a href="{% url 'Main:contact' %}">Contact</a>
-        <span aria-hidden="true">|</span>
-        <a href="{% url 'Main:privacy_policy' %}">Privacy Policy</a>
-        <span aria-hidden="true">|</span>
-        <a href="{% url 'Main:terms_of_service' %}">Terms of Service</a>
-      </p>
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="site-footer">
+
+        <p class="site-footer-copy">
+            &copy; {{ year|default:2026 }}
+            The Caistorians' Association.
+            All rights reserved.
+        </p>
+
+        <p class="site-footer-links">
+
+            <a href="{% url 'Main:about' %}">
+                About Us
+            </a>
+
+            <span aria-hidden="true">|</span>
+
+            <a href="{% url 'Main:contact' %}">
+                Contact
+            </a>
+
+            <span aria-hidden="true">|</span>
+
+            <a href="{% url 'Main:privacy_policy' %}">
+                Privacy Policy
+            </a>
+
+            <span aria-hidden="true">|</span>
+
+            <a href="{% url 'Main:terms_of_service' %}">
+                Terms of Service
+            </a>
+
+        </p>
+
     </footer>
 
+
+    <!-- =====================================================
+         NAVIGATION JAVASCRIPT
+         ===================================================== -->
+
     <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const toggle = document.querySelector('.nav-toggle');
-        const links = document.querySelector('.nav-links');
 
-        if (!toggle || !links) {
-          return;
-        }
+        document.addEventListener('DOMContentLoaded', () => {
 
-        toggle.addEventListener('click', () => {
-          const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
-          toggle.setAttribute('aria-expanded', String(!isExpanded));
-          links.classList.toggle('open');
+            const toggle = document.querySelector('.nav-toggle');
+            const links = document.querySelector('.nav-links');
+
+            /*
+             * Stop if the navbar elements cannot be found.
+             */
+
+            if (!toggle || !links) {
+                return;
+            }
+
+
+            /*
+             * =================================================
+             * MAIN MOBILE MENU
+             * =================================================
+             */
+
+            toggle.addEventListener('click', () => {
+
+                const isExpanded =
+                    toggle.getAttribute('aria-expanded') === 'true';
+
+                const newState = !isExpanded;
+
+                toggle.setAttribute(
+                    'aria-expanded',
+                    String(newState)
+                );
+
+                links.classList.toggle(
+                    'open',
+                    newState
+                );
+
+
+                /*
+                 * If the main menu is being closed,
+                 * also close all dropdowns.
+                 */
+
+                if (!newState) {
+
+                    links
+                        .querySelectorAll('.dropdown.open')
+                        .forEach((dropdown) => {
+
+                            dropdown.classList.remove('open');
+
+                        });
+
+                }
+
+            });
+
+
+            /*
+             * =================================================
+             * DROPDOWN MENUS
+             * =================================================
+             */
+
+            links
+                .querySelectorAll('.dropdown > a')
+                .forEach((dropdownLink) => {
+
+                    dropdownLink.addEventListener('click', (event) => {
+
+                        /*
+                         * Desktop:
+                         * Allow the parent link to work normally.
+                         */
+
+                        if (window.innerWidth > 900) {
+                            return;
+                        }
+
+
+                        /*
+                         * Mobile:
+                         * Clicking the parent opens the dropdown
+                         * instead of immediately following the link.
+                         */
+
+                        event.preventDefault();
+
+                        const dropdown =
+                            dropdownLink.parentElement;
+
+
+                        /*
+                         * Close any other open dropdown.
+                         */
+
+                        links
+                            .querySelectorAll('.dropdown.open')
+                            .forEach((otherDropdown) => {
+
+                                if (otherDropdown !== dropdown) {
+
+                                    otherDropdown.classList.remove('open');
+
+                                }
+
+                            });
+
+
+                        /*
+                         * Toggle the selected dropdown.
+                         */
+
+                        dropdown.classList.toggle('open');
+
+                    });
+
+                });
+
+
+            /*
+             * =================================================
+             * NORMAL LINKS
+             * =================================================
+             * When a normal navigation link is clicked on
+             * mobile, close the whole navigation menu.
+             */
+
+            links
+                .querySelectorAll('a')
+                .forEach((link) => {
+
+                    link.addEventListener('click', () => {
+
+                        if (
+                            window.innerWidth <= 900 &&
+                            link.parentElement.classList.contains('dropdown')
+                        ) {
+                            return;
+                        }
+
+
+                        /*
+                         * Close main navigation.
+                         */
+
+                        toggle.setAttribute(
+                            'aria-expanded',
+                            'false'
+                        );
+
+                        links.classList.remove('open');
+                        /*
+                         * Close dropdowns.
+                         */
+
+                        links
+                            .querySelectorAll('.dropdown.open')
+                            .forEach((dropdown) => {
+
+                                dropdown.classList.remove('open');
+
+                            });
+
+                    });
+
+                });
+
+
+            /*
+             * =================================================
+             * WINDOW RESIZE
+             * =================================================
+             * If the user rotates their phone or resizes the
+             * browser back to desktop, reset the mobile menu.
+             */
+
+            window.addEventListener('resize', () => {
+
+                if (window.innerWidth > 900) {
+
+                    toggle.setAttribute(
+                        'aria-expanded',
+                        'false'
+                    );
+
+                    links.classList.remove('open');
+
+
+                    links
+                        .querySelectorAll('.dropdown.open')
+                        .forEach((dropdown) => {
+
+                            dropdown.classList.remove('open');
+
+                        });
+                }
+            });
         });
-
-        links.querySelectorAll('a').forEach((link) => {
-          link.addEventListener('click', () => {
-            toggle.setAttribute('aria-expanded', 'false');
-            links.classList.remove('open');
-          });
-        });
-      });
     </script>
 </body>
 </html>
