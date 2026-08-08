@@ -2,492 +2,126 @@
 {% load static %}
 
 {% block content %}
-<div class="school_homepage">
+<div class="school-home-page">
 
     <!-- HERO SECTION -->
-    <section class="school_hero">
+    <section class="school-home-hero">
 
-        <div class="school_hero_images">
-            <img src="{% static 'images/picture2.jpg' %}" alt="Old CGS Students" class="hero_img">
-            <img src="{% static 'images/picture3.jpg' %}" alt="Modern CGS Students" class="hero_img hero_img_middle">
-            <img src="{% static 'images/picture4.jpg' %}" alt="Old CGS Students" class="hero_img">
+        <div class="school-home-hero-images">
+            <img src="{% static 'images/picture2.jpg' %}" alt="Old CGS Students" class="school-home-hero-image">
+            <img src="{% static 'images/picture3.jpg' %}" alt="Modern CGS Students" class="school-home-hero-image school-home-hero-image-middle">
+            <img src="{% static 'images/picture4.jpg' %}" alt="Old CGS Students" class="school-home-hero-image">
         </div>
 
-        <div class="school_hero_overlay">
-            <h1 class="school_hero_title">{{ school.name }}</h1>
-            <p class="school_hero_tagline">'We seek to use lively minds, to work hard, to develop all our talents and to grow through sharing to be the best version of ourselves. And of course, Ever to Excel.'</p>
+        <div class="school-home-hero-overlay">
+            <h1 class="school-home-hero-title">{{ school.name }}</h1>
+            <p class="school-home-hero-tagline">'We seek to use lively minds, to work hard, to develop all our talents and to grow through sharing to be the best version of ourselves. And of course, Ever to Excel.'</p>
         </div>
 
     </section>
     <!-- MAGAZINES SECTION -->
-    <section class="school_history">
+    <section class="school-home-section school-home-magazines">
         <h2>Annual Magazines</h2>
-        <div class="magazine-carousel">
-            <button class="carousel-btn left">&#10094;</button>
+        <div class="school-home-magazine-carousel">
+            <button class="school-home-carousel-btn school-home-carousel-btn-left left">&#10094;</button>
 
-            <div class="carousel-viewport" id="magazineCarousel">
-                <div class="carousel-track">
+            <div class="school-home-carousel-viewport" id="schoolHomeMagazineCarousel">
+                <div class="school-home-carousel-track">
                     {% for magazine in magazines %}
-                    <div class="magazine-container">
+                    <div class="school-home-magazine-card">
                         <a href="/community/stories/{{ magazine.id }}/">
-                            <div class="magazine-image-wrap">
+                            <div class="school-home-magazine-image-wrap">
                                 {% if magazine.thumbnail %}
                                     <img src="{{ magazine.thumbnail.url }}" alt="{{ magazine.title }}">
                                 {% else %}
-                                    <div class="magazine-placeholder"></div>
+                                    <div class="school-home-magazine-placeholder"></div>
                                 {% endif %}
                             </div>
-                            <p class="magazine-title">{{ magazine.title }}</p>
+                            <p class="school-home-magazine-title">{{ magazine.title }}</p>
                         </a>
                     </div>
                     {% endfor %}
                 </div>
             </div>
 
-    <button class="carousel-btn right">&#10095;</button>
+    <button class="school-home-carousel-btn school-home-carousel-btn-right right">&#10095;</button>
 </div>
 
 
-        <a class="explore-link" href="/community/stories/">Explore All Magazines</a>
+        <a class="school-home-explore-link" href="/community/stories/">Explore All Magazines</a>
     </section>
     <!-- FEATURE BOXES -->
-    <section class="school_featureboxes">
-        <div class="school_box">
+    <section class="school-home-featureboxes">
+        <div class="school-home-box">
             <h3>Official School News</h3>
             <p>Find our newsletters and official stories.</p>
-            <a href="{% url 'community:story_list' %}">Read Extracts</a>
+            <a href="{% url 'community:story_list' %}" class="school-home-box-link">Read Extracts</a>
         </div>
-        <div class="school_box">
+        <div class="school-home-box">
             <h3>Alumni News</h3>
             <p>We'd love to feature your alumni news.</p>
-            <a href="{% url 'community:submit_story' %}">Submit Your Story</a>
+            <a href="{% url 'community:submit_story' %}" class="school-home-box-link">Submit Your Story</a>
         </div>
-        <div class="school_box">
+        <div class="school-home-box">
             <h3>Events</h3>
             <p>Find out about our upcoming events</p>
-            <a href="{% url 'events:event_list' %}">View All Events</a>
+            <a href="{% url 'events:event_list' %}" class="school-home-box-link">View All Events</a>
         </div>
-        <div class="school_box">
+        <div class="school-home-box">
             <h3>Gallery</h3>
             <p>Photos of students past and present, guest speakers, and awards ceremonies.</p>
-            <a href="{% url 'community:gallery' %}">View Gallery</a>
+            <a href="{% url 'community:gallery' %}" class="school-home-box-link">View Gallery</a>
         </div>
     </section>
 
     <!-- HISTORICAL SECTION -->
-    <section class="school_history">
+    <section class="school-home-section school-home-history">
         <h2>{{ school.name }} Past & Present</h2>
-        <div class="school_history_images">
+        <div class="school-home-history-images">
             {% for image in school.historical_images.all %}
-                <div class="history_img_wrapper">
+                <div class="school-home-history-image-wrapper">
                     <img src="{{ image.image.url }}" alt="{{ image.caption }}">
                 </div>
             {% endfor %}
         </div>
-        <a href="#">Explore Our History</a>
+        <a href="#" class="school-home-history-link">Explore Our History</a>
     </section>
 
-    <style>
-    .school_history {
-        background-color: #f0f0f0;
-        padding: 3rem 1.5rem;
-        text-align: center;
-    }
-
-    .school_history h2 {
-        font-size: 2.3rem;
-        font-weight: 700;
-        margin-bottom: 1.5rem;
-    }
-
-    /* Horizontal scroll container */
-    .school_history_images {
-        display: flex;
-        overflow-x: auto;
-        gap: 1rem;
-        padding-bottom: 0.5rem;
-        scroll-behavior: smooth;
-        scrollbar-width: none; /* Firefox */
-    }
-
-    /* Hide scrollbar in Chrome, Edge, Safari */
-    .school_history_images::-webkit-scrollbar {
-        display: none;
-    }
-
-    /* Uniform image size */
-    .history_img_wrapper {
-        flex: 0 0 auto;
-        width: 250px;
-        height: 170px;
-        position: relative;
-    }
-
-    .history_img_wrapper img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover; /* keeps proportions but crops evenly */
-        border-radius: 8px;
-        box-shadow: 0 5px 12px rgba(0,0,0,0.12);
-        transition: transform 0.25s ease;
-    }
-
-    .history_img_wrapper img:hover {
-        transform: scale(1.04);
-    }
-    </style>
 
     <!-- ALUMNI SLIDER -->
-    <section class="school_alumni_slider">
+    <section class="school-home-alumni-slider">
         <h2>Alumni Highlights</h2>
-        <div class="alumni_slider_container">
+        <div class="school-home-alumni-slider-track">
             {% for alumni in school.alumni_highlights.all %}
-            <div class="alumni_slide">
+            <div class="school-home-alumni-slide">
                 <img src="{{ alumni.photo.url }}" alt="{{ alumni.name }}">
-                <p class="alumni_name">{{ alumni.name }}</p>
-                <p class="alumni_quote">{{ alumni.quote }}</p>
+                <p class="school-home-alumni-name">{{ alumni.name }}</p>
+                <p class="school-home-alumni-quote">{{ alumni.quote }}</p>
             </div>
             {% endfor %}
         </div>
-        <p class="alumni_cta">Join your fellow alumni — it’s for everyone!</p>
+        <p class="school-home-alumni-cta">Join your fellow alumni — it’s for everyone!</p>
     </section>
 
 </div>
 
 
-
-
-
-<style>
-
-/* Keep the navbar sticky on the logged-in school homepage */
-.site_nav {
-    position: sticky !;
-    top: 0;
-    z-index: 2000;
-}
-
-/* Remove default body/html margin to eliminate whitespace */
-body, html {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-}
-
-
-
-
-/* === HERO SECTION === */
-.school_homepage .school_hero {
-    position: relative;
-    width: 100%;
-    min-height: 50vh;
-    overflow: hidden;
-    margin-top: 0;
-    padding-top: 0;
-}
-
-.school_homepage .school_hero_images {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    position: relative;
-    
-}
-
-.school_homepage .school_hero_images::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(0,0,0,0.1) 25%, rgba(0,0,0,0.85) 100%);
-    z-index: 1;
-}
-
-.school_homepage .hero_img {
-    width: calc(100% / 3);
-    height: 100%;
-    object-fit: cover;
-    transform-origin: center center;
-    transition: transform 0.3s ease;
-}
-
-.school_homepage .hero_img_middle {
-    object-position: bottom;
-}
-
-.school_homepage .hero_img:hover {
-    transform: scale(1.05);
-}
-
-.school_homepage .school_hero_overlay {
-    position: absolute;
-    top: 62%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    color: #fff;
-    text-shadow: 0 6px 16px rgba(0,0,0,0.85);
-    z-index: 2;
-}
-
-.school_homepage .school_hero_title {
-    font-size: 2.8rem;
-    font-weight: 700;
-    margin: 0 0 0.3rem 0;
-}
-
-.school_homepage .school_hero_tagline {
-    font-size: 1.2rem;
-    font-weight: 500;
-    margin: 0;
-}
-
-/* === FEATURE BOXES === */
-.school_homepage .school_featureboxes {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    padding: 3rem 1.5rem;
-    background-color: #fff;
-}
-
-.school_homepage .school_box {
-    flex: 1 1 20rem;
-    background-color: #fdfdfd;
-    border-radius: 12px;
-    padding: 1.5rem;
-    margin: 0.8rem;
-    box-shadow: 0px 6px 18px rgba(0,0,0,0.08);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.school_homepage .school_box:hover {
-    transform: translateY(-3px);
-    box-shadow: 0px 10px 25px rgba(0,0,0,0.12);
-}
-
-.school_homepage .school_box h3 {
-    font-weight: 700;
-    margin-bottom: 0.6rem;
-}
-
-.school_homepage .school_box a {
-    display: inline-block;
-    margin-top: 0.8rem;
-    color: #fff;
-    background-color: #0073e6;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: background-color 0.2s ease;
-}
-
-.school_homepage .school_box a:hover {
-    background-color: #005bb5;
-}
-
-/* === HISTORICAL SECTION === */
-.school_homepage .school_history {
-    background-color: #f0f0f0;
-    padding: 3rem 1.5rem;
-    text-align: center;
-}
-
-.school_homepage .school_history h2 {
-    font-size: 2.3rem;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-}
-
-.school_homepage .school_history_images img {
-    max-width: 280px;
-    margin: 0.8rem;
-    border-radius: 8px;
-    box-shadow: 0 5px 12px rgba(0,0,0,0.1);
-}
-
-/* === ALUMNI SLIDER === */
-.school_homepage .school_alumni_slider {
-    background-color: #f7f7f7;
-    color: #222;
-    padding: 2rem 1.5rem 1rem 1.5rem;
-    text-align: center;
-    position: relative;
-}
-
-/* subtle top shadow/gradient */
-.school_homepage .school_alumni_slider::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 40px;
-    background: linear-gradient(to bottom, rgba(247,247,247,0.9), rgba(247,247,247,0));
-    z-index: 1;
-}
-
-.school_homepage .school_alumni_slider h2 {
-    font-size: 2.3rem;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-    position: relative;
-    z-index: 2;
-}
-
-.school_homepage .alumni_slide {
-    display: inline-block;
-    margin: 0.8rem;
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 0.8rem;
-    width: 230px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    position: relative;
-    z-index: 2;
-}
-
-.school_homepage .alumni_slide img {
-    width: 100%;
-    border-radius: 8px;
-    margin-bottom: 0.8rem;
-}
-
-.school_homepage .alumni_name {
-    font-weight: 700;
-    margin-bottom: 0.4rem;
-}
-
-.school_homepage .alumni_quote {
-    font-style: italic;
-    font-size: 0.85rem;
-}
-
-.school_homepage .alumni_cta {
-    margin-top: 1.5rem;
-    font-weight: 600;
-    font-size: 1.1rem;
-    color: #0073e6;
-}
-/* ============================= */
-/* === MAGAZINE CAROUSEL FIX === */
-/* ============================= */
-/* === MAGAZINE CAROUSEL (FINAL FIX) === */
-
-.magazine-carousel {
-    position: relative;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 60px; /* space for arrows */
-}
-
-.carousel-viewport {
-    overflow-x: hidden;
-    width: 100%;
-}
-
-.carousel-track {
-    display: flex;
-    gap: 1.6rem;
-    padding: 1rem 0;
-    scroll-snap-type: x mandatory;
-}
-
-.magazine-container {
-    flex: 0 0 180px;
-    height: 320px;
-    scroll-snap-align: start;
-}
-
-/* Image wrapper */
-.magazine-image-wrap {
-    width: 100%;
-    height: 250px;
-    border-radius: 14px;
-    overflow: hidden;
-}
-
-.magazine-image-wrap img,
-.magazine-placeholder {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    background: #e6e6e6;
-    transition: transform 0.25s ease;
-}
-
-.magazine-container:hover img {
-    transform: scale(1.06);
-}
-
-.magazine-title {
-    margin-top: 0.6rem;
-    color: #fff;
-    font-weight: 600;
-    font-size: 0.95rem;
-    text-align: center;
-    line-height: 1.2;
-    height: 2.4em;
-    overflow: hidden;
-    text-shadow: 0 2px 6px rgba(0,0,0,0.6);
-}
-
-/* Arrows */
-.carousel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    border: none;
-    background: rgba(255,255,255,0.95);
-    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
-    font-size: 1.5rem;
-    cursor: pointer;
-}
-
-.carousel-btn.left {
-    left: 0;
-}
-
-.carousel-btn.right {
-    right: 0;
-}
-
-
-.carousel-viewport {
-    overflow-x: hidden;
-    overflow-y: hidden; /* ← THIS removes the vertical scrollbar */
-}
-
-</style>
-<!-- <script>
-const carousel = document.getElementById("magazineCarousel");
-const scrollAmount = 400;
-
-document.querySelector(".carousel-btn.left").addEventListener("click", () => {
-    carousel.scrollBy({ left: -scrollAmount, behavior: "smooth" });
-});
-
-document.querySelector(".carousel-btn.right").addEventListener("click", () => {
-    carousel.scrollBy({ left: scrollAmount, behavior: "smooth" });
-});
-</script> -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-    const viewport = document.getElementById("magazineCarousel");
+    const viewport = document.getElementById("schoolHomeMagazineCarousel");
     const scrollAmount = 400;
+
+    if (!viewport) {
+        return;
+    }
 
     viewport.scrollLeft = 0;
 
-    document.querySelector(".carousel-btn.left").onclick = () => {
+    document.querySelector(".school-home-carousel-btn-left").onclick = () => {
         viewport.scrollBy({ left: -scrollAmount, behavior: "smooth" });
     };
 
-    document.querySelector(".carousel-btn.right").onclick = () => {
+    document.querySelector(".school-home-carousel-btn-right").onclick = () => {
         viewport.scrollBy({ left: scrollAmount, behavior: "smooth" });
     };
 });
