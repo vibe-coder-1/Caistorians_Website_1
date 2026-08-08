@@ -10,73 +10,52 @@
     {% endif %}
 
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>
-        {% block title %}
-            The Caistorians' Association
-        {% endblock %}
-    </title>
+    <title>{% block title %}The Caistorians' Association{% endblock %}</title>
 
     <link rel="stylesheet" href="{% static 'Main/style.css' %}">
 </head>
 
 <body>
 
-    <!-- Skip link -->
-    <a class="skip-link" href="#main-content">
+    <a class="site_skip-link" href="#main-content">
         Skip to main content
     </a>
 
+    <!-- =========================
+         NAVIGATION
+         ========================= -->
+    <nav class="site_nav" aria-label="Primary navigation">
 
-    <!-- =====================================================
-         NAVBAR
-         ===================================================== -->
-
-    <nav aria-label="Primary navigation">
-
-        <div class="nav-container">
+        <div class="site_nav-container">
 
             <!-- Logo -->
-
-            <div class="logo">
+            <div class="site_nav-logo">
                 <a
                     href="{% url 'Main:homepage' %}"
-                    class="logo1"
+                    class="site_nav-logo-link"
                     aria-label="Go to the homepage"
                 >
-
-                    <p class="navtitle">
-
-                        {% if user.is_authenticated and user.school.logo %}
-
-                            <img
-                                class="navbar-logo"
-                                src="{{ user.school.logo.url }}"
-                                alt="School logo"
-                            >
-
-                        {% else %}
-
-                            <img
-                                class="navbar-logo"
-                                src="{% static 'images/Caistorians_Association_Logo.png' %}"
-                                alt="The Caistorians' Association logo"
-                            >
-
-                        {% endif %}
-
-                    </p>
-
+                    {% if user.is_authenticated and user.school.logo %}
+                        <img
+                            class="site_nav-logo-image"
+                            src="{{ user.school.logo.url }}"
+                            alt="School logo"
+                        >
+                    {% else %}
+                        <img
+                            class="site_nav-logo-image"
+                            src="{% static 'images/Caistorians_Association_Logo.png' %}"
+                            alt="The Caistorians' Association logo"
+                        >
+                    {% endif %}
                 </a>
             </div>
 
-
-            <!-- Mobile hamburger button -->
-
+            <!-- Mobile menu button -->
             <button
-                class="nav-toggle"
+                class="site_nav-toggle"
                 type="button"
                 aria-expanded="false"
                 aria-controls="site-nav"
@@ -87,52 +66,49 @@
                 <span></span>
             </button>
 
-
             <!-- Navigation links -->
-
-            <ul id="site-nav" class="nav-links">
+            <ul id="site-nav" class="site_nav-links">
 
                 {% if user.is_authenticated %}
 
-                    <!-- Home -->
-
-                    <li>
-                        <a href="{% url 'Main:homepage' %}">
+                    <li class="site_nav-item">
+                        <a
+                            href="{% url 'Main:homepage' %}"
+                            class="site_nav-link"
+                        >
                             Home
                         </a>
                     </li>
 
-
-                    <!-- Fundraisers -->
-
-                    <li>
-                        <a href="{% url 'fundraisers:fundraiser_list' %}">
+                    <li class="site_nav-item">
+                        <a
+                            href="{% url 'fundraisers:fundraiser_list' %}"
+                            class="site_nav-link"
+                        >
                             Fundraisers
                         </a>
                     </li>
 
-
-                    <!-- Events -->
-
-                    <li>
-                        <a href="{% url 'events:event_list' %}">
+                    <li class="site_nav-item">
+                        <a
+                            href="{% url 'events:event_list' %}"
+                            class="site_nav-link"
+                        >
                             Events
                         </a>
                     </li>
 
-
-                    <!-- Account dropdown -->
-
-                    <li class="dropdown">
+                    <!-- Account -->
+                    <li class="site_nav-item site_nav-dropdown">
 
                         <a
                             href="{% url 'Accounts:profile' %}"
-                            aria-haspopup="true"
+                            class="site_nav-link site_nav-dropdown-link"
                         >
-                            Account ▾
+                            Account <span aria-hidden="true">▾</span>
                         </a>
 
-                        <ul class="dropdown-menu">
+                        <ul class="site_nav-dropdown-menu">
 
                             <li>
                                 <a href="{% url 'Accounts:profile' %}">
@@ -153,34 +129,31 @@
                             </li>
 
                             <li>
-                                <a href="{% url 'Accounts:logout' %}">
-                                    Logout
-                                </a>
-                            </li>
-
-                            <li>
                                 <a href="{% url 'notifications:list' %}">
                                     Notifications
                                 </a>
                             </li>
 
-                        </ul>
+                            <li>
+                                <a href="{% url 'Accounts:logout' %}">
+                                    Logout
+                                </a>
+                            </li>
 
+                        </ul>
                     </li>
 
-
-                    <!-- Direct Messages dropdown -->
-
-                    <li class="dropdown">
+                    <!-- Direct Messages -->
+                    <li class="site_nav-item site_nav-dropdown">
 
                         <a
                             href="{% url 'interactions:inbox' %}"
-                            aria-haspopup="true"
+                            class="site_nav-link site_nav-dropdown-link"
                         >
-                            Direct Messages ▾
+                            Direct Messages <span aria-hidden="true">▾</span>
                         </a>
 
-                        <ul class="dropdown-menu">
+                        <ul class="site_nav-dropdown-menu">
 
                             <li>
                                 <a href="{% url 'interactions:inbox' %}">
@@ -201,22 +174,19 @@
                             </li>
 
                         </ul>
-
                     </li>
 
-
-                    <!-- Community dropdown -->
-
-                    <li class="dropdown">
+                    <!-- Community -->
+                    <li class="site_nav-item site_nav-dropdown">
 
                         <a
                             href="{% url 'community:gallery' %}"
-                            aria-haspopup="true"
+                            class="site_nav-link site_nav-dropdown-link"
                         >
-                            Community ▾
+                            Community <span aria-hidden="true">▾</span>
                         </a>
 
-                        <ul class="dropdown-menu">
+                        <ul class="site_nav-dropdown-menu">
 
                             <li>
                                 <a href="{% url 'community:gallery' %}">
@@ -231,22 +201,24 @@
                             </li>
 
                         </ul>
-
                     </li>
-
 
                 {% else %}
 
-                    <!-- Logged out navigation -->
-
-                    <li>
-                        <a href="{% url 'Accounts:login' %}">
+                    <li class="site_nav-item">
+                        <a
+                            href="{% url 'Accounts:login' %}"
+                            class="site_nav-link"
+                        >
                             Login
                         </a>
                     </li>
 
-                    <li>
-                        <a href="{% url 'Accounts:create_account' %}">
+                    <li class="site_nav-item">
+                        <a
+                            href="{% url 'Accounts:create_account' %}"
+                            class="site_nav-link"
+                        >
                             Create Account
                         </a>
                     </li>
@@ -255,17 +227,22 @@
 
 
                 <!-- Staff navigation -->
-
                 {% if user.is_staff or user.is_superuser %}
 
-                    <li>
-                        <a href="{% url 'custom_admin:dashboard' %}">
+                    <li class="site_nav-item">
+                        <a
+                            href="{% url 'custom_admin:dashboard' %}"
+                            class="site_nav-link"
+                        >
                             Admin Dashboard
                         </a>
                     </li>
 
-                    <li>
-                        <a href="{% url 'schools:edit_school' user.school.id %}">
+                    <li class="site_nav-item">
+                        <a
+                            href="{% url 'schools:edit_school' user.school.id %}"
+                            class="site_nav-link"
+                        >
                             Edit School
                         </a>
                     </li>
@@ -274,11 +251,13 @@
 
 
                 <!-- Superuser navigation -->
-
                 {% if user.is_superuser %}
 
-                    <li>
-                        <a href="{% url 'schools:create_school' %}">
+                    <li class="site_nav-item">
+                        <a
+                            href="{% url 'schools:create_school' %}"
+                            class="site_nav-link"
+                        >
                             Create School
                         </a>
                     </li>
@@ -288,15 +267,13 @@
             </ul>
 
         </div>
-
     </nav>
 
 
-    <!-- =====================================================
+    <!-- =========================
          MAIN CONTENT
-         ===================================================== -->
-
-    <main id="main-content" class="site-main">
+         ========================= -->
+    <main id="main-content" class="site_main">
 
         {% block content %}
         {% endblock %}
@@ -304,19 +281,18 @@
     </main>
 
 
-    <!-- =====================================================
+    <!-- =========================
          FOOTER
-         ===================================================== -->
+         ========================= -->
+    <footer class="site_footer">
 
-    <footer class="site-footer">
-
-        <p class="site-footer-copy">
+        <p class="site_footer-copy">
             &copy; {{ year|default:2026 }}
             The Caistorians' Association.
             All rights reserved.
         </p>
 
-        <p class="site-footer-links">
+        <p class="site_footer-links">
 
             <a href="{% url 'Main:about' %}">
                 About Us
@@ -345,211 +321,122 @@
     </footer>
 
 
-    <!-- =====================================================
+    <!-- =========================
          NAVIGATION JAVASCRIPT
-         ===================================================== -->
-
+         ========================= -->
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
 
-        document.addEventListener('DOMContentLoaded', () => {
+            const toggle = document.querySelector('.site_nav-toggle');
+            const navigation = document.querySelector('.site_nav-links');
 
-            const toggle = document.querySelector('.nav-toggle');
-            const links = document.querySelector('.nav-links');
-
-            /*
-             * Stop if the navbar elements cannot be found.
-             */
-
-            if (!toggle || !links) {
+            if (!toggle || !navigation) {
                 return;
             }
 
-
-            /*
-             * =================================================
-             * MAIN MOBILE MENU
-             * =================================================
-             */
-
-            toggle.addEventListener('click', () => {
+            toggle.addEventListener('click', function () {
 
                 const isExpanded =
                     toggle.getAttribute('aria-expanded') === 'true';
 
-                const newState = !isExpanded;
-
                 toggle.setAttribute(
                     'aria-expanded',
-                    String(newState)
+                    String(!isExpanded)
                 );
 
-                links.classList.toggle(
-                    'open',
-                    newState
-                );
-
-
-                /*
-                 * If the main menu is being closed,
-                 * also close all dropdowns.
-                 */
-
-                if (!newState) {
-
-                    links
-                        .querySelectorAll('.dropdown.open')
-                        .forEach((dropdown) => {
-
-                            dropdown.classList.remove('open');
-
-                        });
-
-                }
+                navigation.classList.toggle('site_nav-links-open');
 
             });
 
 
             /*
-             * =================================================
-             * DROPDOWN MENUS
-             * =================================================
+             * Mobile dropdown handling
              */
+            const dropdowns = document.querySelectorAll(
+                '.site_nav-dropdown'
+            );
 
-            links
-                .querySelectorAll('.dropdown > a')
-                .forEach((dropdownLink) => {
+            dropdowns.forEach(function (dropdown) {
 
-                    dropdownLink.addEventListener('click', (event) => {
+                const dropdownLink =
+                    dropdown.querySelector('.site_nav-dropdown-link');
 
-                        /*
-                         * Desktop:
-                         * Allow the parent link to work normally.
-                         */
+                if (!dropdownLink) {
+                    return;
+                }
 
-                        if (window.innerWidth > 900) {
-                            return;
-                        }
+                dropdownLink.addEventListener('click', function (event) {
 
-
-                        /*
-                         * Mobile:
-                         * Clicking the parent opens the dropdown
-                         * instead of immediately following the link.
-                         */
+                    if (window.innerWidth <= 768) {
 
                         event.preventDefault();
 
-                        const dropdown =
-                            dropdownLink.parentElement;
-
-
-                        /*
-                         * Close any other open dropdown.
-                         */
-
-                        links
-                            .querySelectorAll('.dropdown.open')
-                            .forEach((otherDropdown) => {
-
-                                if (otherDropdown !== dropdown) {
-
-                                    otherDropdown.classList.remove('open');
-
-                                }
-
-                            });
-
-
-                        /*
-                         * Toggle the selected dropdown.
-                         */
-
-                        dropdown.classList.toggle('open');
-
-                    });
-
-                });
-
-
-            /*
-             * =================================================
-             * NORMAL LINKS
-             * =================================================
-             * When a normal navigation link is clicked on
-             * mobile, close the whole navigation menu.
-             */
-
-            links
-                .querySelectorAll('a')
-                .forEach((link) => {
-
-                    link.addEventListener('click', () => {
-
-                        if (
-                            window.innerWidth <= 900 &&
-                            link.parentElement.classList.contains('dropdown')
-                        ) {
-                            return;
-                        }
-
-
-                        /*
-                         * Close main navigation.
-                         */
-
-                        toggle.setAttribute(
-                            'aria-expanded',
-                            'false'
+                        dropdown.classList.toggle(
+                            'site_nav-dropdown-open'
                         );
 
-                        links.classList.remove('open');
-                        /*
-                         * Close dropdowns.
-                         */
-
-                        links
-                            .querySelectorAll('.dropdown.open')
-                            .forEach((dropdown) => {
-
-                                dropdown.classList.remove('open');
-
-                            });
-
-                    });
+                    }
 
                 });
 
+            });
+
 
             /*
-             * =================================================
-             * WINDOW RESIZE
-             * =================================================
-             * If the user rotates their phone or resizes the
-             * browser back to desktop, reset the mobile menu.
+             * Close the mobile navigation when
+             * clicking a normal navigation link.
              */
+            navigation.querySelectorAll(
+                '.site_nav-item:not(.site_nav-dropdown) a'
+            ).forEach(function (link) {
 
-            window.addEventListener('resize', () => {
-
-                if (window.innerWidth > 900) {
+                link.addEventListener('click', function () {
 
                     toggle.setAttribute(
                         'aria-expanded',
                         'false'
                     );
 
-                    links.classList.remove('open');
+                    navigation.classList.remove(
+                        'site_nav-links-open'
+                    );
 
+                });
 
-                    links
-                        .querySelectorAll('.dropdown.open')
-                        .forEach((dropdown) => {
-
-                            dropdown.classList.remove('open');
-
-                        });
-                }
             });
+
+
+            /*
+             * Reset mobile navigation when returning
+             * to desktop size.
+             */
+            window.addEventListener('resize', function () {
+
+                if (window.innerWidth > 768) {
+
+                    toggle.setAttribute(
+                        'aria-expanded',
+                        'false'
+                    );
+
+                    navigation.classList.remove(
+                        'site_nav-links-open'
+                    );
+
+                    dropdowns.forEach(function (dropdown) {
+
+                        dropdown.classList.remove(
+                            'site_nav-dropdown-open'
+                        );
+
+                    });
+
+                }
+
+            });
+
         });
     </script>
+
 </body>
 </html>
