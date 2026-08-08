@@ -2,58 +2,49 @@
 {% load static %}
 
 {% block content %}
-<div style="font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0;">
-
-    <!-- Hero Section -->
-    <section style="position: relative; text-align: center; color: black; padding: 50px 50px">
-        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-            <h1 style="font-size: 3em; margin-bottom: 0.3em;">Caistor Grammar School</h1>
-            <p style="font-size: 1.3em; letter-spacing: 0.05em;">A community for students, alumni, and supporters</p>
+<div class="homepage_container">
+    <section class="homepage_hero">
+        <div class="homepage_hero-content">
+            <h1 class="homepage_maintitle">Caistor Grammar School</h1>
+            <p class="homepage_tagline">A community for students, alumni, and supporters</p>
         </div>
     </section>
 
-    <!-- Intro Section -->
-    <section style="text-align: center; padding: 50px 10%; background-color: #f8f8f8;">
-        <h2 style="font-size: 2em; margin-bottom: 10px;">Welcome to the CGS Alumni Platform</h2>
-        <p style="max-width: 700px; margin: 0 auto; font-size: 1.1em; line-height: 1.6;">
+    <section class="homepage_intro">
+        <h2 class="homepage_sectiontitle">Welcome to the CGS Alumni Platform</h2>
+        <p class="homepage_text">
             Caistor Grammar School is a selective state academy with a proud tradition of academic excellence and community spirit.
             Whether you’re a current student, a recent graduate, or a lifelong alumnus, this platform connects you to the stories,
             events, and people that make CGS special.
         </p>
     </section>
 
-    <!-- Feature Boxes -->
-    <section style="display: flex; flex-wrap: wrap; justify-content: center; text-align: center; background: white; padding: 40px 0;">
-        <div style="flex: 1 1 250px; margin: 15px; padding: 30px; border: 1px solid #ddd; border-radius: 12px; max-width: 300px;">
-            <h3 style="margin-bottom: 10px;">About the School</h3>
-            <p>Learn more about CGS’s values, academic achievements, and rich history dating back to 1631.</p>
-            <a href="https://www.caistorgrammar.com/" style="display: inline-block; margin-top: 10px; color: #004aad; text-decoration: none;">Visit Official Site →</a>
+    <section class="homepage_features">
+        <div class="homepage_featurecard">
+            <h3 class="homepage_featuretitle">About the School</h3>
+            <p class="homepage_featuretext">Learn more about CGS’s values, academic achievements, and rich history dating back to 1631.</p>
+            <a class="homepage_featurelink" href="https://www.caistorgrammar.com/">Visit Official Site →</a>
         </div>
 
-        <div style="flex: 1 1 250px; margin: 15px; padding: 30px; border: 1px solid #ddd; border-radius: 12px; max-width: 300px;">
-            <h3 style="margin-bottom: 10px;">Join the Alumni</h3>
-            <p>Stay connected with the CGS community. Share your journey and support future generations.</p>
-            <a href="{% url 'Accounts:create_account' %}" style="display: inline-block; margin-top: 10px; color: #004aad; text-decoration: none;">Sign Up →</a>
+        <div class="homepage_featurecard">
+            <h3 class="homepage_featuretitle">Join the Alumni</h3>
+            <p class="homepage_featuretext">Stay connected with the CGS community. Share your journey and support future generations.</p>
+            <a class="homepage_featurelink" href="{% url 'Accounts:create_account' %}">Sign Up →</a>
         </div>
+    </section>
 
-    <!-- Quote Section -->
-    <section style="background-color: #004aad; color: white; padding: 60px 20px; text-align: center;">
-        <blockquote style="font-size: 1.4em; max-width: 800px; margin: 0 auto; font-style: italic;">
-            “'Caistor Grammar School offers an all round education, not just good grades ... Children are taught an excellent work ethic, independent thinking and are set up for later life, nurtured and encouraged within a very tight community.'”
+    <section class="homepage_quote">
+        <blockquote>
+            “Caistor Grammar School offers an all round education, not just good grades ... Children are taught an excellent work ethic, independent thinking and are set up for later life, nurtured and encouraged within a very tight community.”
         </blockquote>
     </section>
 
-    <!-- Call to Action -->
-    <section style="text-align: center; padding: 60px 20px;">
-        <h2 style="font-size: 2em;">Be part of the story.</h2>
-        <p style="font-size: 1.1em; max-width: 700px; margin: 10px auto; padding: 10px 10px">
+    <section class="homepage_ctasection">
+        <h2 class="homepage_sectiontitle">Be part of the story.</h2>
+        <p class="homepage_text">
             Join the platform to share your achievements, attend exclusive events, and stay connected with fellow CGS alumni.
         </p>
-        <a href="{% url 'Accounts:create_account' %}" 
-           style="background-color: #004aad; color: white; padding: 12px 25px; border-radius: 8px; text-decoration: none; font-weight: bold;">
-           Get Started
-        </a>
+        <a class="homepage_ctabutton" href="{% url 'Accounts:create_account' %}">Get Started</a>
     </section>
-
 </div>
 {% endblock %}

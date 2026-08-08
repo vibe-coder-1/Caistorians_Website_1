@@ -12,113 +12,123 @@
     <link rel="stylesheet" href="{% static 'Main/style.css' %}">
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
     <!-- Navbar -->
-<nav>
-  <div class="nav-container">
-    <div class="logo">
-      <a href="{% url 'Main:homepage' %}" class="logo1">
-        <p class="navtitle">
-          {% if user.is_authenticated and user.school.logo %}
-            <img class="navbar-logo" src="{{ user.school.logo.url }}" alt="Logo">
+    <nav aria-label="Primary navigation">
+      <div class="nav-container">
+        <div class="logo">
+          <a href="{% url 'Main:homepage' %}" class="logo1" aria-label="Go to the homepage">
+            <p class="navtitle">
+              {% if user.is_authenticated and user.school.logo %}
+                <img class="navbar-logo" src="{{ user.school.logo.url }}" alt="School logo">
+              {% else %}
+                <img class="navbar-logo" src="{% static 'images/Caistorians_Association_Logo.png' %}" alt="The Caistorians' Association logo">
+              {% endif %}
+            </p>
+          </a>
+        </div>
+
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle navigation menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <ul id="site-nav" class="nav-links">
+          {% if user.is_authenticated %}
+            <li><a href="{% url 'Main:homepage' %}">Home</a></li>
+            <li><a href="{% url 'fundraisers:fundraiser_list' %}">Fundraisers</a></li>
+            <li><a href="{% url 'events:event_list' %}">Events</a></li>
+            <li class="dropdown">
+              <a href="{% url 'Accounts:profile' %}">Account ▾</a>
+              <ul class="dropdown-menu">
+                <li><a href="{% url 'Accounts:profile' %}">My Profile</a></li>
+                <li><a href="{% url 'Accounts:edit_profile' %}">Edit Profile</a></li>
+                <li><a href="{% url 'Accounts:directory' %}">Alumni Directory</a></li>
+                <li><a href="{% url 'Accounts:logout' %}">Logout</a></li>
+                <li><a href="{% url 'notifications:list' %}">Notifications</a></li>
+              </ul>
+            </li>
+
+            <li class="dropdown">
+              <a href="{% url 'interactions:inbox' %}">Direct Messages ▾</a>
+              <ul class="dropdown-menu">
+                <li><a href="{% url 'interactions:inbox' %}">Inbox</a></li>
+                <li><a href="{% url 'interactions:outbox' %}">Outbox</a></li>
+                <li><a href="{% url 'interactions:compose' %}">Compose</a></li>
+              </ul>
+            </li>
+
+            <li class="dropdown">
+              <a href="{% url 'community:gallery' %}">Community ▾</a>
+              <ul class="dropdown-menu">
+                <li><a href="{% url 'community:gallery' %}">Gallery</a></li>
+                <li><a href="{% url 'community:story_list' %}">Stories</a></li>
+              </ul>
+            </li>
           {% else %}
-            <img class="navbar-logo" src="{% static 'images/Caistorians_Association_Logo.png' %}" alt="Logo">
+            <li><a href="{% url 'Accounts:login' %}">Login</a></li>
+            <li><a href="{% url 'Accounts:create_account' %}">Create Account</a></li>
           {% endif %}
-      </a>
-    </div>
-    <ul class="nav-links">
-      <!-- Account -->
-      {% if user.is_authenticated %}
-     <li>
-        <li><a href="{% url 'Main:homepage' %}">Home</a></li>
-        <li><a href="{% url 'fundraisers:fundraiser_list' %}">Fundraisers  </a></li>
-        <li><a href="{% url 'events:event_list' %}">Events  </a></li>
-      </li>
-      <li class="dropdown">
-        <a href="{% url 'Accounts:profile' %}">Account ▾</a>
-        <ul class="dropdown-menu">
-          <li><a href="{% url 'Accounts:profile' %}">My Profile</a></li>
-          <li><a href="{% url 'Accounts:edit_profile' %}">Edit Profile</a></li>
-          <li><a href="{% url 'Accounts:directory' %}">Alumni Directory</a></li>
-          <li><a href="{% url 'Accounts:logout' %}">Logout</a></li>
-          <li><a href="{% url 'notifications:list' %}">Notifications</a></li>
+
+          {% if user.is_staff or user.is_superuser %}
+            <li><a href="{% url 'custom_admin:dashboard' %}">Admin Dashboard</a></li>
+            <li><a href="{% url 'schools:edit_school' user.school.id %}">Edit School</a></li>
+          {% endif %}
+
+          {% if user.is_superuser %}
+            <li><a href="{% url 'schools:create_school' %}">Create School</a></li>
+          {% endif %}
         </ul>
-      </li>
-
-      <!-- Interactions -->
-      <li class="dropdown">
-        <a href="{% url 'interactions:inbox' %}">Direct Messages ▾</a>
-        <ul class="dropdown-menu">
-          <li><a href="{% url 'interactions:inbox' %}">Inbox</a></li>
-          <li><a href="{% url 'interactions:outbox' %}">Outbox</a></li>
-          <li><a href="{% url 'interactions:compose' %}">Compose</a></li>
-        </ul>
-      </li>
-
-      <!-- Community -->
-      <li class="dropdown">
-        <a href="{% url 'community:gallery' %}">Community ▾</a>
-        <ul class="dropdown-menu">
-          <li><a href="{% url 'community:gallery' %}">Gallery</a></li>
-          <li><a href="{% url 'community:story_list' %}">Stories</a></li>
-          <!--<li><a href="{% url 'community:submit_story' %}">Submit Story</a></li>
-          <li><a href="{% url 'community:upload_photo' %}">Upload Photo</a></li>-->
-          <!--<li><a href="{% url 'schools:school_list' %}">Schools List</a></li>-->
-        </ul>
-      </li>
-  
-    <!-- <li class="dropdown">-------------------------------------------------------Chat feature disabled for now. 
-      <a href="#">chat ▾</a>
-      <ul class="dropdown-menu">
-        <li><a href="{% url 'chat:chat_redirect' %}">chat</a></li>
-      </ul>
-    </li> -->
-
-      {% else %}
-      <li><a href="{% url 'Accounts:login' %}">Login</a></li>
-      <li><a href="{% url 'Accounts:create_account' %}">Create Account</a></li>
-      {% endif %}
-      <!-- Admin -->
-       {% if user.is_staff or user.is_superuser %}
-      <li><a href="{% url 'custom_admin:dashboard' %}">Admin Dashboard</a></li>
-      <li><a href="{% url 'schools:edit_school' user.school.id %}">Edit School</a></li>
-      {% endif %}
-
-      {% if user.is_superuser %}
-        <li><a href="{% url 'schools:create_school' %}">Create School</a></li>
-      {% endif %}
-    </ul>
-  </div>
-</nav>
-
-
+      </div>
+    </nav>
 
     <!-- Main Content -->
-    <main style="padding-top: 100px; align-items: center;">
+    <main id="main-content" class="site-main">
         {% block content %}
         {% endblock %}
     </main>
 
     <!-- Footer -->
-<footer style="margin-top:4rem;padding:2rem 1rem;background:#1e3a5f;border-top:1px solid #1e3a5f;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;text-align:center;">
+    <footer class="site-footer">
+      <p class="site-footer-copy">
+        &copy; {{ year|default:2026 }} The Caistorians' Association. All rights reserved.
+      </p>
 
-  <p style="margin:0 0 0.75rem 0;color:#ffffff;font-size:0.9rem;">
-    &copy; {{ year|default:2026 }} The Caistorians' Association. All rights reserved.
-  </p>
+      <p class="site-footer-links">
+        <a href="{% url 'Main:about' %}">About Us</a>
+        <span aria-hidden="true">|</span>
+        <a href="{% url 'Main:contact' %}">Contact</a>
+        <span aria-hidden="true">|</span>
+        <a href="{% url 'Main:privacy_policy' %}">Privacy Policy</a>
+        <span aria-hidden="true">|</span>
+        <a href="{% url 'Main:terms_of_service' %}">Terms of Service</a>
+      </p>
+    </footer>
 
-  <p style="margin:0;font-size:0.9rem;">
-    <a href="{% url 'Main:about' %}" style="color:#cecece;text-decoration:none;font-weight:500;">About Us</a>
-    <span style="margin:0 0.5rem;color:#ffffff;">|</span>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const toggle = document.querySelector('.nav-toggle');
+        const links = document.querySelector('.nav-links');
 
-    <a href="{% url 'Main:contact' %}" style="color:#cecece;text-decoration:none;font-weight:500;">Contact</a>
-    <span style="margin:0 0.5rem;color:#ffffff;">|</span>
+        if (!toggle || !links) {
+          return;
+        }
 
-    <a href="{% url 'Main:privacy_policy' %}" style="color:#cecece;text-decoration:none;font-weight:500;">Privacy Policy</a>
-    <span style="margin:0 0.5rem;color:#ffffff;">|</span>
+        toggle.addEventListener('click', () => {
+          const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+          toggle.setAttribute('aria-expanded', String(!isExpanded));
+          links.classList.toggle('open');
+        });
 
-    <a href="{% url 'Main:terms_of_service' %}" style="color:#cecece;text-decoration:none;font-weight:500;">Terms of Service</a>
-  </p>
-
-</footer>
-
+        links.querySelectorAll('a').forEach((link) => {
+          link.addEventListener('click', () => {
+            toggle.setAttribute('aria-expanded', 'false');
+            links.classList.remove('open');
+          });
+        });
+      });
+    </script>
 </body>
 </html>
