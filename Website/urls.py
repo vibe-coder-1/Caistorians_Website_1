@@ -19,6 +19,7 @@ try:
     from django.urls import path, include
     from django.conf import settings
     from django.conf.urls.static import static
+    from error_handling.views import custom_404_handler, custom_500_handler
 except ImportError as e:
     print(f"\nError: Django not available.\n{e}")
     urlpatterns = []
@@ -37,7 +38,11 @@ else:
         path('notifications/', include('notifications.urls', namespace='notifications')),
         path('fundraisers/', include('fundraisers.urls', namespace='fundraisers')),
         path('chat/', include('chat.urls', namespace='chat')),
+        path('error-handling/', include('error_handling.urls', namespace='error_handling')),
     ]
+
+    handler404 = custom_404_handler
+    handler500 = custom_500_handler
 
     # Serve media files in development only
     if settings.DEBUG:

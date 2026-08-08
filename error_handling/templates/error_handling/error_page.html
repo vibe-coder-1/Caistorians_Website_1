@@ -1,0 +1,18 @@
+{% extends 'Main/base.html' %}
+
+{% block title %}{{ error_code }} Error | The Caistorians' Association{% endblock %}
+
+{% block content %}
+<div class="error-page">
+    <div class="error-page-card" role="alert">
+        <p class="error-page-eyebrow">The Caistorians' Association</p>
+        <h1 class="error-page-code">{{ error_code }}</h1>
+        <h2 class="error-page-title">{{ title }}</h2>
+        <p class="error-page-message">{{ message }}</p>
+        <div class="error-page-actions">
+            <a class="error-page-link" href="{% url 'Main:homepage' %}">Return home</a>
+            <a class="error-page-link" href="{% url 'Accounts:login' %}">Go to login</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

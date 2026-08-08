@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     'fundraisers',
     'channels',
     'chat',
+    'error_handling',
     'bleach',
     "storages"
 ]

@@ -323,6 +323,84 @@ a:focus-visible {
 }
 
 
+/* Error page */
+
+.error-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    padding: 2rem 1rem;
+}
+
+.error-page-card {
+    width: min(100%, 720px);
+    padding: 3rem 2rem;
+    border: 1px solid #dbe4ee;
+    border-radius: 1rem;
+    background: #ffffff;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    text-align: center;
+}
+
+.error-page-eyebrow {
+    margin: 0 0 0.75rem;
+    color: #4b5563;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.error-page-code {
+    margin: 0 0 0.5rem;
+    color: #1e3a5f;
+    font-size: clamp(3rem, 8vw, 5.25rem);
+    line-height: 1;
+}
+
+.error-page-title {
+    margin: 0 0 1rem;
+    color: #111827;
+    font-size: clamp(1.35rem, 3vw, 2rem);
+}
+
+.error-page-message {
+    margin: 0 auto 1.75rem;
+    max-width: 560px;
+    color: #475569;
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.error-page-actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.error-page-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 1.4rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    color: #1e3a5f;
+    background: #f8fafc;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.error-page-link:hover,
+.error-page-link:focus-visible {
+    color: #1e3a5f;
+    background: #eef2f7;
+    text-decoration: none;
+}
+
+
 /* =========================================================
    HOMEPAGE
    ========================================================= */
