@@ -1,0 +1,387 @@
+{% extends "Main/base.html" %}
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f4f4f4;
+        padding: 20px;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .timeline {
+        position: relative;
+        max-width: 1000px;
+        margin: auto;
+    }
+
+    .timeline::after {
+        content: '';
+        position: absolute;
+        width: 4px;
+        background-color: #4a90e2;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        margin-left: 0px;
+    }
+
+    .entry {
+        padding: 20px;
+        position: relative;
+        width: 45%;
+    }
+
+    .entry.left {
+        left: 0;
+    }
+
+    .entry.right {
+        left: 50%;
+    }
+
+    .entry::before {
+        content: '';
+        position: absolute;
+        top: 20px;
+        width: 20px;
+        height: 20px;
+        background-color: #4a90e2;
+        border-radius: 50%;
+        border: 3px solid white;
+        z-index: 1;
+    }
+
+    .entry.left::before {
+        left: +490px;
+    }
+
+    .entry.right::before {
+        left: -10px;
+    }
+
+    .content {
+        padding: 20px;
+        background: white;
+        border-radius: 6px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .year {
+        font-weight: bold;
+        color: #4a90e2;
+        margin-bottom: 10px;
+    }
+</style>
+
+<body>
+
+<h1>History of CGS</h1>
+
+<div class="timeline">
+
+    <div class="entry left">
+        <div class="content">
+            <div class="year">1630</div>
+            <p>School founded using money from the wills of Francis Rawlinson and William Hansard</p>
+        </div>
+    </div>
+
+    <div class="entry right">
+        <div class="content">
+            <div class="year">1631</div>
+            <p>The school is constructed in what is now known as the Old Hall</p>
+        </div>
+    </div>
+
+    <div class="entry left">
+        <div class="content">
+            <div class="year">1634</div>
+            <p>The first headmaster, Mr Metcalf is appointed</p>
+        </div>
+    </div>
+
+    <div class="entry right">
+        <div class="content">
+            <div class="year">1700 to 1900</div>
+            <p>Grove House is built and used for teaching. It was demolished in the 1980's due to subsidence</p>
+        </div>
+    </div>
+
+    <div class="entry left">
+        <div class="content">
+            <div class="year">1818</div>
+            <p>By this point 30 to 40 pupils attended the school</p>
+        </div>
+    </div>
+
+    <div class="entry right">
+        <div class="content">
+            <div class="year">1837</div>
+            <p>The school building is repaired with a parapet being built on the South side</p>
+        </div>
+    </div>
+
+    <div class="entry left">
+        <div class="content">
+            <div class="year">1838</div>
+            <p>W. Ellis LLD, the headmaster, announces the reception for boarding pupils is complete</p>
+        </div>
+    </div>
+
+    <div class="entry right">
+        <div class="content">
+            <div class="year">1885</div>
+            <p>The patrons, the Ayscoughs, surrender their position to a board of governers</p>
+        </div>
+    </div>
+
+    <div class="entry left">
+        <div class="content">
+            <div class="year">1904</div>
+            <p>Lindsey County Council did not recognise the school as efficient so pupils had to go to Market Rasen's De Aston school for grammar education. This had led to only 7 pupils being taught at CGS by this point.</p>
+        </div>
+    </div>
+
+    <div class="entry right">
+        <div class="content">
+            <div class="year">1908</div>
+            <p>After adopting suggestions from the council such as allowing girls to study there, the school became considered efficient, leading to a rise of pupils.</p>
+        </div>
+    </div>
+
+    <div class="entry left">
+        <div class="content">
+            <div class="year">1909</div>
+            <p>2 extra rooms were built for the library, before being converted into one science lab</p>
+        </div>
+    </div>
+
+    <div class="entry right">
+        <div class="content">
+            <div class="year">1910</div>
+            <p>There were now 46 pupils studying at CGS in this year</p>
+        </div>
+    </div>
+
+    <div class="entry left">
+        <div class="content">
+            <div class="year">1914</div>
+            <p>A new science lab is built, which has since been converted into a kitchen, language lab, and is now our RE room. Also, the girls toilets in the old building are built and the playing field on Navigation lane is bought</p>
+        </div>
+    </div>
+
+    <div class="entry right">
+        <div class="content">
+            <div class="year">1920</div>
+            <p>A large army hut is aquired to be used for 3 new classrooms</p>
+        </div>
+    </div>
+
+    <div class="entry left">
+        <div class="content">
+            <div class="year">1921</div>
+            <p>Another boarding house is aquired to further increase pupil numbers</p>
+        </div>
+    </div>
+
+    <div class="entry right">
+        <div class="content">
+            <div class="year">1930</div>
+            <p>The new main building opened including more classrooms</p>
+        </div>
+    </div>
+
+    <div class="entry left">
+        <div class="content">
+            <div class="year">1931</div>
+            <p>Major repairs are made to the Old Hall</p>
+        </div>
+    </div>
+
+    <div class="entry right">
+        <div class="content">
+            <div class="year">20th and 21st Century</div>
+            <p>From this point, many temporary buildings have been used to teach in during periods of repairs and building works on the school site</p>
+        </div>
+    </div>
+
+    <div class="entry left">
+        <div class="content">
+            <div class="year">1944</div>
+            <p>Before this, the local education authority paid fees for all pupils who passed a scholarship test, whilst parents paid for those who did not. 1944 marked the point when an 11+ test was introduced with those not passing not being admitted to the school, marking the end of fee paying pupils</p>
+        </div>
+    </div>
+
+    <div class="entry right">
+        <div class="content">
+            <div class="year">1945</div>
+            <p>Pre fabricated buildings are used to expand the school</p>
+        </div>
+    </div>
+
+    <div class="entry left">
+        <div class="content">
+            <div class="year">1950's</div>
+            <p>The chapel is used at the top of the school for teaching</p>
+        </div>
+    </div>
+
+    <div class="entry right">
+        <div class="content">
+            <div class="year">1957</div>
+            <p>Council announces plans to close the school as girls are beginning to be admitted to De Aston, so they reasoned the school was no longer required</p>
+        </div>
+    </div>
+
+    <div class="entry left">
+        <div class="content">
+            <div class="year">1960</div>
+            <p>A walk took place in protest of the school closing on the night of the 18th February</p>
+        </div>
+    </div>
+
+    <div class="entry right">
+        <div class="content">
+            <div class="year">1961</div>
+            <p>A music room is built in a temporary building which later became a history room before being demolished</p>
+        </div>
+    </div>
+
+    <div class="entry left">
+        <div class="content">
+            <div class="year">1964</div>
+            <p>The closure plan for the school is abandoned, and a new boarding house is planned to be built (Lindsey house)</p>
+        </div>
+    </div>
+
+    <div class="entry right">
+        <div class="content">
+            <div class="year">1965</div>
+            <p>The needlework room is built which is later converted to a geography room before being demolished. Around the same time, beech house is aquired and a swimming pool is built</p>
+        </div>
+    </div>
+
+    <div class="entry left">
+        <div class="content">
+            <div class="year">1967</div>
+            <p>Lindsey house is complete</p>
+        </div>
+    </div>
+
+    <div class="entry right">
+        <div class="content">
+            <div class="year">1981</div>
+            <p>By this point, 327 pupils attend CGS</p>
+        </div>
+    </div>
+
+    <div class="entry left">
+        <div class="content">
+            <div class="year">1983</div>
+            <p>The chapel is converted to a library</p>
+        </div>
+    </div>
+
+    <div class="entry right">
+        <div class="content">
+            <div class="year">1984</div>
+            <p>Manning building opens and there is an extension to the science block</p>
+        </div>
+    </div>
+
+    <div class="entry left">
+        <div class="content">
+            <div class="year">1988</div>
+            <p>With the new guidence allowing parents to choose which school their child went to, the school introduced its own entrance test</p>
+        </div>
+    </div>
+
+    <div class="entry right">
+        <div class="content">
+            <div class="year">1993-1994</div>
+            <p>The technology and science buildings open across these 2 years</p>
+        </div>
+    </div>
+
+    <div class="entry left">
+        <div class="content">
+            <div class="year">1995</div>
+            <p>The school closes to boarding pupils and so Lindsey is converted into a music classroom and a flat for French and German exchange students</p>
+        </div>
+    </div>
+
+    <div class="entry right">
+        <div class="content">
+            <div class="year">1996-2016</div>
+            <p>Roger Hale is headmaster and by 2016 there are 560 pupils in the school. Many construction works occur in these 20 years</p>
+        </div>
+    </div>
+
+    <div class="entry left">
+        <div class="content">
+            <div class="year">2001</div>
+            <p>Lindsey is converted for 2 maths classrooms and 4 English classrooms on the top 2 floors of Lindsey house</p>
+        </div>
+    </div>
+
+    <div class="entry right">
+        <div class="content">
+            <div class="year">2005</div>
+            <p>Manning is extended to include 2 new classrooms, a fitness suite and a computer classroom for PE students, with the school being awarded sports college status</p>
+        </div>
+    </div>
+
+    <div class="entry left">
+        <div class="content">
+            <div class="year">2010</div>
+            <p>The school is awarded acadamy status</p>
+        </div>
+    </div>
+
+    <div class="entry right">
+        <div class="content">
+            <div class="year">2011</div>
+            <p>Food technology being planned to become a compulsary subject leads to an extension on the canteen, with the music department being extended also</p>
+        </div>
+    </div>
+
+    <div class="entry left">
+        <div class="content">
+            <div class="year">2012</div>
+            <p> Olympic Torch building is built to commemerate students involved in the 2012 Olympic games. This building has 2 classrooms for the physics department</p>
+        </div>
+    </div>
+
+    <div class="entry right">
+        <div class="content">
+            <div class="year">2022</div>
+            <p>Grove court is built</p>
+        </div>
+    </div>
+
+    <div class="entry left">
+        <div class="content">
+            <div class="year">2023</div>
+            <p>The new hall is rebuilt and called the Newbolt centre</p>
+        </div>
+    </div>
+
+    <div class="entry right">
+        <div class="content">
+            <div class="year">2026</div>
+            <p>Currently, there are 650 pupils at CGS, which has recently been awarded the 'Best State School in the East Midlands' by the Sunday Times</p>
+        </div>
+    </div>
+
+</div>
+
+<div>
+    <p>The full history of the school document can be found by clicking this link.</p>
+</div>
+
+</body>
+</html>
