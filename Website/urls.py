@@ -29,7 +29,7 @@ else:
         path('admin/', admin.site.urls),
         path('', include('Main.urls')),
         path('accounts/', include('Accounts.urls')),
-        path('history/', include('History.urls')),
+        path('history/', include('history.urls')),
         path('interactions/', include('interactions.urls', namespace='interactions')),
         path('events/', include('events.urls', namespace='events')),
         path('community/', include('community.urls', namespace='community')),
