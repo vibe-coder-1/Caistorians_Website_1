@@ -71,7 +71,8 @@ INSTALLED_APPS = [
     'chat',
     'error_handling',
     'bleach',
-    "storages"
+    "storages",
+    "history"
 ]
 
 MIDDLEWARE = [
