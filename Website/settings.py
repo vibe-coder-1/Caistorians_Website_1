@@ -44,7 +44,6 @@ STATICFILES_DIRS = [
 # SECURITY WARNING: don't run with debug turned on in production!
 #
 ALLOWED_HOSTS = ['127.0.0.1','10.25.130.184', 'localhost','Caistorians_Website.com', 'caistorians.com','caistorians-website.onrender.com','www.caistorians.com']
-# Set SECURE_COOKIES=True in the production environment when serving over HTTPS.
 SECURE_COOKIES = os.getenv("SECURE_COOKIES", "False").lower() == "true"
 CSRF_COOKIE_SECURE = SECURE_COOKIES
 SESSION_COOKIE_SECURE = SECURE_COOKIES
