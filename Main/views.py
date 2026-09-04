@@ -18,6 +18,8 @@ def homepage(request):
 def site_home(request):
     return render(request, 'Main/homepage.html')
 
+def history(request):
+    return render(request,'Main/history.html')
 def about(request):
     return render(request, 'Main/about.html')
 def contact(request):

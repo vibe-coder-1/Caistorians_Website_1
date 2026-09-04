@@ -72,7 +72,6 @@ INSTALLED_APPS = [
     'error_handling',
     'bleach',
     "storages",
-    "history"
 ]
 
 MIDDLEWARE = [
