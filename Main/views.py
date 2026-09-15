@@ -26,3 +26,5 @@ def privacy_policy(request):
     return render(request, 'Main/privacy_policy.html')
 def terms_of_service(request):
     return render(request, 'Main/terms_of_service.html')
+def history(request):
+    return render(request, 'Main/history.html')
