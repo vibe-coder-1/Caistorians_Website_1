@@ -26,7 +26,8 @@ except ImportError:
 
 # Environment variables with fallbacks
 SECRET_KEY = os.getenv("SECRET_KEY") or "fallback-secret-key-change-in-production"
-DEBUG = os.getenv("DEBUG", "False") == "True"
+#DEBUG = os.getenv("DEBUG", "False") == "True"
+DEBUG = True
 
 STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY")
 STRIPE_PUBLISHABLE_KEY = os.getenv("STRIPE_PUBLISHABLE_KEY")
@@ -112,23 +113,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'Website.wsgi.application'
 ASGI_APPLICATION = "Website.asgi.application"
 
-# Development channel layer (in-memory). Replace with Redis in production.
-# CHANNEL_LAYERS = {
-#     "default": {
-#         "BACKEND": "channels.layers.InMemoryChannelLayer",
-#     },
-# }
-
-# CHANNEL_LAYERS = {
-#     "default": {
-#         "BACKEND": "channels_redis.core.RedisChannelLayer",
-#         "CONFIG": {
-#             "hosts": [os.environ.get("REDIS_URL")],
-#         },
-#     },
-# }
-
-# import os
 
 CHANNEL_LAYERS = {
     "default": {
@@ -143,28 +127,20 @@ CHANNEL_LAYERS = {
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-# DATABASES = {                                         OLD DATABASE
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST'),
-        'PORT': os.getenv('DB_PORT'),
-        'OPTIONS': {
-            'sslmode': os.getenv('DB_SSLMODE'),
-            'channel_binding': os.getenv('DB_CHANNEL_BINDING'),
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.getenv('DB_NAME'),
+            'USER': os.getenv('DB_USER'),
+            'PASSWORD': os.getenv('DB_PASSWORD'),
+            'HOST': os.getenv('DB_HOST'),
+            'PORT': os.getenv('DB_PORT'),
+            'OPTIONS': {
+                'sslmode': os.getenv('DB_SSLMODE'),
+                'channel_binding': os.getenv('DB_CHANNEL_BINDING'),
+            }
         }
     }
-}
-
 
 
 # Password validation
