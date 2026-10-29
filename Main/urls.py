@@ -14,5 +14,5 @@ urlpatterns = [
     path('privacy_policy/', views.privacy_policy, name='privacy_policy'),
     path('terms_of_service/', views.terms_of_service, name='terms_of_service'),
     path('history/', views.history, name='history'),
-    path('CGS history/',views.CGShistory,name='CGShistory')
+    path('CGShistory/',views.CGShistory,name='CGShistory')
 ]
