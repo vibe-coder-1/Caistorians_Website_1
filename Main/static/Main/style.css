@@ -973,7 +973,7 @@ a:focus-visible {
       top: 0;
       bottom: 0;
       left: 50%;
-      margin-left: 15px;
+      margin-left: 0px;
 }
 
 .entry {
@@ -1011,7 +1011,7 @@ a:focus-visible {
 }
 
 .content {
-      padding: 20px;
+      padding: 35px;
       background: white;
       border-radius: 6px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
