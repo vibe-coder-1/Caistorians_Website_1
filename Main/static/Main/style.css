@@ -957,15 +957,15 @@ a:focus-visible {
 }
 
 .timeline {
-      position: absolute;
+      position: relative;
       max-width: 1000px;
       margin: auto;
 }
 
 .timeline::after {
       content: '';
-      position: relative;
-      width: 15px;
+      position: absolute;
+      width: 4px;
       background-color: #4a90e2;
       top: 0;
       bottom: 0;
