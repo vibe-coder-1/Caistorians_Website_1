@@ -942,6 +942,87 @@ a:focus-visible {
 }
 
 /* =========================================================
+   HISTORY PAGE
+   ========================================================= */
+
+.body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+}
+
+.h1 {
+      text-align: center;
+      margin-bottom: 40px;
+}
+
+.timeline {
+      position: relative;
+      max-width: 1000px;
+      margin: auto;
+}
+
+.timeline::after {
+      content: '';
+      position: absolute;
+      width: 4px;
+      background-color: #4a90e2;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: 0px;
+}
+
+.entry {
+      padding: 20px;
+      position: relative;
+      width: 45%;
+}
+
+.entry.left {
+   left: 0;
+}
+
+.entry.right {
+   left: 50%;
+}
+
+.entry::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      width: 20px;
+      height: 20px;
+      background-color: #4a90e2;
+      border-radius: 50%;
+      border: 3px solid white;
+      z-index: 1;
+}
+
+.entry.left::before {
+      left: +490px;
+}
+
+.entry.right::before {
+      left: -10px;
+}
+
+.content {
+      padding: 20px;
+      background: white;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.year {
+      font-weight: bold;
+      color: #4a90e2;
+      margin-bottom: 10px;
+}
+
+
+
+/* =========================================================
    LOGIN
    ========================================================= */
 
