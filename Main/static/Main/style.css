@@ -964,7 +964,7 @@ a:focus-visible {
 
 .timeline::after {
       content: '';
-      position: absolute;
+      position: relative;
       width: 4px;
       background-color: #4a90e2;
       top: 0;
