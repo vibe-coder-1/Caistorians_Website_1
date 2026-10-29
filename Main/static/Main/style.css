@@ -953,8 +953,9 @@ a:focus-visible {
 
 .h1 {
       text-align: center;
+      margin-top: 40px;
       margin-bottom: 40px;
-      font-size: 120px;
+      font-size: 40px;
       font-weight: bold;
 }
 
@@ -972,7 +973,7 @@ a:focus-visible {
       top: 0;
       bottom: 0;
       left: 50%;
-      margin-left: 0px;
+      margin-left: 15px;
 }
 
 .entry {
@@ -1006,7 +1007,7 @@ a:focus-visible {
 }
 
 .entry.right::before {
-      left: -0px;
+      left: -10px;
 }
 
 .content {
