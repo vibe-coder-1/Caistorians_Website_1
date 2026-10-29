@@ -30,3 +30,5 @@ def terms_of_service(request):
     return render(request, 'Main/terms_of_service.html')
 def history(request):
     return render(request, 'Main/history.html')
+def history(request):
+    return render(request, 'Main/CGS history.pdf')
