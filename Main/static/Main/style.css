@@ -954,6 +954,8 @@ a:focus-visible {
 .h1 {
       text-align: center;
       margin-bottom: 40px;
+      font-size: 120px;
+      font-weight: bold;
 }
 
 .timeline {
@@ -1004,7 +1006,7 @@ a:focus-visible {
 }
 
 .entry.right::before {
-      left: -10px;
+      left: -0px;
 }
 
 .content {
@@ -1018,6 +1020,11 @@ a:focus-visible {
       font-weight: bold;
       color: #4a90e2;
       margin-bottom: 10px;
+}
+
+.subscript {
+      text-align: center;
+      margin-top: 40px;
 }
 
 
